@@ -1,0 +1,16 @@
+body {
+  background: url("../scss/image.jpg") no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+.button {
+  background-color: #555555;
+  /* Black */
+  color: white;
+  width: auto;
+  border: 1px solid gray;
+  border-radius: 7%;
+  float: right;
+  font-size: 0.875; }
