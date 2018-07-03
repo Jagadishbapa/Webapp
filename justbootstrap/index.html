@@ -1,0 +1,236 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+      <div class="container-fluid">
+          <!-- all your great content here -->
+
+
+          <!--Main heading-->
+          <h1>Enter event Info!</h1>
+
+          <!--Form starts-->
+          <form>
+
+              <!--Sponsor Info-->
+              <fieldset class="form-group">
+                  <legend>Sponsor Info</legend>
+
+                  <div class="container-fluid">
+
+                      <!--Organization-->
+                      <div class="form-group">
+                          <label for="organisation">Organisation</label>
+                          <input type="text" class="form-control" id="organisation" placeholder="Enter Organisation">
+                      </div>
+
+                      <!--Department-->
+                      <div class="form-group">
+                          <label for="department">Department</label>
+                          <input type="text" class="form-control" id="department" placeholder="Enter department">
+                      </div>
+
+                      <!--Co-Sponsors-->
+                      <div class="form-group">
+                          <label for="coSponsors">Co-Sponsors</label>
+                          <input type="text" class="form-control" id="coSponsors" placeholder="Enter Co-Sponsors">
+                      </div>
+
+                  </div>
+
+              </fieldset>
+
+
+              <!--Event Information-->
+              <fieldset class="form-group">
+                  <legend>Event Information</legend>
+
+                  <div class="container-fluid">
+
+                      <!--Event Description-->
+                      <div class="form-group">
+                          <label for="eventInfo">Event Description</label>
+                          <textarea maxlength="500" class="form-control" id="eventInfo" rows="3"></textarea>
+                      </div>
+
+
+                      <!--Speaker Info-->
+                      <p>Speakers</p>
+
+                      <div class="form-row">
+                          <div class="col">
+                              <input type="text" class="form-control" placeholder="First name">
+                          </div>
+                          <div class="col">
+                              <input type="text" class="form-control" placeholder="Middle name">
+                          </div>
+                          <div class="col">
+                              <input type="text" class="form-control" placeholder="Last name">
+                          </div>
+                          <div class="col">
+                              <input type="email" class="form-control" id="email1" placeholder="email">
+                          </div>
+                          <div class="col">
+                              <button type="button" class="btn btn-primary col-md-4">Add Speaker</button>
+                          </div>
+                          
+                      </div>
+
+
+                      <br />
+                      <!--Location Information-->
+                      <h5>Location</h5>
+                      <div class="form-group">
+                          <label for="inputAddress">Address line 1</label>
+                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                      </div>
+                      <div class="form-group">
+                          <label for="inputAddress2">Address line 2</label>
+                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                      </div>
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <label for="inputCity">City</label>
+                              <input type="text" class="form-control" id="inputCity">
+                          </div>
+                          <div class="form-group col-md-4">
+                              <label for="inputState">State</label>
+                              <select id="inputState" class="form-control">
+                                  <option selected>Choose...</option>
+                                  <option>...</option>
+                              </select>
+                          </div>
+                          <div class="form-group col-md-2">
+                              <label for="inputZip">Zip</label>
+                              <input type="text" class="form-control" id="inputZip">
+                          </div>
+                      </div>
+
+                  </div>
+
+              </fieldset>
+
+
+              <!--Contact Information-->
+              <fieldset class="form-group">
+                  <legend>Contact Information</legend>
+
+                  <div class="container-fluid">
+
+                      <!--Email-->
+                      <div class="form-group">
+                          <label for="primEmail">Primary Email:</label>
+                          <input type="email" class="form-control" id="primEmail">
+                      </div>
+
+                      <div class="form-group">
+                          <label for="secEmail">Secondary Email:</label>
+                          <input type="email" class="form-control" id="secEmail">
+                      </div>
+
+                      <!--Telephone-->
+                      <div class="form-group">
+                          <label for="telephone">Phone number</label>
+                          <input type="tel" class="form-control" id="telephone" placeholder="Enter phone number">
+                      </div>
+
+                      <!--Website-->
+                      <div class="form-group">
+                          <label for="url">Website</label>
+                          <input type="url" class="form-control" id="url" placeholder="Enter website">
+                      </div>
+
+                  </div>
+
+              </fieldset>
+
+              <!--Location Information
+              <fieldset class="form-group">
+                  <legend>Location Information</legend>
+
+                  <div class="container-fluid">
+
+                      <div class="form-group">
+                          <label for="inputAddress">Address line 1</label>
+                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                      </div>
+                      <div class="form-group">
+                          <label for="inputAddress2">Address line 2</label>
+                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                      </div>
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <label for="inputCity">City</label>
+                              <input type="text" class="form-control" id="inputCity">
+                          </div>
+                          <div class="form-group col-md-4">
+                              <label for="inputState">State</label>
+                              <select id="inputState" class="form-control">
+                                  <option selected>Choose...</option>
+                                  <option>...</option>
+                              </select>
+                          </div>
+                          <div class="form-group col-md-2">
+                              <label for="inputZip">Zip</label>
+                              <input type="text" class="form-control" id="inputZip">
+                          </div>
+                      </div>
+
+                  </div>
+
+              </fieldset>-->
+
+
+              <!--Additional Information-->
+              <fieldset class="form-group">
+                  <legend>Additional Information</legend>
+
+                  <div class="container-fluid">
+
+                      <!--Co-Sponsors-->
+                      <div class="form-group">
+                          <label for="coSponsors">Co-Sponsors</label>
+                          <input type="text" class="form-control" id="coSponsors" placeholder="Enter Co-Sponsors">
+                      </div>
+
+                      <!--cost of event-->
+                      <div class="form-group">
+                          <label for="cost">Anticipated Cost of Event</label>
+                          <input type="number" class="form-control" id="cost" placeholder="Enter cost of event">
+                      </div>
+
+                      <!--source of funding-->
+                      <div class="form-group">
+                          <label for="sourcefund">Sources of Funding</label>
+                          <input type="text" class="form-control" id="sourcefund" placeholder="Enter source of funding">
+                      </div>
+
+                      <!--number of attaendees-->
+                      <div class="form-group">
+                          <label for="attendees">Anticipated number of attendees</label>
+                          <input type="number" class="form-control" id="attendees" placeholder="Enter number of attendees">
+                      </div>
+
+                  </div>
+
+              </fieldset>
+
+          </form>
+
+          <!-- Optional JavaScript -->
+          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+      </div>
+  </body>
+</html>
