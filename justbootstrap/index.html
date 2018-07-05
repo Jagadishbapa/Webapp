@@ -56,9 +56,29 @@
                           <textarea maxlength="500" class="form-control" id="eventInfo" rows="3"></textarea>
                       </div>
 
+					 
+						<h5>Speakers</h5>
+					<table id="sTable" class="table table-bordered">
+					  <tbody>
+						<tr>
+						  <td> <input style="border:none" type="text" class="form-control" id="fEvent" placeholder="First name">  </td>
+						  <td> <input style="border:none" type="text" class="form-control" id="lEvent" placeholder="Last name">   </td>
+						  <td> <input style="border:none" type="text" class="form-control" id="mEvent" placeholder="Middle name"> </td>
+						  <td> <input style="border:none" type="email" class="form-control" id="emailEvent" placeholder="Email"> </td>
+						  <td> <input type="button" id ="delSpeaker" value="Delete" onclick = "deleteRow(this)"  </td>
+						</tr>
+					  </tbody>
+					 </table>
+					 <div class="col-md-10 text-center"> 
+						<button type="button" class="btn btn-primary" align="center" id ="addSpeaker" onclick = "add()">Add Speaker</button>
+					</div>
+					  
+					  
+					  
 
                       <!--Speaker Info-->
-                      <p>Speakers</p>
+                      <!--
+					  <p>Speakers</p>
 
                       <div class="form-row">
                           <div class="col">
@@ -74,13 +94,13 @@
                               <input type="email" class="form-control" id="email1" placeholder="email">
                           </div>
                           <div class="col">
-                              <button type="button" class="btn btn-default responsive-width"><!--!class="btn btn-primary col-md-4">-->Add Speaker</button>
+                              <button type="button" class="btn btn-default responsive-width">--><!--!class="btn btn-primary col-md-4">--><!--Add Speaker</button>
                           </div>
                           
                       </div>
+						
 
-
-                      <br />
+                      <br />-->
                       <!--Location Information-->
                       <h5>Location</h5>
                       <div class="form-group">
@@ -527,6 +547,7 @@
 
           <!-- Optional JavaScript -->
           <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		  <script src="js/myscripts.js"></script>
           <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
