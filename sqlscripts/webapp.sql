@@ -1,24 +1,62 @@
 CREATE OR REPLACE TYPE SPEAKER AS OBJECT 
 ( /* TODO enter attribute and method declarations here */ 
-  first_name VARCHAR2(200),
-  last_name VARCHAR2(200),
-  middle_name VARCHAR2(200),
-  email VARCHAR2(200));
-  
-/  
-CREATE TYPE speaker_type AS TABLE OF speaker; 
+  first_name VARCHAR2(100),
+  last_name VARCHAR2(100),
+  middle_name VARCHAR2(100),
+  email VARCHAR2(100));
+  /
+ 
+CREATE TYPE speaker_type AS TABLE OF speaker;
+
 /
 CREATE OR REPLACE TYPE location AS OBJECT 
 ( /* TODO enter attribute and method declarations here */ 
-  building_room VARCHAR2(200),
+  building_room VARCHAR2(100),
   address_line1 VARCHAR2(200),
   address_line2 VARCHAR2(200),
-  county VARCHAR2(200),
-  city VARCHAR2(200),
-  state VARCHAR2(200),
-  country VARCHAR2(200),
+  county VARCHAR2(100),
+  city VARCHAR2(100),
+  state VARCHAR2(100),
+  country VARCHAR2(100),
   zip NUMBER);
 /
+
+CREATE OR REPLACE TYPE contact_info AS OBJECT 
+( /* TODO enter attribute and method declarations here */ 
+  first_name VARCHAR2(100),
+  last_name VARCHAR2(100),
+  sponsoring_department VARCHAR2(100),
+  email_1 VARCHAR2(100),
+  email_2 VARCHAR2(100),
+  phone_number NUMBER,
+  website VARCHAR2(100));
+
+/
+CREATE OR REPLACE TYPE co_sponsor AS OBJECT 
+( /* TODO enter attribute and method declarations here */ 
+  name VARCHAR2(100),
+  email VARCHAR2(100),
+  phone_number NUMBER,
+  website VARCHAR2(100));
+  
+/
+CREATE TYPE co_sponsor_type AS TABLE OF co_sponsor; 
+/
+
+drop type co_sponsor_type;
+drop type co_sponsor;
+drop type contact_info;
+drop type location;
+drop type speaker_type;
+drop type speaker;
+
+
+-------------------------------------------------------------------------------------
+
+
+
+
+
 
 CREATE OR REPLACE TYPE location AS OBJECT 
 ( /* TODO enter attribute and method declarations here */ 
