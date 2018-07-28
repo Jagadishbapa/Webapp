@@ -13,6 +13,23 @@
 		html+="</tr>";
 	  	$("#sTable").append(html);
 	}
+	
+	
+	function deleteRowC(row){
+      var d = row.parentNode.parentNode.rowIndex;
+      document.getElementById('sTableC').deleteRow(d);
+   }
+    function addC(){
+		var html = '';
+		html+="<tr>";
+		html += "<td>" + "<input style="+ '"border:none"' + "type="+ '"text"'+  "class="+'"form-control"'+ "id="+'"fEvent"' + "placeholder="+ '"Co-sponsor Name"'+ ">" + "</td>";
+		html += "<td>" + "<input style="+ '"border:none"' + "type="+ '"text"'+  "class="+'"form-control"'+ "id="+'"fEvent"' + "placeholder="+ '"Co-sponsor Email"'+ ">" + "</td>";
+		html += "<td>" + "<input style="+ '"border:none"' + "type="+ '"text"'+  "class="+'"form-control"'+ "id="+'"fEvent"' + "placeholder="+ '"Co-sponsor Phone number"'+ ">" + "</td>";
+		html += "<td>" + "<input style="+ '"border:none"' + "type="+ '"text"'+  "class="+'"form-control"'+ "id="+'"fEvent"' + "placeholder="+ '"Co-sponsor website"'+ ">" + "</td>";
+		html +="<td> <input type="+'"button"'+ "id ="+'"deleteDep"'+ "value="+'"Delete"'+ "onclick ="+' "deleteRow(this)"'+  "</td>";
+		html+="</tr>";
+	  	$("#sTableC").append(html);
+	}
 	  
 	/*  
 	    var data = ["a", "bunch", "of", "things", "to", "insert"];

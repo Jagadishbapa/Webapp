@@ -5,9 +5,9 @@ CREATE OR REPLACE TYPE SPEAKER AS OBJECT
   middle_name VARCHAR2(100),
   email VARCHAR2(100));
 
- 
+ /
 CREATE TYPE speaker_type AS TABLE OF speaker;
-
+/
 
 CREATE OR REPLACE TYPE location AS OBJECT 
 ( /* TODO enter attribute and method declarations here */ 
@@ -19,7 +19,8 @@ CREATE OR REPLACE TYPE location AS OBJECT
   state VARCHAR2(100),
   country VARCHAR2(100),
   zip NUMBER);
-
+/
+  
 CREATE OR REPLACE TYPE contact_info AS OBJECT 
 ( /* TODO enter attribute and method declarations here */ 
   first_name VARCHAR2(100),
@@ -29,7 +30,7 @@ CREATE OR REPLACE TYPE contact_info AS OBJECT
   email_2 VARCHAR2(100),
   phone_number NUMBER,
   website VARCHAR2(100));
-
+/
 
 CREATE OR REPLACE TYPE co_sponsor AS OBJECT 
 ( /* TODO enter attribute and method declarations here */ 
@@ -38,10 +39,12 @@ CREATE OR REPLACE TYPE co_sponsor AS OBJECT
   phone_number NUMBER,
   website VARCHAR2(100));
   
-
+/
 CREATE TYPE co_sponsor_type AS TABLE OF co_sponsor; 
+/
 
-
+drop table UW_ENGAGEMENT;
+/
 CREATE TABLE UW_ENGAGEMENT 
 (
   EVENT_ID NUMBER GENERATED ALWAYS AS IDENTITY INCREMENT BY 1 START WITH 1 NOT NULL 
@@ -76,7 +79,7 @@ CREATE TABLE UW_ENGAGEMENT
 ) 
 NESTED TABLE SPEAKERS STORE AS SPEAKERS 	
 NESTED TABLE CO_SPONSORS STORE AS CO_SPONSORS;
-
+/
 ALTER TABLE UW_ENGAGEMENT
 ADD CONSTRAINT UW_ENGAGEMENT_CHK1 CHECK 
 (organization IN
@@ -106,7 +109,7 @@ ADD CONSTRAINT UW_ENGAGEMENT_CHK1 CHECK
 'University of Wyoming Foundation'
 ))
 ENABLE;
-
+/
 ALTER TABLE UW_ENGAGEMENT
 ADD CONSTRAINT UW_ENGAGEMENT_CHK2 CHECK 
 (department IN (
@@ -459,7 +462,7 @@ ADD CONSTRAINT UW_ENGAGEMENT_CHK2 CHECK
 'Internal Audit'
 ))
 ENABLE;
-
+/
 ALTER TABLE UW_ENGAGEMENT
 ADD CONSTRAINT UW_ENGAGEMENT_CHK3 CHECK 
 (event_type IN (
@@ -477,19 +480,191 @@ ADD CONSTRAINT UW_ENGAGEMENT_CHK3 CHECK
 'Seminar/Public talk or Performance/Exhibition'
 ))
 ENABLE;
-
+/
 ALTER TABLE UW_ENGAGEMENT
 ADD CONSTRAINT UW_ENGAGEMENT_CHK4 CHECK 
-((location.address_line1 IS NOT NULL AND location.county IS NOT NULL AND  location.city IS NOT NULL AND  location.state IS NOT NULL AND  location.country IS NOT NULL AND  location.zip IS NOT NULL))
-ENABLE;
+((location.address_line1 IS NOT NULL AND 
+location.county IS NOT NULL AND
+location.city IS NOT NULL AND
+location.state IS NOT NULL AND
+location.country IS NOT NULL AND
+location.zip IS NOT NULL AND
+location.county IN 
+(
+'Albany County',
+'Big Horn County',
+'Campbell County',
+'Carbon County',
+'Converse County',
+'Crook County',
+'Fremont County',
+'Goshen County',
+'Hot Springs County',
+'Johnson County',
+'Laramie County',
+'Lincoln County',
+'Natrona County',
+'Niobrara County',
+'Park County',
+'Platte County',
+'Sheridan County',
+'Sublette County',
+'Sweetwater County',
+'Teton County',
+'Uninta County',
+'Washakie County',
+'Weston County',
+'Wind River Indian Reservation'
+) AND
 
+location.city IN
+(
+  'Albin',
+'Bar Nunn',
+'Basin',
+'Bear River',
+'Buffalo',
+'Burlington',
+'Burns',
+'Byron',
+'Casper',
+'Cheyenne',
+'Clearmont',
+'Cody',
+'Cowley',
+'Dayton',
+'Deaver',
+'Diamondville',
+'Douglas',
+'Dubois',
+'Edgerton',
+'Evanston',
+'Evansville',
+'Frannie-BigHornCty',
+'Frannie-Park Cty',
+'Gillette',
+'Glendo',
+'Glenrock',
+'Grand Encampment',
+'Granger',
+'Green River',
+'Greybull',
+'Guernsey',
+'Hudson',
+'Hulett',
+'Jackson',
+'Kaycee',
+'Kemmerer',
+'Lander',
+'Laramie',
+'Lingle',
+'Lovell',
+'Lusk',
+'Lyman',
+'Manderson',
+'Meeteetse',
+'Midwest',
+'Mills',
+'Moorcroft',
+'Mountain View',
+'Newcastle',
+'Opal',
+'Pavillion',
+'Pine Bluffs',
+'Pinedale',
+'Powell',
+'Ranchester',
+'Rawlins',
+'Riverton',
+'Rock River',
+'Rock Springs',
+'Rolling Hills',
+'Saratoga',
+'Sheridan',
+'Shoshoni',
+'Star Valley Ranch',
+'Sundance',
+'Ten Sleep',
+'Thermopolis',
+'Torrington',
+'Upton',
+'Wamsutter',
+'Wheatland',
+'Worland',
+'Wright',
+'Yoder',
+'Crowheart',
+'Fort Washakie',
+'Ethete',
+'Kinnear',
+'Arapahoe'
+) AND
+
+location.state IN
+(
+'Alabama',
+'Alaska',
+'Arizona',
+'Arkansas',
+'California',
+'Colorado',
+'Connecticut',
+'Delaware',
+'Florida',
+'Georgia',
+'Hawaii',
+'Idaho',
+'Illinois',
+'Indiana',
+'Iowa',
+'Kansas',
+'Kentucky',
+'Louisiana',
+'Maine',
+'Maryland',
+'Massachusetts',
+'Michigan',
+'Minnesota',
+'Mississippi',
+'Missouri',
+'Montana',
+'Nebraska',
+'Nevada',
+'New Hampshire',
+'New Jersey',
+'New Mexico',
+'New York',
+'North Carolina',
+'North Dakota',
+'Ohio',
+'Oklahoma',
+'Oregon',
+'Pennsylvania',
+'Rhode Island',
+'South Carolina',
+'South Dakota',
+'Tennessee',
+'Texas',
+'Utah',
+'Vermont',
+'Virginia',
+'Washington',
+'West Virginia',
+'Wisconsin',
+'Wyoming'
+) AND
+
+location.country in ('United States')
+
+))
+ENABLE;
+/
 ALTER TABLE UW_ENGAGEMENT
 ADD CONSTRAINT UW_ENGAGEMENT_CHK5 CHECK 
 ((contact_info.Sponsoring_department IS NOT NULL AND contact_info.email_1 IS NOT NULL)
-
 )
 ENABLE;
-
+/
 ALTER TABLE UW_ENGAGEMENT
 ADD CONSTRAINT UW_ENGAGEMENT_CHK6 CHECK 
 (funding_source1 IN
@@ -501,7 +676,7 @@ ADD CONSTRAINT UW_ENGAGEMENT_CHK6 CHECK
 'foundation'
 ))
 ENABLE;
-
+/
 ALTER TABLE UW_ENGAGEMENT
 ADD CONSTRAINT UW_ENGAGEMENT_CHK7 CHECK 
 (funding_source2 IN
@@ -513,12 +688,12 @@ ADD CONSTRAINT UW_ENGAGEMENT_CHK7 CHECK
 'foundation'
 ))
 ENABLE;
-
+/
 ALTER TABLE UW_ENGAGEMENT
 ADD CONSTRAINT UW_ENGAGEMENT_CHK8 CHECK 
 (lower(cancelled) IN ('yes','no'))
 ENABLE;
-
+/
 CREATE OR REPLACE TRIGGER UW_ENGAGE_UPDATE_TRIGGER 
 AFTER UPDATE ON UW_ENGAGEMENT 
 FOR EACH ROW
@@ -527,7 +702,7 @@ BEGIN
   SET last_update_date = SYSDATE
   WHERE event_id=:old.event_id;
 END;
-
+/
 CREATE OR REPLACE TRIGGER UW_ENGAGE_UPDATE_TRIGGER 
 AFTER UPDATE of cancelled ON UW_ENGAGEMENT 
 FOR EACH ROW
