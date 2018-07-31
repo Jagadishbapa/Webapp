@@ -5,20 +5,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>UW Engagement-Organizer</title>
   </head>
   <body>
-	<nav id="menu" class="menu-side">
-		<a href="../pages/theAboutPage.html" id="about">About</a>
-		<a href="#ahu" id="about">lv</a>
-		<a href="index.html" id="help">Help</a>
-		<a href="javascript:test()" id="contact">Contact</a>
+	<nav class = "navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="menu" class="menu-side" style="position: relative">
+		<button class = "navbar-toggler" data-toggle="collapse" data-target="#coll-target">
+			<span class ="navbar-toggler-icon"></span>
+		</button>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" href="#">List of Events</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="javascript:test()">Register Event</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Sign Out</a>
+			</li>
+		</ul>
+		<!--
+		<div class = "collapse navbar-collapse" id="coll-target">
+			<a href="../pages/theAboutPage.html" id="about">About</a>
+			<a href="#ahu" id="about">lv</a>
+			<a href="index.html" id="help">Help</a>
+			<a href="javascript:test()" id="contact">Contact</a>
+		</div>
+		-->
 	</nav>
-	<iframe id="target">
-		<!-- content is being loaded here from other .html files -->
-	</iframe>
+	<div class="container-fluid">
+		<iframe src="uw_engagement.jpg" id="target" width="100%" height="1000">
+			<!-- content is being loaded here from other .html files -->
+		</iframe>
+	</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
