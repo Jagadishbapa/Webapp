@@ -1,0 +1,13 @@
+
+event end date to html web page
+united states minor to database countries
+sign in and sign out columns to IT people
+move sign out to right on web page
+
+remove united states minor from countries in web page
+
+creation_date nullable
+private field in database
+created_by column to database for updating and cancellation of event
+cost_funding1, cost_funding2, cost_other
+
