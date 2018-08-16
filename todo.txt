@@ -12,8 +12,8 @@ created_by column to database for updating and cancellation of event
 cost_funding1, cost_funding2, cost_other
 
 
-html options sort
-update constraint names in data-final and id's
+
+
 * in html
 
 
