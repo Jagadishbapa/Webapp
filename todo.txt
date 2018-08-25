@@ -13,7 +13,22 @@ cost_funding1, cost_funding2, cost_other
 
 
 
+move sign out to right side
+update table-remove location and contact info as different types
 
 * in html
+change column check values ('A&s')
+update country state sizes in db
+change country state values in html
+end date > start date
+updated_by column add
+create table for admins
+admins can update and cancel event
+create sign in page
+create a table for wyoweb users
+sign in page
+
+
+filters - dates, county, city, dept, org, by keyword
 
 
