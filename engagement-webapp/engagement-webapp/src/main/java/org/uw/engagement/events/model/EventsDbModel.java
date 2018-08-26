@@ -1,16 +1,25 @@
 package org.uw.engagement.events.model;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import oracle.jdbc.OracleBfile;
+import oracle.sql.BLOB;
+
 import java.util.*;
 import java.sql.*;
 import java.sql.Date;
-
-import oracle.sql.*;
-
-
 
 @Entity
 @Table(name="UW_ENGAGEMENT")
@@ -55,24 +64,66 @@ public class EventsDbModel {
 	
 	
 	@Column(name="EVENT_FILE")
-	private BFILE event_file;
+	private Blob event_file;
 	
 	
 	@Column(name="EVENT_COST")
 	private Integer eve_cost;
 	
-	//@Embedded
+	
+    //@Column(name = "SPEAKERS")
+    @ElementCollection
+    @JoinTable(name="SPEAKERS", joinColumns=@javax.persistence.JoinColumn(name="EVENT_ID"))
+	private java.util.Set<Speakers> speakers;
+    
+    //@ElementCollection
+   // @JoinTable(name="LOCATION", joinColumns=@javax.persistence.JoinColumn(name="EVENT_ID"))
+    @OneToOne
+    @JoinColumn(name = "event_id")
+    private Location loc;
+    
+	//@org.hibernate.annotations.Type( type = "string-array" )
+   // @Column(
+     ////   name = "sensor_names", 
+     //   columnDefinition = "text[]"
+   // )
+	//private String[] sensorNames;
+	
+	/*
+
+	   @ElementCollection
+	   @CollectionTable(name="Nicknames", joinColumns=@javax.persistence.JoinColumn(name="id"))
+	   @Column(name="nickname")
+	   public Set<String> getNicknames() { return Nicknames; } 
+	
+	*/
+	/*
 	@Column(name="SPEAKERS")
-	private java.sql.Array speakers;
+	@ElementCollection(targetClass=Speakers.class)
+	private List<Speakers> speakers;
+	
+	   @ElementCollection
+	   @CollectionTable(name="Speakerss", joinColumns=@javax.persistence.JoinColumn(name="id"))
+	   @AttributeOverrides({
+		      @AttributeOverride(name="first_name", column=@Column(name="f_na")),
+		      @AttributeOverride(name="last_name", column=@Column(name="l_na")),
+		      @AttributeOverride(name="middle_name", column=@Column(name="m_na")),
+		      @AttributeOverride(name="email", column=@Column(name="email"))
+		   })
+	   public List<Speakers> getSpeakers() { return speakers; } 
+	//private java.sql.Array speakers;
 	//= new ArrayList<Speakers>();
+	
+	 
 	
 
 	//@Column(name="LOCATION")
-	//private Location loc;
+	private Location loc;
 	
 	//@Embedded
 	//@Column(name="CONTACT_INFO")
 	//private ContactInfo contacts;
+	*/
 	
 	@Column(name="ANTICIPATED_COST")
 	private Integer ant_cost;
@@ -123,7 +174,7 @@ public class EventsDbModel {
 	public EventsDbModel() {}
 
 	public EventsDbModel(Integer id, String org, String dept, String event_desc, String event_type, String priv, Integer fee,
-			Timestamp eve_start_time, Timestamp eve_end_time, BFILE event_file, Integer eve_cost, java.sql.Array speakers,
+			Timestamp eve_start_time, Timestamp eve_end_time, Blob event_file, Integer eve_cost, Set<Speakers> speakers,
 			Location loc, ContactInfo contacts, Integer ant_cost, Integer ant_num_attendees, String fund1, String fund2,
 			String fundOther, Integer costF1, Integer costF2, Integer costFO, Integer attendeeC,
 			String createdBy, Date creation_date, Date last_up_date, String cancelled, Date cancel_date) {
@@ -140,7 +191,7 @@ public class EventsDbModel {
 		this.event_file = event_file;
 		this.eve_cost = eve_cost;
 		this.speakers = speakers;
-		//this.loc = loc;
+		this.loc = loc;
 		//this.contacts = contacts;
 		this.ant_cost = ant_cost;
 		this.ant_num_attendees = ant_num_attendees;
@@ -231,11 +282,11 @@ public class EventsDbModel {
 		this.eve_end_time = eve_end_time;
 	}
 
-	public BFILE getEvent_file() {
+	public Blob getEvent_file() {
 		return event_file;
 	}
 
-	public void setEvent_file(BFILE event_file) {
+	public void setEvent_file(Blob event_file) {
 		this.event_file = event_file;
 	}
 
@@ -247,22 +298,24 @@ public class EventsDbModel {
 		this.eve_cost = eve_cost;
 	}
 
-	public java.sql.Array getSpeakers() {
+	
+	public Set<Speakers> getSpeakers() {
 		return speakers;
 	}
 
-	public void setSpeakers(java.sql.Array speakers) {
+	public void setSpeakers(Set<Speakers> speakers) {
 		this.speakers = speakers;
 	}
-/*
-	//public Location getLoc() {
-		//return loc;
-	//}
+	
+
+	public Location getLoc() {
+		return loc;
+	}
 
 	public void setLoc(Location loc) {
 		this.loc = loc;
 	}
-
+/*
 	public ContactInfo getContacts() {
 		return contacts;
 	}

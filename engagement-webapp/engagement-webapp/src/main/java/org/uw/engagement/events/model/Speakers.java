@@ -1,9 +1,11 @@
 package org.uw.engagement.events.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
-
-public class Speakers {
+@Embeddable
+public class Speakers implements Serializable{
 	String first_name;
 	String last_name;
 	String middle_name;

@@ -32,3 +32,6 @@ sign in page
 filters - dates, county, city, dept, org, by keyword
 
 
+create uw_engagement, uw_users, uw_eng_admins, location, countries, states, speakers, contact_info, co-sponsors
+
+

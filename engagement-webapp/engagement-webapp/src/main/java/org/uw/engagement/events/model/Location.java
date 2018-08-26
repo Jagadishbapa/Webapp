@@ -1,10 +1,16 @@
 package org.uw.engagement.events.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 //import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
-public class Location {
+@Entity
+public class Location implements Serializable {
+		@Id Integer event_id;
 	  String building_room;
 	  String address_line1;
 	  String address_line2;
@@ -19,9 +25,10 @@ public class Location {
 		
 	}
 	  
-	public Location(String building_room, String address_line1, String address_line2, String county, String city,
+	public Location(Integer id, String building_room, String address_line1, String address_line2, String county, String city,
 			String state, String country, int zip) {
 		super();
+		this.event_id=id;
 		this.building_room = building_room;
 		this.address_line1 = address_line1;
 		this.address_line2 = address_line2;
@@ -31,6 +38,18 @@ public class Location {
 		this.country = country;
 		this.zip = zip;
 	}
+	public Integer getId() {
+		return event_id;
+	}
+
+	public void setId(Integer id) {
+		this.event_id = id;
+	}
+
+	public void setZip(Integer zip) {
+		this.zip = zip;
+	}
+
 	public String getBuilding_room() {
 		return building_room;
 	}
