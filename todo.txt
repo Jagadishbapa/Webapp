@@ -32,6 +32,13 @@ sign in page
 filters - dates, county, city, dept, org, by keyword
 
 
-create uw_engagement, uw_users, uw_eng_admins, location, countries, states, speakers, contact_info, co-sponsors
+create countries, us_states, wy_COUNTIES, wy_cties,  uw_users, uw_eng_admins, uw_engagement , location, speakers, contact_info, co-sponsors
 
+triggers
 
+uw_engagement creation_date, other city shouldn't be null if city is other, last_updated_date, start_date_time>end_date_time, cancellation(cancel or undo cancel) update trigger(cancelled_by and updated_by)
+
+done -- set generated id column for uw_engagement;
+
+tutorialpoints -- typescript
+pluralsight -- angular 2 course

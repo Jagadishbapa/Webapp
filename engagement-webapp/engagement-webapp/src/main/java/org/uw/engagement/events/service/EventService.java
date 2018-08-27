@@ -23,4 +23,9 @@ public class EventService {
 		eventsDao.findById(eventId).forEach(events::add);
 		return events;
 	}
+	
+	@Transactional
+	public EventsDbModel saveEvent(EventsDbModel event) {
+		return eventsDao.save(event);
+	}
 }

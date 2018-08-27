@@ -1,63 +1,66 @@
 package org.uw.engagement.events.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class CoSponsors{
-	  String name;
-	  String email;
-	  int phone_number;
-	  String website;
+public class CoSponsors implements Serializable{
+
+	@Column(name="CO_SPONSOR_NAME")
+	private String cos_name;
 	
-	public CoSponsors()
-	{}
+	@Column(name="CO_SPONSOR_EMAIL")
+	private String cos_email;
 	
-	public CoSponsors(String name, String email, int phone_number, String website) {
+	@Column(name="CO_SPONSOR_PHONE_NUMBER")
+	private String cos_ph_number;
+	
+	@Column(name="CO_SPONSOR_WEBSITE")
+	private String cos_website;
+	
+	public CoSponsors() {}
+
+	public CoSponsors(String cos_name, String cos_email, String cos_ph_number, String cos_website) {
 		super();
-		this.name = name;
-		this.email = email;
-		this.phone_number = phone_number;
-		this.website = website;
+		this.cos_name = cos_name;
+		this.cos_email = cos_email;
+		this.cos_ph_number = cos_ph_number;
+		this.cos_website = cos_website;
 	}
-	public String getName() {
-		return name;
+
+	public String getCos_name() {
+		return cos_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setCos_name(String cos_name) {
+		this.cos_name = cos_name;
 	}
-	public String getEmail() {
-		return email;
+
+	public String getCos_email() {
+		return cos_email;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setCos_email(String cos_email) {
+		this.cos_email = cos_email;
 	}
-	public int getPhone_number() {
-		return phone_number;
+
+	public String getCos_ph_number() {
+		return cos_ph_number;
 	}
-	public void setPhone_number(int phone_number) {
-		this.phone_number = phone_number;
+
+	public void setCos_ph_number(String cos_ph_number) {
+		this.cos_ph_number = cos_ph_number;
 	}
-	public String getWebsite() {
-		return website;
+
+	public String getCos_website() {
+		return cos_website;
 	}
-	public void setWebsite(String website) {
-		this.website = website;
+
+	public void setCos_website(String cos_website) {
+		this.cos_website = cos_website;
 	}
-	  
-	  
-//	  CoSponsors(String name, String em, int pn, String wbs)
-//	  {
-//		  this.name = name;
-//		  this.email = em;
-//		  this.phone_number = pn;
-//		  this.website = wbs;
-//	  }
-//	  
-//	  CoSponsors(CoSponsors csps)
-//	  {
-//		  this.name = csps.name;
-//		  this.email = csps.email;
-//		  this.phone_number = csps.phone_number;
-//		  this.website = csps.website; 
-//	  }
+	
+
 }

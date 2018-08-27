@@ -18,6 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 public interface EventsDao extends CrudRepository<EventsDbModel, Integer> {
 
 	public List<EventsDbModel> findById (int eventId);
+	
+	
+	public EventsDbModel save(EventsDbModel event);
 }
 /*
 import java.io.Serializable;

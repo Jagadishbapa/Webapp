@@ -1,0 +1,16 @@
+CREATE OR REPLACE TRIGGER UW_ENGAGEMENT_TRIGGER 
+BEFORE INSERT OR UPDATE ON UW_ENGAGEMENT 
+FOR EACH ROW
+BEGIN
+  IF UPDATING THEN
+    :new.last_update_date := SYSDATE;
+    IF :new.cancelled != :old.cancelled AND :new.cancelled='YES' THEN
+      :new.cancellation_date := SYSDATE;
+    ELSIF :new.cancelled != :old.cancelled THEN
+      :new.cancellation_date := null;
+      :new.cancelled_by :=null;
+    END IF;
+  ELSIF INSERTING THEN
+    :new.creation_date := SYSDATE;
+  END IF;
+END;

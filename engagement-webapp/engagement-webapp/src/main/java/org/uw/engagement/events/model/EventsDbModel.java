@@ -7,12 +7,20 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import oracle.jdbc.OracleBfile;
 import oracle.sql.BLOB;
@@ -23,9 +31,17 @@ import java.sql.Date;
 
 @Entity
 @Table(name="UW_ENGAGEMENT")
+@SecondaryTables({
+    @SecondaryTable(name="LOCATION", pkJoinColumns={
+        @PrimaryKeyJoinColumn(name="event_id", referencedColumnName="event_id") }),
+
+    @SecondaryTable(name="CONTACT_INFO", pkJoinColumns={
+        @PrimaryKeyJoinColumn(name="event_id", referencedColumnName="event_id") })
+})
 public class EventsDbModel {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="EVENT_ID")
 	private Integer id;
 	
@@ -71,59 +87,65 @@ public class EventsDbModel {
 	private Integer eve_cost;
 	
 	
-    //@Column(name = "SPEAKERS")
+ 
     @ElementCollection
-    @JoinTable(name="SPEAKERS", joinColumns=@javax.persistence.JoinColumn(name="EVENT_ID"))
-	private java.util.Set<Speakers> speakers;
+    @JoinTable(name="SPEAKERS", joinColumns=@JoinColumn(name="EVENT_ID"))
+	private java.util.Set<Speakers> speakers = new HashSet<Speakers>();
     
     //@ElementCollection
    // @JoinTable(name="LOCATION", joinColumns=@javax.persistence.JoinColumn(name="EVENT_ID"))
-    @OneToOne
-    @JoinColumn(name = "event_id")
-    private Location loc;
+   // @OneToOne
+   // @JoinColumn(name = "event_id")
+   // private Location loc;
     
-	//@org.hibernate.annotations.Type( type = "string-array" )
-   // @Column(
-     ////   name = "sensor_names", 
-     //   columnDefinition = "text[]"
-   // )
-	//private String[] sensorNames;
+    @Column(table = "LOCATION")
+    private String building_room;
+    
+    @Column(table = "LOCATION")
+    private String address_line1;
+    
+    @Column(table = "LOCATION")
+    private String address_line2;
+    
+    @Column(table = "LOCATION")
+    private String county;
+    
+    @Column(table = "LOCATION")
+    private String city;
+    
+    @Column(table = "LOCATION")
+    private String state;
+    
+    @Column(table = "LOCATION")
+    private String country;
+    
+    @Column(table = "LOCATION")
+    private String other_city;
+    
+    @Column(table = "LOCATION")
+    private String zip;
+    
+    @Column(table = "CONTACT_INFO")
+	private String first_name;
 	
-	/*
-
-	   @ElementCollection
-	   @CollectionTable(name="Nicknames", joinColumns=@javax.persistence.JoinColumn(name="id"))
-	   @Column(name="nickname")
-	   public Set<String> getNicknames() { return Nicknames; } 
+    @Column(table = "CONTACT_INFO")
+	private String last_name;
 	
-	*/
-	/*
-	@Column(name="SPEAKERS")
-	@ElementCollection(targetClass=Speakers.class)
-	private List<Speakers> speakers;
+    @Column(table = "CONTACT_INFO")
+	private String sponsoring_department;
 	
-	   @ElementCollection
-	   @CollectionTable(name="Speakerss", joinColumns=@javax.persistence.JoinColumn(name="id"))
-	   @AttributeOverrides({
-		      @AttributeOverride(name="first_name", column=@Column(name="f_na")),
-		      @AttributeOverride(name="last_name", column=@Column(name="l_na")),
-		      @AttributeOverride(name="middle_name", column=@Column(name="m_na")),
-		      @AttributeOverride(name="email", column=@Column(name="email"))
-		   })
-	   public List<Speakers> getSpeakers() { return speakers; } 
-	//private java.sql.Array speakers;
-	//= new ArrayList<Speakers>();
+    @Column(table = "CONTACT_INFO")
+	private String email_1;
 	
-	 
+    @Column(table = "CONTACT_INFO")
+	private String email_2;
 	
-
-	//@Column(name="LOCATION")
-	private Location loc;
+    @Column(table = "CONTACT_INFO")
+	private String phone_number;
 	
-	//@Embedded
-	//@Column(name="CONTACT_INFO")
-	//private ContactInfo contacts;
-	*/
+    @Column(table = "CONTACT_INFO")
+	private String website;
+	
 	
 	@Column(name="ANTICIPATED_COST")
 	private Integer ant_cost;
@@ -149,35 +171,48 @@ public class EventsDbModel {
 	@Column(name="COST_FUNDING_OTHER")
 	private Integer costFO;
 	
-	//@Embedded
-	//@Column(name="CO_SPONSORS")
-	//private Struct coSponsors;
+    @ElementCollection
+    @JoinTable(name="CO_SPONSORS", joinColumns=@JoinColumn(name="EVENT_ID"))
+	private java.util.List<CoSponsors> coSponsors;
 	
 	@Column(name="ATTENDEES_COUNT")
 	private Integer attendeeC;
 	
-	@Column(name="CREATED_BY")
-	private String createdBy;
+    
+    @Column(name = "CREATED_BY")
+	private String created_by;
 	
 	@Column(name="CREATION_DATE")
-	private Date creation_date;
+	@JsonIgnore private java.util.Date creation_date = new java.util.Date();
 	
 	@Column(name="LAST_UPDATE_DATE")
-	private Date last_up_date;
+	@JsonIgnore private Date last_up_date;
 	
 	@Column(name="CANCELLED")
 	private String cancelled;
 	
 	@Column(name="CANCELLATION_DATE")
-	private Date cancel_date;
+	@JsonIgnore private Date cancel_date;
+	
+    
+    @Column(name = "UPDATED_BY")
+    @JsonIgnore private String updated_by;
+    
+    
+    @Column(name = "CANCELLED_BY")
+    @JsonIgnore private String cancelled_by;
 	
 	public EventsDbModel() {}
 
-	public EventsDbModel(Integer id, String org, String dept, String event_desc, String event_type, String priv, Integer fee,
-			Timestamp eve_start_time, Timestamp eve_end_time, Blob event_file, Integer eve_cost, Set<Speakers> speakers,
-			Location loc, ContactInfo contacts, Integer ant_cost, Integer ant_num_attendees, String fund1, String fund2,
-			String fundOther, Integer costF1, Integer costF2, Integer costFO, Integer attendeeC,
-			String createdBy, Date creation_date, Date last_up_date, String cancelled, Date cancel_date) {
+	public EventsDbModel(Integer id, String org, String dept, String event_desc, String event_type, String priv,
+			Integer fee, Timestamp eve_start_time, Timestamp eve_end_time, Blob event_file, Integer eve_cost,
+			Set<Speakers> speakers, String building_room, String address_line1, String address_line2, String county,
+			String city, String state, String country, String other_city, String zip, String first_name,
+			String last_name, String sponsoring_department, String email_1, String email_2, String phone_number,
+			String website, Integer ant_cost, Integer ant_num_attendees, String fund1, String fund2, String fundOther,
+			Integer costF1, Integer costF2, Integer costFO, List<CoSponsors> coSponsors, Integer attendeeC,
+			String created_by, Date creation_date, Date last_up_date, String cancelled, Date cancel_date,
+			String updated_by, String cancelled_by) {
 		super();
 		this.id = id;
 		this.org = org;
@@ -191,8 +226,22 @@ public class EventsDbModel {
 		this.event_file = event_file;
 		this.eve_cost = eve_cost;
 		this.speakers = speakers;
-		this.loc = loc;
-		//this.contacts = contacts;
+		this.building_room = building_room;
+		this.address_line1 = address_line1;
+		this.address_line2 = address_line2;
+		this.county = county;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.other_city = other_city;
+		this.zip = zip;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.sponsoring_department = sponsoring_department;
+		this.email_1 = email_1;
+		this.email_2 = email_2;
+		this.phone_number = phone_number;
+		this.website = website;
 		this.ant_cost = ant_cost;
 		this.ant_num_attendees = ant_num_attendees;
 		this.fund1 = fund1;
@@ -201,13 +250,15 @@ public class EventsDbModel {
 		this.costF1 = costF1;
 		this.costF2 = costF2;
 		this.costFO = costFO;
-		//this.coSponsors = coSponsors;
+		this.coSponsors = coSponsors;
 		this.attendeeC = attendeeC;
-		this.createdBy = createdBy;
+		this.created_by = created_by;
 		this.creation_date = creation_date;
 		this.last_up_date = last_up_date;
 		this.cancelled = cancelled;
 		this.cancel_date = cancel_date;
+		this.updated_by = updated_by;
+		this.cancelled_by = cancelled_by;
 	}
 
 	public Integer getId() {
@@ -298,32 +349,142 @@ public class EventsDbModel {
 		this.eve_cost = eve_cost;
 	}
 
-	
-	public Set<Speakers> getSpeakers() {
+	public java.util.Set<Speakers> getSpeakers() {
 		return speakers;
 	}
 
-	public void setSpeakers(Set<Speakers> speakers) {
+	public void setSpeakers(java.util.Set<Speakers> speakers) {
 		this.speakers = speakers;
 	}
-	
 
-	public Location getLoc() {
-		return loc;
-	}
-
-	public void setLoc(Location loc) {
-		this.loc = loc;
-	}
-/*
-	public ContactInfo getContacts() {
-		return contacts;
+	public String getBuilding_room() {
+		return building_room;
 	}
 
-	public void setContacts(ContactInfo contacts) {
-		this.contacts = contacts;
+	public void setBuilding_room(String building_room) {
+		this.building_room = building_room;
 	}
-	*/
+
+	public String getAddress_line1() {
+		return address_line1;
+	}
+
+	public void setAddress_line1(String address_line1) {
+		this.address_line1 = address_line1;
+	}
+
+	public String getAddress_line2() {
+		return address_line2;
+	}
+
+	public void setAddress_line2(String address_line2) {
+		this.address_line2 = address_line2;
+	}
+
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getOther_city() {
+		return other_city;
+	}
+
+	public void setOther_city(String other_city) {
+		this.other_city = other_city;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+
+	public String getSponsoring_department() {
+		return sponsoring_department;
+	}
+
+	public void setSponsoring_department(String sponsoring_department) {
+		this.sponsoring_department = sponsoring_department;
+	}
+
+	public String getEmail_1() {
+		return email_1;
+	}
+
+	public void setEmail_1(String email_1) {
+		this.email_1 = email_1;
+	}
+
+	public String getEmail_2() {
+		return email_2;
+	}
+
+	public void setEmail_2(String email_2) {
+		this.email_2 = email_2;
+	}
+
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
 	public Integer getAnt_cost() {
 		return ant_cost;
 	}
@@ -388,13 +549,13 @@ public class EventsDbModel {
 		this.costFO = costFO;
 	}
 
-	//public Struct getCoSponsors() {
-		//return coSponsors;
-	//}
+	public java.util.List<CoSponsors> getCoSponsors() {
+		return coSponsors;
+	}
 
-	//public void setCoSponsors(Struct coSponsors) {
-		//this.coSponsors = coSponsors;
-	//}
+	public void setCoSponsors(java.util.List<CoSponsors> coSponsors) {
+		this.coSponsors = coSponsors;
+	}
 
 	public Integer getAttendeeC() {
 		return attendeeC;
@@ -404,15 +565,15 @@ public class EventsDbModel {
 		this.attendeeC = attendeeC;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
+	public String getCreated_by() {
+		return created_by;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setCreated_by(String created_by) {
+		this.created_by = created_by;
 	}
 
-	public Date getCreation_date() {
+	public java.util.Date getCreation_date() {
 		return creation_date;
 	}
 
@@ -443,8 +604,23 @@ public class EventsDbModel {
 	public void setCancel_date(Date cancel_date) {
 		this.cancel_date = cancel_date;
 	}
-	
-	
-	
-	
+
+	public String getUpdated_by() {
+		return updated_by;
+	}
+
+	public void setUpdated_by(String updated_by) {
+		this.updated_by = updated_by;
+	}
+
+	public String getCancelled_by() {
+		return cancelled_by;
+	}
+
+	public void setCancelled_by(String cancelled_by) {
+		this.cancelled_by = cancelled_by;
+	}
+
+
+
 }

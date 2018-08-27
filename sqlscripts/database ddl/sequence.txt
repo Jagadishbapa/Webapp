@@ -1,0 +1,1 @@
+create countries, us_states, wy_COUNTIES, wy_cities,  uw_users, uw_eng_admins, uw_engagement , location, speakers, contact_info, co_sponsors
