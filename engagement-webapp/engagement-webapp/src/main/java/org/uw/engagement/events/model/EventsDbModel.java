@@ -196,7 +196,7 @@ public class EventsDbModel {
 	
     
     @Column(name = "UPDATED_BY")
-    private String updated_by;
+    @JsonIgnore private String updated_by;
     
     
     @Column(name = "CANCELLED_BY")
