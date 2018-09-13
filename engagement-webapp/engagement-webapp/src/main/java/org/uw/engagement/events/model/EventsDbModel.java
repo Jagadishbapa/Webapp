@@ -62,35 +62,35 @@ public class EventsDbModel {
 	
 
 	@Column(name="PRIVATE")
-	private String priv;
+	@JsonIgnore private String priv;
 	
 
 	@Column(name="FEE")
-	private Integer fee;
+	@JsonIgnore private Integer fee;
 	
 
 	
 	@Column(name="EVENT_START_DATE_TIME")
-	private Timestamp eve_start_time;
+	@JsonIgnore private Timestamp eve_start_time;
 	
 
 	
 	@Column(name="EVENT_END_DATE_TIME")
-	private Timestamp eve_end_time;
+	@JsonIgnore private Timestamp eve_end_time;
 	
 	
 	@Column(name="EVENT_FILE")
-	private Blob event_file;
+	@JsonIgnore private Blob event_file;
 	
 	
 	@Column(name="EVENT_COST")
-	private Integer eve_cost;
+	@JsonIgnore private Integer eve_cost;
 	
 	
  
     @ElementCollection
     @JoinTable(name="SPEAKERS", joinColumns=@JoinColumn(name="EVENT_ID"))
-	private java.util.Set<Speakers> speakers = new HashSet<Speakers>();
+    @JsonIgnore private java.util.Set<Speakers> speakers = new HashSet<Speakers>();
     
     //@ElementCollection
    // @JoinTable(name="LOCATION", joinColumns=@javax.persistence.JoinColumn(name="EVENT_ID"))
@@ -99,88 +99,88 @@ public class EventsDbModel {
    // private Location loc;
     
     @Column(table = "LOCATION")
-    private String building_room;
+    @JsonIgnore private String building_room;
     
     @Column(table = "LOCATION")
-    private String address_line1;
+    @JsonIgnore private String address_line1;
     
     @Column(table = "LOCATION")
-    private String address_line2;
+    @JsonIgnore private String address_line2;
     
     @Column(table = "LOCATION")
-    private String county;
+    @JsonIgnore private String county;
     
     @Column(table = "LOCATION")
-    private String city;
+    @JsonIgnore private String city;
     
     @Column(table = "LOCATION")
-    private String state;
+    @JsonIgnore private String state;
     
     @Column(table = "LOCATION")
-    private String country;
+    @JsonIgnore private String country;
     
     @Column(table = "LOCATION")
-    private String other_city;
+    @JsonIgnore private String other_city;
     
     @Column(table = "LOCATION")
-    private String zip;
+    @JsonIgnore private String zip;
     
     @Column(table = "CONTACT_INFO")
-	private String first_name;
+    @JsonIgnore private String first_name;
 	
     @Column(table = "CONTACT_INFO")
-	private String last_name;
+    @JsonIgnore private String last_name;
 	
     @Column(table = "CONTACT_INFO")
-	private String sponsoring_department;
+    @JsonIgnore private String sponsoring_department;
 	
     @Column(table = "CONTACT_INFO")
-	private String email_1;
+    @JsonIgnore private String email_1;
 	
     @Column(table = "CONTACT_INFO")
-	private String email_2;
+    @JsonIgnore private String email_2;
 	
     @Column(table = "CONTACT_INFO")
-	private String phone_number;
+    @JsonIgnore private String phone_number;
 	
     @Column(table = "CONTACT_INFO")
-	private String website;
+    @JsonIgnore private String website;
 	
 	
 	@Column(name="ANTICIPATED_COST")
-	private Integer ant_cost;
+	@JsonIgnore private Integer ant_cost;
 
 	@Column(name="ANTICIPATED_NUM_ATTENDEES")
-	private Integer ant_num_attendees;
+	@JsonIgnore private Integer ant_num_attendees;
 	
 	@Column(name="FUNDING_SOURCE1")
-	private String fund1;
+	@JsonIgnore private String fund1;
 	
 	@Column(name="FUNDING_SOURCE2")
-	private String fund2;
+	@JsonIgnore private String fund2;
 	
 	@Column(name="FUNDING_OTHER")
-	private String fundOther;
+	@JsonIgnore private String fundOther;
 	
 	@Column(name="COST_FUNDING1")
-	private Integer costF1;
+	@JsonIgnore private Integer costF1;
 	
 	@Column(name="COST_FUNDING2")
-	private Integer costF2;
+	@JsonIgnore private Integer costF2;
 	
 	@Column(name="COST_FUNDING_OTHER")
-	private Integer costFO;
+	@JsonIgnore private Integer costFO;
 	
     @ElementCollection
     @JoinTable(name="CO_SPONSORS", joinColumns=@JoinColumn(name="EVENT_ID"))
-	private java.util.List<CoSponsors> coSponsors;
+    @JsonIgnore private java.util.List<CoSponsors> coSponsors;
 	
 	@Column(name="ATTENDEES_COUNT")
-	private Integer attendeeC;
+	@JsonIgnore private Integer attendeeC;
 	
     
     @Column(name = "CREATED_BY")
-	private String created_by;
+    @JsonIgnore private String created_by;
 	
 	@Column(name="CREATION_DATE")
 	@JsonIgnore private java.util.Date creation_date = new java.util.Date();
@@ -189,7 +189,7 @@ public class EventsDbModel {
 	@JsonIgnore private Date last_up_date;
 	
 	@Column(name="CANCELLED")
-	private String cancelled;
+	@JsonIgnore private String cancelled;
 	
 	@Column(name="CANCELLATION_DATE")
 	@JsonIgnore private Date cancel_date;

@@ -1,4 +1,5 @@
-
+*ngFor="let event of events"
+[routerLink]="['/transfer']" [queryParams]="{ id: event.id }
 event end date to html web page
 united states minor to database countries
 sign in and sign out columns to IT people
