@@ -20,6 +20,7 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import oracle.jdbc.OracleBfile;
@@ -62,35 +63,37 @@ public class EventsDbModel {
 	
 
 	@Column(name="PRIVATE")
-	@JsonIgnore private String priv;
+	private String priv;
 	
 
 	@Column(name="FEE")
-	@JsonIgnore private Integer fee;
+	private Integer fee;
 	
 
 	
 	@Column(name="EVENT_START_DATE_TIME")
-	@JsonIgnore private Timestamp eve_start_time;
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm aa")
+	private Timestamp eve_start_time;
 	
 
 	
 	@Column(name="EVENT_END_DATE_TIME")
-	@JsonIgnore private Timestamp eve_end_time;
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm aa")
+	private Timestamp eve_end_time;
 	
 	
 	@Column(name="EVENT_FILE")
-	@JsonIgnore private Blob event_file;
+	private Blob event_file;
 	
 	
 	@Column(name="EVENT_COST")
-	@JsonIgnore private Integer eve_cost;
+	private Integer eve_cost;
 	
 	
  
     @ElementCollection
     @JoinTable(name="SPEAKERS", joinColumns=@JoinColumn(name="EVENT_ID"))
-    @JsonIgnore private java.util.Set<Speakers> speakers = new HashSet<Speakers>();
+    private java.util.Set<Speakers> speakers = new HashSet<Speakers>();
     
     //@ElementCollection
    // @JoinTable(name="LOCATION", joinColumns=@javax.persistence.JoinColumn(name="EVENT_ID"))
@@ -99,100 +102,100 @@ public class EventsDbModel {
    // private Location loc;
     
     @Column(table = "LOCATION")
-    @JsonIgnore private String building_room;
+    private String building_room;
     
     @Column(table = "LOCATION")
-    @JsonIgnore private String address_line1;
+    private String address_line1;
     
     @Column(table = "LOCATION")
-    @JsonIgnore private String address_line2;
+    private String address_line2;
     
     @Column(table = "LOCATION")
-    @JsonIgnore private String county;
+    private String county;
     
     @Column(table = "LOCATION")
-    @JsonIgnore private String city;
+    private String city;
     
     @Column(table = "LOCATION")
-    @JsonIgnore private String state;
+    private String state;
     
     @Column(table = "LOCATION")
-    @JsonIgnore private String country;
+    private String country;
     
     @Column(table = "LOCATION")
-    @JsonIgnore private String other_city;
+    private String other_city;
     
     @Column(table = "LOCATION")
-    @JsonIgnore private String zip;
+    private String zip;
     
     @Column(table = "CONTACT_INFO")
-    @JsonIgnore private String first_name;
+    private String first_name;
 	
     @Column(table = "CONTACT_INFO")
-    @JsonIgnore private String last_name;
+    private String last_name;
 	
     @Column(table = "CONTACT_INFO")
-    @JsonIgnore private String sponsoring_department;
+    private String sponsoring_department;
 	
     @Column(table = "CONTACT_INFO")
-    @JsonIgnore private String email_1;
+    private String email_1;
 	
     @Column(table = "CONTACT_INFO")
-    @JsonIgnore private String email_2;
+    private String email_2;
 	
     @Column(table = "CONTACT_INFO")
-    @JsonIgnore private String phone_number;
+    private String phone_number;
 	
     @Column(table = "CONTACT_INFO")
-    @JsonIgnore private String website;
+    private String website;
 	
 	
 	@Column(name="ANTICIPATED_COST")
-	@JsonIgnore private Integer ant_cost;
+	private Integer ant_cost;
 
 	@Column(name="ANTICIPATED_NUM_ATTENDEES")
-	@JsonIgnore private Integer ant_num_attendees;
+	private Integer ant_num_attendees;
 	
 	@Column(name="FUNDING_SOURCE1")
-	@JsonIgnore private String fund1;
+	private String fund1;
 	
 	@Column(name="FUNDING_SOURCE2")
-	@JsonIgnore private String fund2;
+	private String fund2;
 	
 	@Column(name="FUNDING_OTHER")
-	@JsonIgnore private String fundOther;
+	private String fundOther;
 	
 	@Column(name="COST_FUNDING1")
-	@JsonIgnore private Integer costF1;
+	private Integer costF1;
 	
 	@Column(name="COST_FUNDING2")
-	@JsonIgnore private Integer costF2;
+	private Integer costF2;
 	
 	@Column(name="COST_FUNDING_OTHER")
-	@JsonIgnore private Integer costFO;
+	private Integer costFO;
 	
     @ElementCollection
     @JoinTable(name="CO_SPONSORS", joinColumns=@JoinColumn(name="EVENT_ID"))
-    @JsonIgnore private java.util.List<CoSponsors> coSponsors;
+    private java.util.List<CoSponsors> coSponsors;
 	
 	@Column(name="ATTENDEES_COUNT")
-	@JsonIgnore private Integer attendeeC;
+	private Integer attendeeC;
 	
     
     @Column(name = "CREATED_BY")
-    @JsonIgnore private String created_by;
+    private String created_by;
 	
 	@Column(name="CREATION_DATE")
 	@JsonIgnore private java.util.Date creation_date = new java.util.Date();
 	
 	@Column(name="LAST_UPDATE_DATE")
-	@JsonIgnore private Date last_up_date;
+	private Date last_up_date;
 	
 	@Column(name="CANCELLED")
-	@JsonIgnore private String cancelled;
+	private String cancelled;
 	
 	@Column(name="CANCELLATION_DATE")
-	@JsonIgnore private Date cancel_date;
+	private Date cancel_date;
 	
     
     @Column(name = "UPDATED_BY")
@@ -201,6 +204,12 @@ public class EventsDbModel {
     
     @Column(name = "CANCELLED_BY")
     @JsonIgnore private String cancelled_by;
+    
+	@Column(name="EVENT_NAME")
+	private String event_name;
+	
+	@Column(name="FLAG")
+	private String flag;
 	
 	public EventsDbModel() {}
 
@@ -211,8 +220,8 @@ public class EventsDbModel {
 			String last_name, String sponsoring_department, String email_1, String email_2, String phone_number,
 			String website, Integer ant_cost, Integer ant_num_attendees, String fund1, String fund2, String fundOther,
 			Integer costF1, Integer costF2, Integer costFO, List<CoSponsors> coSponsors, Integer attendeeC,
-			String created_by, Date creation_date, Date last_up_date, String cancelled, Date cancel_date,
-			String updated_by, String cancelled_by) {
+			String created_by, java.util.Date creation_date, Date last_up_date, String cancelled, Date cancel_date,
+			String updated_by, String cancelled_by, String event_name, String flag) {
 		super();
 		this.id = id;
 		this.org = org;
@@ -259,6 +268,8 @@ public class EventsDbModel {
 		this.cancel_date = cancel_date;
 		this.updated_by = updated_by;
 		this.cancelled_by = cancelled_by;
+		this.event_name = event_name;
+		this.flag = flag;
 	}
 
 	public Integer getId() {
@@ -577,7 +588,7 @@ public class EventsDbModel {
 		return creation_date;
 	}
 
-	public void setCreation_date(Date creation_date) {
+	public void setCreation_date(java.util.Date creation_date) {
 		this.creation_date = creation_date;
 	}
 
@@ -621,6 +632,21 @@ public class EventsDbModel {
 		this.cancelled_by = cancelled_by;
 	}
 
+	public String getEvent_name() {
+		return event_name;
+	}
 
+	public void setEvent_name(String event_name) {
+		this.event_name = event_name;
+	}
 
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	
 }

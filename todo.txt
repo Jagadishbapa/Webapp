@@ -41,5 +41,7 @@ uw_engagement creation_date, other city shouldn't be null if city is other, last
 
 done -- set generated id column for uw_engagement;
 
+set flag and event name, add event name and poster
+
 tutorialpoints -- typescript
 pluralsight -- angular 2 course

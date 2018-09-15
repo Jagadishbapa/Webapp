@@ -3,6 +3,7 @@ package org.uw.engagement.events.service;
 
 import org.uw.engagement.events.dao.*;
 import org.uw.engagement.events.model.EventsDbModel;
+import org.uw.engagement.events.model.EngEventsView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class EventService {
 	@Autowired
 	private EventsDao eventsDao;
 	
+	@Autowired
+	private AudEventsDao audeventsDao;
+	
 	@Transactional
 	public List<EventsDbModel> getAllEvents(int eventId)
 	{
@@ -27,5 +31,13 @@ public class EventService {
 	@Transactional
 	public EventsDbModel saveEvent(EventsDbModel event) {
 		return eventsDao.save(event);
+	}
+	
+	@Transactional
+	public List<EngEventsView> getEvents()
+	{
+		List<EngEventsView> events = new ArrayList();
+		audeventsDao.findAll().forEach(events::add);
+		return events;
 	}
 }

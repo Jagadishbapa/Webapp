@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.uw.engagement.events.model.EventsDbModel;
+import org.uw.engagement.events.model.EngEventsView;
 import org.uw.engagement.events.service.EventService;
 
 @RestController
@@ -17,6 +18,7 @@ import org.uw.engagement.events.service.EventService;
 public class EventsController {
 	@Autowired
 	private EventService eventService;
+	
 
 	@RequestMapping(value="/allevents/{id}",method=RequestMethod.GET)
 	public List<EventsDbModel> getAllEvents(@PathVariable int id)
@@ -27,6 +29,11 @@ public class EventsController {
 	@RequestMapping(value="/save", method=RequestMethod.POST, headers= {"content-type=application/json"} )
 	public EventsDbModel saveEvent(@RequestBody EventsDbModel event) {
 		return eventService.saveEvent(event);
+	}
+	
+	@RequestMapping(value="/audgetevents", method=RequestMethod.GET, headers= {"content-type=application/json"} )
+	public List<EngEventsView> getEvents() {
+		return eventService.getEvents();
 	}
 	
 }
