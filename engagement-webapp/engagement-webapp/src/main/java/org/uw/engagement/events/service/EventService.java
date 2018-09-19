@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,4 +42,14 @@ public class EventService {
 		audeventsDao.findAll().forEach(events::add);
 		return events;
 	}
+	
+	@Transactional
+	public Page<EngEventsView> getPageEvents(AudEventsDao aed, int page)
+	{
+		//Page<EngEventsView> events = new ArrayList();
+		//audeventsDao.findAll().forEach(events::add);
+		System.out.println(page);
+		return aed.findAll(new PageRequest(page,25));
+	}
+	
 }

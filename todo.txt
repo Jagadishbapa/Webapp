@@ -30,7 +30,7 @@ create a table for wyoweb users
 sign in page
 
 
-filters - dates, county, city, dept, org, by keyword
+filters - dates, county, city, dept, org, by keyword, type of event
 
 
 create countries, us_states, wy_COUNTIES, wy_cities,  uw_users, uw_eng_admins, uw_engagement , location, speakers, contact_info, co_sponsors
@@ -42,6 +42,9 @@ uw_engagement creation_date, other city shouldn't be null if city is other, last
 done -- set generated id column for uw_engagement;
 
 set flag and event name, add event name and poster
+"upcoming events for next 1 week(set view in the database and on the website) order by event start date and time
+set pop ups for the events, apply fileters, 25 events per page
+click on event
 
 tutorialpoints -- typescript
 pluralsight -- angular 2 course

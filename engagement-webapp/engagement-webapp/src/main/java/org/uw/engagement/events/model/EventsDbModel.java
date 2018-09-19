@@ -48,10 +48,10 @@ public class EventsDbModel {
 	
 	
 	@Column(name="ORGANIZATION")
-	private String org;
+	private String organization;
 
 	@Column(name="DEPARTMENT")
-	private String dept;
+	private String department;
 	
 
 	@Column(name="EVENT_DESC")
@@ -73,13 +73,13 @@ public class EventsDbModel {
 	
 	@Column(name="EVENT_START_DATE_TIME")
 	@JsonFormat(pattern="yyyy-MM-dd hh:mm aa")
-	private Timestamp eve_start_time;
+	private Timestamp event_start_date_time;
 	
 
 	
 	@Column(name="EVENT_END_DATE_TIME")
 	@JsonFormat(pattern="yyyy-MM-dd hh:mm aa")
-	private Timestamp eve_end_time;
+	private Timestamp event_end_date_time;
 	
 	
 	@Column(name="EVENT_FILE")
@@ -87,19 +87,13 @@ public class EventsDbModel {
 	
 	
 	@Column(name="EVENT_COST")
-	private Integer eve_cost;
+	private Integer event_cost;
 	
 	
  
     @ElementCollection
     @JoinTable(name="SPEAKERS", joinColumns=@JoinColumn(name="EVENT_ID"))
     private java.util.Set<Speakers> speakers = new HashSet<Speakers>();
-    
-    //@ElementCollection
-   // @JoinTable(name="LOCATION", joinColumns=@javax.persistence.JoinColumn(name="EVENT_ID"))
-   // @OneToOne
-   // @JoinColumn(name = "event_id")
-   // private Location loc;
     
     @Column(table = "LOCATION")
     private String building_room;
@@ -151,35 +145,35 @@ public class EventsDbModel {
 	
 	
 	@Column(name="ANTICIPATED_COST")
-	private Integer ant_cost;
+	private Integer anticipated_cost;
 
 	@Column(name="ANTICIPATED_NUM_ATTENDEES")
-	private Integer ant_num_attendees;
+	private Integer anticipated_num_attendees;
 	
 	@Column(name="FUNDING_SOURCE1")
-	private String fund1;
+	private String funding_source1;
 	
 	@Column(name="FUNDING_SOURCE2")
-	private String fund2;
+	private String funding_source2;
 	
 	@Column(name="FUNDING_OTHER")
-	private String fundOther;
+	private String funding_other;
 	
 	@Column(name="COST_FUNDING1")
-	private Integer costF1;
+	private Integer cost_funding1;
 	
 	@Column(name="COST_FUNDING2")
-	private Integer costF2;
+	private Integer cost_funding2;
 	
 	@Column(name="COST_FUNDING_OTHER")
-	private Integer costFO;
+	private Integer cost_funding_other;
 	
     @ElementCollection
     @JoinTable(name="CO_SPONSORS", joinColumns=@JoinColumn(name="EVENT_ID"))
-    private java.util.List<CoSponsors> coSponsors;
+    private java.util.List<CoSponsors> co_sponsors;
 	
 	@Column(name="ATTENDEES_COUNT")
-	private Integer attendeeC;
+	private Integer attendees_count;
 	
     
     @Column(name = "CREATED_BY")
@@ -189,13 +183,13 @@ public class EventsDbModel {
 	@JsonIgnore private java.util.Date creation_date = new java.util.Date();
 	
 	@Column(name="LAST_UPDATE_DATE")
-	private Date last_up_date;
+	@JsonIgnore private Date last_update_date;
 	
 	@Column(name="CANCELLED")
 	private String cancelled;
 	
 	@Column(name="CANCELLATION_DATE")
-	private Date cancel_date;
+	@JsonIgnore private Date cancelllation_date;
 	
     
     @Column(name = "UPDATED_BY")
@@ -213,27 +207,29 @@ public class EventsDbModel {
 	
 	public EventsDbModel() {}
 
-	public EventsDbModel(Integer id, String org, String dept, String event_desc, String event_type, String priv,
-			Integer fee, Timestamp eve_start_time, Timestamp eve_end_time, Blob event_file, Integer eve_cost,
-			Set<Speakers> speakers, String building_room, String address_line1, String address_line2, String county,
-			String city, String state, String country, String other_city, String zip, String first_name,
-			String last_name, String sponsoring_department, String email_1, String email_2, String phone_number,
-			String website, Integer ant_cost, Integer ant_num_attendees, String fund1, String fund2, String fundOther,
-			Integer costF1, Integer costF2, Integer costFO, List<CoSponsors> coSponsors, Integer attendeeC,
-			String created_by, java.util.Date creation_date, Date last_up_date, String cancelled, Date cancel_date,
-			String updated_by, String cancelled_by, String event_name, String flag) {
+	public EventsDbModel(Integer event_id, String organization, String department, String event_desc, String event_type,
+			String priv, Integer fee, Timestamp eve_start_date_time, Timestamp eve_end_date_time, Blob event_file,
+			Integer event_cost, Set<Speakers> speakers, String building_room, String address_line1,
+			String address_line2, String county, String city, String state, String country, String other_city,
+			String zip, String first_name, String last_name, String sponsoring_department, String email_1,
+			String email_2, String phone_number, String website, Integer anticipated_cost,
+			Integer anticipated_num_attendees, String funding_source1, String funding_source2, String funding_other,
+			Integer cost_funding1, Integer cost_funding2, Integer cost_funding_other, List<CoSponsors> co_sponsors,
+			Integer attendees_count, String created_by, java.util.Date creation_date, Date last_update_date,
+			String cancelled, Date cancelllation_date, String updated_by, String cancelled_by, String event_name,
+			String flag) {
 		super();
-		this.id = id;
-		this.org = org;
-		this.dept = dept;
+		this.id = event_id;
+		this.organization = organization;
+		this.department = department;
 		this.event_desc = event_desc;
 		this.event_type = event_type;
 		this.priv = priv;
 		this.fee = fee;
-		this.eve_start_time = eve_start_time;
-		this.eve_end_time = eve_end_time;
+		this.event_start_date_time = eve_start_date_time;
+		this.event_end_date_time = eve_end_date_time;
 		this.event_file = event_file;
-		this.eve_cost = eve_cost;
+		this.event_cost = event_cost;
 		this.speakers = speakers;
 		this.building_room = building_room;
 		this.address_line1 = address_line1;
@@ -251,49 +247,49 @@ public class EventsDbModel {
 		this.email_2 = email_2;
 		this.phone_number = phone_number;
 		this.website = website;
-		this.ant_cost = ant_cost;
-		this.ant_num_attendees = ant_num_attendees;
-		this.fund1 = fund1;
-		this.fund2 = fund2;
-		this.fundOther = fundOther;
-		this.costF1 = costF1;
-		this.costF2 = costF2;
-		this.costFO = costFO;
-		this.coSponsors = coSponsors;
-		this.attendeeC = attendeeC;
+		this.anticipated_cost = anticipated_cost;
+		this.anticipated_num_attendees = anticipated_num_attendees;
+		this.funding_source1 = funding_source1;
+		this.funding_source2 = funding_source2;
+		this.funding_other = funding_other;
+		this.cost_funding1 = cost_funding1;
+		this.cost_funding2 = cost_funding2;
+		this.cost_funding_other = cost_funding_other;
+		this.co_sponsors = co_sponsors;
+		this.attendees_count = attendees_count;
 		this.created_by = created_by;
 		this.creation_date = creation_date;
-		this.last_up_date = last_up_date;
+		this.last_update_date = last_update_date;
 		this.cancelled = cancelled;
-		this.cancel_date = cancel_date;
+		this.cancelllation_date = cancelllation_date;
 		this.updated_by = updated_by;
 		this.cancelled_by = cancelled_by;
 		this.event_name = event_name;
 		this.flag = flag;
 	}
 
-	public Integer getId() {
+	public Integer getEvent_id() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setEvent_id(Integer event_id) {
+		this.id = event_id;
 	}
 
-	public String getOrg() {
-		return org;
+	public String getOrganization() {
+		return organization;
 	}
 
-	public void setOrg(String org) {
-		this.org = org;
+	public void setOrganization(String organization) {
+		this.organization = organization;
 	}
 
-	public String getDept() {
-		return dept;
+	public String getDepartment() {
+		return department;
 	}
 
-	public void setDept(String dept) {
-		this.dept = dept;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 	public String getEvent_desc() {
@@ -328,20 +324,20 @@ public class EventsDbModel {
 		this.fee = fee;
 	}
 
-	public Timestamp getEve_start_time() {
-		return eve_start_time;
+	public Timestamp getEve_start_date_time() {
+		return event_start_date_time;
 	}
 
-	public void setEve_start_time(Timestamp eve_start_time) {
-		this.eve_start_time = eve_start_time;
+	public void setEve_start_date_time(Timestamp eve_start_date_time) {
+		this.event_start_date_time = eve_start_date_time;
 	}
 
-	public Timestamp getEve_end_time() {
-		return eve_end_time;
+	public Timestamp getEve_end_date_time() {
+		return event_end_date_time;
 	}
 
-	public void setEve_end_time(Timestamp eve_end_time) {
-		this.eve_end_time = eve_end_time;
+	public void setEve_end_date_time(Timestamp eve_end_date_time) {
+		this.event_end_date_time = eve_end_date_time;
 	}
 
 	public Blob getEvent_file() {
@@ -352,12 +348,12 @@ public class EventsDbModel {
 		this.event_file = event_file;
 	}
 
-	public Integer getEve_cost() {
-		return eve_cost;
+	public Integer getEvent_cost() {
+		return event_cost;
 	}
 
-	public void setEve_cost(Integer eve_cost) {
-		this.eve_cost = eve_cost;
+	public void setEvent_cost(Integer event_cost) {
+		this.event_cost = event_cost;
 	}
 
 	public java.util.Set<Speakers> getSpeakers() {
@@ -369,6 +365,8 @@ public class EventsDbModel {
 	}
 
 	public String getBuilding_room() {
+		if(building_room==null)
+			return "";
 		return building_room;
 	}
 
@@ -425,6 +423,8 @@ public class EventsDbModel {
 	}
 
 	public String getOther_city() {
+		if(other_city==null)
+			return "";
 		return other_city;
 	}
 
@@ -496,84 +496,84 @@ public class EventsDbModel {
 		this.website = website;
 	}
 
-	public Integer getAnt_cost() {
-		return ant_cost;
+	public Integer getAnticipated_cost() {
+		return anticipated_cost;
 	}
 
-	public void setAnt_cost(Integer ant_cost) {
-		this.ant_cost = ant_cost;
+	public void setAnticipated_cost(Integer anticipated_cost) {
+		this.anticipated_cost = anticipated_cost;
 	}
 
-	public Integer getAnt_num_attendees() {
-		return ant_num_attendees;
+	public Integer getAnticipated_num_attendees() {
+		return anticipated_num_attendees;
 	}
 
-	public void setAnt_num_attendees(Integer ant_num_attendees) {
-		this.ant_num_attendees = ant_num_attendees;
+	public void setAnticipated_num_attendees(Integer anticipated_num_attendees) {
+		this.anticipated_num_attendees = anticipated_num_attendees;
 	}
 
-	public String getFund1() {
-		return fund1;
+	public String getFunding_source1() {
+		return funding_source1;
 	}
 
-	public void setFund1(String fund1) {
-		this.fund1 = fund1;
+	public void setFunding_source1(String funding_source1) {
+		this.funding_source1 = funding_source1;
 	}
 
-	public String getFund2() {
-		return fund2;
+	public String getFunding_source2() {
+		return funding_source2;
 	}
 
-	public void setFund2(String fund2) {
-		this.fund2 = fund2;
+	public void setFunding_source2(String funding_source2) {
+		this.funding_source2 = funding_source2;
 	}
 
-	public String getFundOther() {
-		return fundOther;
+	public String getFunding_other() {
+		return funding_other;
 	}
 
-	public void setFundOther(String fundOther) {
-		this.fundOther = fundOther;
+	public void setFunding_other(String funding_other) {
+		this.funding_other = funding_other;
 	}
 
-	public Integer getCostF1() {
-		return costF1;
+	public Integer getCost_funding1() {
+		return cost_funding1;
 	}
 
-	public void setCostF1(Integer costF1) {
-		this.costF1 = costF1;
+	public void setCost_funding1(Integer cost_funding1) {
+		this.cost_funding1 = cost_funding1;
 	}
 
-	public Integer getCostF2() {
-		return costF2;
+	public Integer getCost_funding2() {
+		return cost_funding2;
 	}
 
-	public void setCostF2(Integer costF2) {
-		this.costF2 = costF2;
+	public void setCost_funding2(Integer cost_funding2) {
+		this.cost_funding2 = cost_funding2;
 	}
 
-	public Integer getCostFO() {
-		return costFO;
+	public Integer getCost_funding_other() {
+		return cost_funding_other;
 	}
 
-	public void setCostFO(Integer costFO) {
-		this.costFO = costFO;
+	public void setCost_funding_other(Integer cost_funding_other) {
+		this.cost_funding_other = cost_funding_other;
 	}
 
-	public java.util.List<CoSponsors> getCoSponsors() {
-		return coSponsors;
+	public java.util.List<CoSponsors> getCo_sponsors() {
+		return co_sponsors;
 	}
 
-	public void setCoSponsors(java.util.List<CoSponsors> coSponsors) {
-		this.coSponsors = coSponsors;
+	public void setCo_sponsors(java.util.List<CoSponsors> co_sponsors) {
+		this.co_sponsors = co_sponsors;
 	}
 
-	public Integer getAttendeeC() {
-		return attendeeC;
+	public Integer getAttendees_count() {
+		return attendees_count;
 	}
 
-	public void setAttendeeC(Integer attendeeC) {
-		this.attendeeC = attendeeC;
+	public void setAttendees_count(Integer attendees_count) {
+		this.attendees_count = attendees_count;
 	}
 
 	public String getCreated_by() {
@@ -592,12 +592,12 @@ public class EventsDbModel {
 		this.creation_date = creation_date;
 	}
 
-	public Date getLast_up_date() {
-		return last_up_date;
+	public Date getLast_update_date() {
+		return last_update_date;
 	}
 
-	public void setLast_up_date(Date last_up_date) {
-		this.last_up_date = last_up_date;
+	public void setLast_update_date(Date last_update_date) {
+		this.last_update_date = last_update_date;
 	}
 
 	public String getCancelled() {
@@ -608,12 +608,12 @@ public class EventsDbModel {
 		this.cancelled = cancelled;
 	}
 
-	public Date getCancel_date() {
-		return cancel_date;
+	public Date getCancelllation_date() {
+		return cancelllation_date;
 	}
 
-	public void setCancel_date(Date cancel_date) {
-		this.cancel_date = cancel_date;
+	public void setCancelllation_date(Date cancelllation_date) {
+		this.cancelllation_date = cancelllation_date;
 	}
 
 	public String getUpdated_by() {
@@ -648,5 +648,4 @@ public class EventsDbModel {
 		this.flag = flag;
 	}
 
-	
 }

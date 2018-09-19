@@ -10,15 +10,17 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface AudEventsDao extends CrudRepository<EngEventsView, Integer> {
+public interface AudEventsDao extends CrudRepository<EngEventsView, Integer>, JpaRepository<EngEventsView, Integer> {
 
-	public List<EngEventsView> findAll();
+	//public List<EngEventsView> findAll();
 	
-	//public List<EngEventsView> getEvents();
+	//public List<EngEventsView> findAll();
 }
 

@@ -30,50 +30,92 @@ import java.sql.Date;
 
 
 @Entity
-@Table(name="eng_events_view")
+@Table(name="ENG_EVENTS_VIEW")
 public class EngEventsView {
 	@Id
+	@Column(name="EVENT_ID")
 	private	Integer	event_id;
 	
+	@Column(name="EVENT_NAME")
 	private	String	event_name;
+	
+	@Column(name="ORGANIZATION")
 	private	String	organization;
+	
+	@Column(name="DEPARTMENT")
 	private	String	department;
+	
+	@Column(name="EVENT_DESC")
 	private	String	event_desc;
+	
+	@Column(name="EVENT_TYPE")
 	private	String	event_type;
 	
 	@Column(name="PRIVATE")
 	private	String	priv;
+	
+	@Column(name="FEE")
 	private	Integer	fee;
 	
+	@Column(name="EVENT_START_DATE_TIME")
 	@JsonFormat(pattern="yyyy-MM-dd hh:mm aa")
 	private	Timestamp	event_start_date_time;
 	
+	@Column(name="EVENT_END_DATE_TIME")
 	@JsonFormat(pattern="yyyy-MM-dd hh:mm aa")
 	private	Timestamp	event_end_date_time;
 	
+	@Column(name="BUILDING_ROOM")
 	private	String	building_room;
+	
+	@Column(name="ADDRESS_LINE1")
 	private	String	address_line1;
+	
+	@Column(name="ADDRESS_LINE2")
 	private	String	address_line2;
+	
+	@Column(name="COUNTY")
 	private	String	county;
+	
+	@Column(name="CITY")
 	private	String	city;
+	
+	@Column(name="OTHER_CITY")
 	private	String	other_city;
+	
+	@Column(name="STATE")
 	private	String	state;
+	
+	@Column(name="COUNTRY")
+	private	String	country;
+	
+	@Column(name="ZIP")
 	private	Integer	zip;
+	
+	@Column(name="FIRST_NAME")
 	private	String	first_name;
+	
+	@Column(name="LAST_NAME")
 	private	String	last_name;
+	
+	@Column(name="EMAIL_1")
 	private	String	email_1;
+	
+	@Column(name="EMAIL_2")
 	private	String	email_2;
+	
+	@Column(name="PHONE_NUMBER")
 	private	String	phone_number;
 	
 	public EngEventsView() {}
 
-	public EngEventsView(Integer eVENT_ID, String event_name, String organization, String department, String event_desc,
+	public EngEventsView(Integer event_id, String event_name, String organization, String department, String event_desc,
 			String event_type, String priv, Integer fee, Timestamp event_start_date_time, Timestamp event_end_date_time,
 			String building_room, String address_line1, String address_line2, String county, String city,
-			String other_city, String state, Integer zip, String first_name, String last_name, String email_1,
-			String email_2, String phone_number) {
+			String other_city, String state, String country, Integer zip, String first_name, String last_name,
+			String email_1, String email_2, String phone_number) {
 		super();
-		event_id = eVENT_ID;
+		this.event_id = event_id;
 		this.event_name = event_name;
 		this.organization = organization;
 		this.department = department;
@@ -90,6 +132,7 @@ public class EngEventsView {
 		this.city = city;
 		this.other_city = other_city;
 		this.state = state;
+		this.country = country;
 		this.zip = zip;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -98,12 +141,12 @@ public class EngEventsView {
 		this.phone_number = phone_number;
 	}
 
-	public Integer getEVENT_ID() {
+	public Integer getEvent_id() {
 		return event_id;
 	}
 
-	public void setEVENT_ID(Integer eVENT_ID) {
-		event_id = eVENT_ID;
+	public void setEvent_id(Integer event_id) {
+		this.event_id = event_id;
 	}
 
 	public String getEvent_name() {
@@ -179,6 +222,8 @@ public class EngEventsView {
 	}
 
 	public String getBuilding_room() {
+		if(building_room==null)
+			return "";
 		return building_room;
 	}
 
@@ -219,6 +264,8 @@ public class EngEventsView {
 	}
 
 	public String getOther_city() {
+		if(other_city==null)
+			return "";
 		return other_city;
 	}
 
@@ -232,6 +279,14 @@ public class EngEventsView {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public Integer getZip() {
@@ -281,6 +336,5 @@ public class EngEventsView {
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
-
 
 }
