@@ -49,7 +49,7 @@ public class EventService {
 		//Page<EngEventsView> events = new ArrayList();
 		//audeventsDao.findAll().forEach(events::add);
 		System.out.println(page);
-		return aed.findAll(new PageRequest(page,25));
+		return aed.findAll(new PageRequest(page,1));
 	}
 	
 }

@@ -49,8 +49,21 @@ public class EventsController {
 	public Page<EngEventsView> showPage( @RequestParam("p") int page ) {
 		return eventService.getPageEvents(audeventsDao,page);
 		//return "index";
-		
 	}
+	
+	@GetMapping("/listfilter")
+	public Page<EngEventsView> showPageFilter( @RequestParam("p") int page ) {
+		return eventService.getPageEvents(audeventsDao,page);
+		//return "index";
+	}
+	
+	@GetMapping("/listkeysearch")
+	public Page<EngEventsView> showPageKeySearch( @RequestParam("p") int page ) {
+		return eventService.getPageEvents(audeventsDao,page);
+		//return "index";
+	}
+	
+	//applyfilter
 	/*
 	public Page<EngEventsView> getEvents(@RequestParam(defaultValue="0") int page) {
 		return eventService.getPageEvents()new PageRequest(page,4);
