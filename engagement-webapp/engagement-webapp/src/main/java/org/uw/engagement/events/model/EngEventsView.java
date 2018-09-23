@@ -1,5 +1,6 @@
 package org.uw.engagement.events.model;
 import javax.persistence.AttributeOverride;
+import javax.persistence.ParameterMode;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -13,11 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -30,81 +34,91 @@ import java.sql.Date;
 
 
 @Entity
-@Table(name="ENG_EVENTS_VIEW")
+@Table(name="eng_events_view")
+
+@NamedStoredProcedureQueries({
+   @NamedStoredProcedureQuery(name = "audviewproc", 
+                              procedureName = "audviewproc",
+                            		  resultClasses = EngEventsView.class,
+                              parameters = {
+                                 //@StoredProcedureParameter(mode = ParameterMode.IN, name = "org", type = String.class),
+                                 @StoredProcedureParameter(name="l_ret", mode = ParameterMode.REF_CURSOR, type = void.class)
+                              })
+})
 public class EngEventsView {
 	@Id
-	@Column(name="EVENT_ID")
+	@Column(name="event_id")
 	private	Integer	event_id;
 	
-	@Column(name="EVENT_NAME")
+	@Column(name="event_name")
 	private	String	event_name;
 	
-	@Column(name="ORGANIZATION")
+	@Column(name="organization")
 	private	String	organization;
 	
-	@Column(name="DEPARTMENT")
+	@Column(name="department")
 	private	String	department;
 	
-	@Column(name="EVENT_DESC")
+	@Column(name="event_desc")
 	private	String	event_desc;
 	
-	@Column(name="EVENT_TYPE")
+	@Column(name="event_type")
 	private	String	event_type;
 	
-	@Column(name="PRIVATE")
+	@Column(name="private")
 	private	String	priv;
 	
-	@Column(name="FEE")
+	@Column(name="fee")
 	private	Integer	fee;
 	
-	@Column(name="EVENT_START_DATE_TIME")
+	@Column(name="event_start_date_time")
 	@JsonFormat(pattern="yyyy-MM-dd hh:mm aa")
 	private	Timestamp	event_start_date_time;
 	
-	@Column(name="EVENT_END_DATE_TIME")
+	@Column(name="event_end_date_time")
 	@JsonFormat(pattern="yyyy-MM-dd hh:mm aa")
 	private	Timestamp	event_end_date_time;
 	
-	@Column(name="BUILDING_ROOM")
+	@Column(name="building_room")
 	private	String	building_room;
 	
-	@Column(name="ADDRESS_LINE1")
+	@Column(name="address_line1")
 	private	String	address_line1;
 	
-	@Column(name="ADDRESS_LINE2")
+	@Column(name="address_line2")
 	private	String	address_line2;
 	
-	@Column(name="COUNTY")
+	@Column(name="county")
 	private	String	county;
 	
-	@Column(name="CITY")
+	@Column(name="city")
 	private	String	city;
 	
-	@Column(name="OTHER_CITY")
+	@Column(name="other_city")
 	private	String	other_city;
 	
-	@Column(name="STATE")
+	@Column(name="state")
 	private	String	state;
 	
-	@Column(name="COUNTRY")
+	@Column(name="country")
 	private	String	country;
 	
-	@Column(name="ZIP")
+	@Column(name="zip")
 	private	Integer	zip;
 	
-	@Column(name="FIRST_NAME")
+	@Column(name="first_name")
 	private	String	first_name;
 	
-	@Column(name="LAST_NAME")
+	@Column(name="last_name")
 	private	String	last_name;
 	
-	@Column(name="EMAIL_1")
+	@Column(name="email_1")
 	private	String	email_1;
 	
-	@Column(name="EMAIL_2")
+	@Column(name="email_2")
 	private	String	email_2;
 	
-	@Column(name="PHONE_NUMBER")
+	@Column(name="phone_number")
 	private	String	phone_number;
 	
 	public EngEventsView() {}
@@ -222,8 +236,6 @@ public class EngEventsView {
 	}
 
 	public String getBuilding_room() {
-		if(building_room==null)
-			return "";
 		return building_room;
 	}
 
@@ -264,8 +276,6 @@ public class EngEventsView {
 	}
 
 	public String getOther_city() {
-		if(other_city==null)
-			return "";
 		return other_city;
 	}
 

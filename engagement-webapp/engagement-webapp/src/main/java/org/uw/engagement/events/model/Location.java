@@ -6,7 +6,9 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,47 +21,52 @@ import org.hibernate.annotations.GenericGenerator;
 //import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
-@Table(name="LOCATION")
+@Table(name="location")
 public class Location implements Serializable {
+		
+	    @OneToOne(fetch=FetchType.LAZY, mappedBy="location")
+	    private EventsDbModel eventsdbmodel;
+	    
 		@Id 
-		@Column(name="EVENT_ID")
+		@GeneratedValue(strategy=GenerationType.AUTO)
+		@Column(name="event_id")
 		private Integer event_id;
 		
 		//@OneToOne(mappedBy="EventsDbModel")
 		//private EventsDbModel employee;
 		
-		@Column(name="BUILDING_ROOM")
+		@Column(name="building_room")
 		private String building_room;
 		
-		@Column(name="ADDRESS_LINE1")
+		@Column(name="address_line1")
 		private String address_line1;
 		
-		@Column(name="ADDRESS_LINE2")
+		@Column(name="address_line2")
 		private String address_line2;
 		
-	    @Column(name = "COUNTY")
+	    @Column(name = "county")
 		private String county;
 		
-	    @Column(name = "CITY")
+	    @Column(name = "city")
 		private String city;
 		
-	    @Column(name = "STATE")
+	    @Column(name = "state")
 		private String state;
 		
-	    @Column(name = "COUNTRY")
+	    @Column(name = "country")
 		private String country;
 		
-		@Column(name="OTHER_CITY")
-		private String othercity;
+		@Column(name="other_city")
+		private String other_city;
 		
-		@Column(name="ZIP")
+		@Column(name="zip")
 		private Integer zip;
 		
 		public Location()
 		{}
 
 		public Location(Integer event_id, String building_room, String address_line1, String address_line2,
-				String county, String city, String state, String country, String othercity, Integer zip) {
+				String county, String city, String state, String country, String other_city, Integer zip) {
 			super();
 			this.event_id = event_id;
 			this.building_room = building_room;
@@ -69,7 +76,7 @@ public class Location implements Serializable {
 			this.city = city;
 			this.state = state;
 			this.country = country;
-			this.othercity = othercity;
+			this.other_city = other_city;
 			this.zip = zip;
 		}
 
@@ -137,12 +144,12 @@ public class Location implements Serializable {
 			this.country = country;
 		}
 
-		public String getOthercity() {
-			return othercity;
+		public String getOther_city() {
+			return other_city;
 		}
 
-		public void setOthercity(String othercity) {
-			this.othercity = othercity;
+		public void setOther_city(String other_city) {
+			this.other_city = other_city;
 		}
 
 		public Integer getZip() {
@@ -152,7 +159,5 @@ public class Location implements Serializable {
 		public void setZip(Integer zip) {
 			this.zip = zip;
 		}
-
-
 }
 */

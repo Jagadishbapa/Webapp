@@ -9,16 +9,16 @@ import javax.persistence.Embeddable;
 public class Speakers implements Serializable{
 	
 	
-	@Column(name="FIRST_NAME")
+	@Column(name="first_name")
 	private String first_name;
 	
-	@Column(name="LAST_NAME")
+	@Column(name="last_name")
 	private String last_name;
 	
-	@Column(name="MIDDLE_NAME")
+	@Column(name="middle_name")
 	private String middle_name;
 	
-	@Column(name="EMAIL")
+	@Column(name="email")
 	private String email;
 
 public Speakers()
