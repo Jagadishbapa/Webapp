@@ -38,10 +38,9 @@ public class EventsController {
 	
 	// used
 	@GetMapping("/listfilter")
-	public Page<EngEventsView> showPageFilter( @RequestParam("page") int page, @RequestParam("organization") String organization)
-			throws ParseException {
+	public Page<EngEventsView> showPageFilter(@RequestParam("filterquery") String filterquery, @RequestParam("datefrom") String datefroms, @RequestParam("dateto") String datetos, @RequestParam("county") String v_county, @RequestParam("city") String v_city, @RequestParam("organization") String v_org, @RequestParam("department") String v_dept, @RequestParam("eventtype") String v_eventtype, @RequestParam("keyword") String v_keyword, @RequestParam("page") int page) {
 		Pageable pageableRequest = new PageRequest(page, 25);
-		return eventService.getFilterEvents(eevr, organization, pageableRequest);
+			return eventService.getFilterEvents(eevr, filterquery, datefroms, datetos, v_county, v_city, v_org, v_dept, v_eventtype, v_keyword, page, pageableRequest);
 	}
 	
 
