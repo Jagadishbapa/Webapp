@@ -5,6 +5,4 @@ SELECT  uw_eng.event_id, uw_eng.event_name, uw_eng.organization, uw_eng.departme
 FROM uw_engagement uw_eng, location loc, contact_info co_info
 WHERE uw_eng.event_id = loc.event_id AND
       uw_eng.event_id=co_info.event_id AND
-      TRUNC(CAST(event_start_date_time as DATE)) between to_date(CURRENT_DATE, 'DD-MON-YY') AND to_date(CURRENT_DATE+7, 'DD-MON-YY')
-ORDER BY uw_eng.event_start_date_time;
-        
+      flag = 'N';
