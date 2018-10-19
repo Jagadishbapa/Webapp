@@ -1,4 +1,4 @@
-package org.uw.engagement.events.model;
+/*package org.uw.engagement.events.model;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CollectionTable;
@@ -403,4 +403,4 @@ public class UwEngModel {
 	}
 	
 	
-}
+}*/

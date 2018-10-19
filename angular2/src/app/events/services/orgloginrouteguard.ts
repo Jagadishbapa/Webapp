@@ -14,7 +14,7 @@ import {Observable, Observer, Subject} from 'rxjs/Rx';
 
 export class OrgLoginAuthguard implements CanActivate {
 
-    public isOrgLoggedin: boolean = false;
+    public isOrgLoggedin: boolean;
     public redirectUrl: string;
 
     constructor(private router: Router, private authService: OrgLoginService){
@@ -22,20 +22,15 @@ export class OrgLoginAuthguard implements CanActivate {
     }
 
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-        this.redirectUrl=state.url;
-        return this.checkOrgLogin(this.redirectUrl);
-    }
-
-    checkOrgLogin(url: string): boolean{
-        if(this.isOrgLoggedin){
+        if (this.authService.userloggedin) {
             return true;
-        }else{
-            //this.authService.isLoggedIn().subscribe(res=>{
-                //console.log("fjgbkg");
-            //}
-
-            //)
-        }   
-        return true;
-    }
+          } else {
+            this.router.navigate(['/login'], {
+              queryParams: {
+                return: state.url
+              }
+            });
+            return false;
+          }
+        }
 }

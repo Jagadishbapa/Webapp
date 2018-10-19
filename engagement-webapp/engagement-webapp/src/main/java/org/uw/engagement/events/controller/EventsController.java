@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.uw.engagement.events.model.EventsDbModel;
-import org.uw.engagement.events.model.UwEngModel;
-import org.uw.engagement.events.dao.AudEventsDao;
+//import org.uw.engagement.events.model.UwEngModel;
+//import org.uw.engagement.events.dao.AudEventsDao;
 import org.uw.engagement.events.dao.EngEventsViewRepository;
-import org.uw.engagement.events.dao.EventsDao;
-import org.uw.engagement.events.dao.UwEngModelDao;
+//import org.uw.engagement.events.dao.EventsDao;
+//import org.uw.engagement.events.dao.UwEngModelDao;
 import org.uw.engagement.events.model.EngEventsView;
 import org.uw.engagement.events.service.EventService;
 
@@ -30,8 +30,7 @@ import org.uw.engagement.events.service.EventService;
 @RequestMapping(value="/events")
 public class EventsController {
 	//audience view used
-	@Autowired
-	private EngEventsViewRepository eevr;
+
 	
 	@Autowired
 	private EventService eventService;
@@ -40,22 +39,34 @@ public class EventsController {
 	@GetMapping("/listfilter")
 	public Page<EngEventsView> showPageFilter(@RequestParam("filterquery") String filterquery, @RequestParam("datefrom") String datefroms, @RequestParam("dateto") String datetos, @RequestParam("county") String v_county, @RequestParam("city") String v_city, @RequestParam("organization") String v_org, @RequestParam("department") String v_dept, @RequestParam("eventtype") String v_eventtype, @RequestParam("keyword") String v_keyword, @RequestParam("page") int page) {
 		Pageable pageableRequest = new PageRequest(page, 25);
-			return eventService.getFilterEvents(eevr, filterquery, datefroms, datetos, v_county, v_city, v_org, v_dept, v_eventtype, v_keyword, page, pageableRequest);
+			return eventService.getFilterEvents( filterquery, datefroms, datetos, v_county, v_city, v_org, v_dept, v_eventtype, v_keyword, page, pageableRequest);
 	}
 	
+	
+	@GetMapping("/organizerlogin")
+	public boolean orgauthenticate(@RequestParam("userid") String userid, @RequestParam("password") String pwd) {
+		System.out.println("called");
+		return eventService.uservalid(userid,pwd);
+	}
 
+	@RequestMapping(value="/save", method=RequestMethod.POST, headers= {"content-type=application/json"} )
+	public EventsDbModel saveEvent(@RequestBody EventsDbModel event) {
+		return eventService.saveEvent(event);
+	}
 	
-	@Autowired
-	private AudEventsDao audeventsDao;
 	
-	@Autowired
-	private EventsDao eventsDao;
 	
-	@Autowired
-	private UwEngModelDao uwengmodeldao;
+//	@Autowired
+	//private AudEventsDao audeventsDao;
+	
+	//@Autowired
+	//private EventsDao eventsDao;
+	
+	//@Autowired
+	//private UwEngModelDao uwengmodeldao;
 	
 
-	@RequestMapping(value="/allevents/{id}",method=RequestMethod.GET)
+	/*@RequestMapping(value="/allevents/{id}",method=RequestMethod.GET)
 	public List<EventsDbModel> getAllEvents(@PathVariable int id)
 	{
 		return eventService.getAllEvents(id);
@@ -72,6 +83,7 @@ public class EventsController {
 	}
 	*/
 	//--done
+	/*
 	@GetMapping("/list")
 	public Page<EngEventsView> showPage( @RequestParam("p") int page ) {
 		return eventService.getPageEvents(audeventsDao,page);
@@ -80,7 +92,7 @@ public class EventsController {
 	
 
 	
-	/*@GetMapping("/listfilter")
+	@GetMapping("/listfilter")
 	public Page<EventsDbModel> showPageFilter( @RequestParam("page") int page, @RequestParam("datefrom") String datefrom) throws ParseException {
 		//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		//Date datefrom1= formatter.parse(datefrom);
@@ -88,14 +100,14 @@ public class EventsController {
 		Pageable pageableRequest = new PageRequest(page, 25);
 		return eventService.getPageEvents1(pageableRequest);
 		//return "index";
-	}*/
+	}
 	
 	@GetMapping("/listkeysearch")
 	public Page<EngEventsView> showPageKeySearch( @RequestParam("p") int page ) {
 		return eventService.getPageEvents(audeventsDao,page);
 		//return "index";
 	}
-	
+	*/
 	//applyfilter
 	/*
 	public Page<EngEventsView> getEvents(@RequestParam(defaultValue="0") int page) {

@@ -10,7 +10,6 @@ import {HttpClient,HttpParams} from '@angular/common/http'
 import { Http } from '@angular/http';
 
 @Component({
-    selector: 'aud-iframe',
     templateUrl: './i-frame.component.html'
 })
 

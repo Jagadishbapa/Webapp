@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'organizer',
-  template:   `hiiii`
+  template:   `
+        <org-nav-bar></org-nav-bar>
+        <router-outlet></router-outlet>
+    `
 })
 export class OrganizerComponent {
   title = 'Organizer';

@@ -1,4 +1,4 @@
-package org.uw.engagement.events.dao;
+/*package org.uw.engagement.events.dao;
 import org.uw.engagement.events.model.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,9 +20,10 @@ import org.springframework.data.jpa.repository.Query;
 public interface UwEngModelDao extends CrudRepository<UwEngModel, Integer>, JpaRepository<UwEngModel, Integer>{
 	
 	 /* @Query(value="SELECT * FROM UW_ENGAGEMENT \\ #pageable\\",
-	  		countQuery = "select count(*) FROM UW_ENGAGEMENT ", nativeQuery = true ) */
+	  		countQuery = "select count(*) FROM UW_ENGAGEMENT ", nativeQuery = true ) 
     @Query(nativeQuery = true, value="SELECT * FROM uw_engagement where organization = :org ORDER BY ?#{#pageable}",
     		countQuery = "select count(*) FROM uw_engagement") 
     public Page<UwEngModel> findByOrganization(@Param("org") String org, Pageable pageable);
 }
-//dao - repository
+dao - repository
+*/

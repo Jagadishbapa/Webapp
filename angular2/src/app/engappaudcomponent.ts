@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'engagement-app',
   template:   `
-  <router-outlet></router-outlet>
+  <aud-nav-bar></aud-nav-bar>
+  <aud-iframe></aud-iframe>
     `
 })
-export class EngagementAppComponent {
+export class EngAudAppComponent {
   title = 'UW-Engagement';
 }

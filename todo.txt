@@ -53,3 +53,10 @@ pluralsight -- angular 2 course
 
 modify filtering, get events based on filtering, adjust text(Upcoming Events for next 1 week), get events based on apply filter or search keyword or default, pagnation based on 3 things, text based on 3 things,
 all events button
+
+
+//
+
+
+
+sponsoring depat, primary email(contact_info), phone_number(3rd column)

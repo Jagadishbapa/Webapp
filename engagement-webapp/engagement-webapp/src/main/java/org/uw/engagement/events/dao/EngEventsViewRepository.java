@@ -27,7 +27,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.uw.engagement.events.model.EngEventsView;
 import org.uw.engagement.events.model.EventsDbModel;
-import org.uw.engagement.events.model.UwEngModel;
+//import org.uw.engagement.events.model.UwEngModel;
 
 @Repository
 public interface EngEventsViewRepository extends CrudRepository<EngEventsView, Integer>, JpaRepository<EngEventsView, Integer>{

@@ -2,9 +2,9 @@
 package org.uw.engagement.events.service;
 
 import org.uw.engagement.events.dao.*;
-import org.uw.engagement.events.model.EventsDbModel;
-import org.uw.engagement.events.model.UwEngModel;
+//import org.uw.engagement.events.model.UwEngModel;
 import org.uw.engagement.events.model.EngEventsView;
+import org.uw.engagement.events.model.EventsDbModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,15 +23,21 @@ import org.springframework.transaction.annotation.Transactional;
 public class EventService {
 	
 	@Autowired
-	private EventsDao eventsDao;
+	private UwUsersDao uwusersDao;
 	
 	@Autowired
-	private AudEventsDao audeventsDao;
+	private OrgEventsDao orgeventsDao;
+	
+	@Autowired
+	private EngEventsViewRepository eevr;
+	
+	@Autowired
+	private EventsDao eventsDao;
 	
 	//--done
 	
 	@Transactional
-	public Page<EngEventsView> getFilterEvents(EngEventsViewRepository eevr, String filterquery, String datefroms, String datetos, String v_county, String v_city,  String v_org, String v_dept, String v_eventtype, String v_keyword, int page, Pageable pageable) 
+	public Page<EngEventsView> getFilterEvents(String filterquery, String datefroms, String datetos, String v_county, String v_city,  String v_org, String v_dept, String v_eventtype, String v_keyword, int page, Pageable pageable) 
 	{
 		//return  eevr.findByAllFilters("American Heritage Center and Art Museum",  new PageRequest(page,1));
 		System.out.println(filterquery+datefroms);
@@ -74,16 +80,37 @@ public class EventService {
 		
 	}
 	
-		
-	//-not done
-	@Transactional
-	public Page<EngEventsView> getPageEvents(AudEventsDao aed, int page)
+	
+	//Org login
+	public boolean uservalid(String userid, String pwd)
 	{
-		return aed.findAll(new PageRequest(page,1));
+		return uwusersDao.existsByEmailAndPwd(userid,pwd);
+	}
+		
+	//-- Organizer transactions
+	@Transactional
+	public Page<EventsDbModel> getPageEvents(Pageable pageable)
+	{
+		return orgeventsDao.findAll(pageable);
 	}
 	
-
+	//@Transactional
+	//public EventsDbModel saveEvent(EventsDbModel event) {
+		//return orgeventsDao.save(event);
+	//}
 	
+	@Transactional
+	public int cancelEvent(String status, Integer eventid)
+	{
+		return orgeventsDao.eventCancel(status, eventid);
+	}
+	
+	@Transactional
+	public EventsDbModel saveEvent(EventsDbModel event) {
+		return eventsDao.save(event);
+	}
+
+	/*
 	@Transactional
 	public List<EventsDbModel> getAllEvents(int eventId)
 	{
@@ -104,6 +131,7 @@ public class EventService {
 		audeventsDao.findAll().forEach(events::add);
 		return events;
 	}
+*/
 
-	
+
 }

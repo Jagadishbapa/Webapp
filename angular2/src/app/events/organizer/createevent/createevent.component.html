@@ -1,0 +1,877 @@
+<div class = "container-fluid" style="    border-style: solid; background-color: white;"><font color="black">
+          <!-- all your great content here -->
+
+
+          <!--Main heading-->
+          <h1 align="center">Register Event</h1>
+
+          <form [formGroup] = "eventForm">
+            <fieldset class="form-group">
+                <legend><font color="black">Sponsor Info</font></legend>
+
+                <div class="container-fluid">
+
+                    <!--Organization-->
+                    <div class="form-group">
+                        Organization<select required id="organization" class="form-control" name = "organization" formControlName="org" >
+                          <option value ="American Heritage Center and Art Museum">American Heritage Center and Art Museum</option>
+                          <option value ="Athletics">Athletics</option>
+                          <option value ="College of Agriculture and Natural Resources">College of Agriculture and Natural Resources</option>
+                          <option value ="College of Arts and Sciences">College of Arts and Sciences</option>
+                          <option value ="College of Business">College of Business</option>
+                          <option value ="College of Education">College of Education</option>
+                          <option value ="College of Engineering and Applied Science">College of Engineering and Applied Science</option>
+                          <option value ="College of Health Sciences">College of Health Sciences</option>
+                          <option value ="College of Law">College of Law</option>
+                          <option value ="Division of Academic Affairs">Division of Academic Affairs</option>
+                          <option value ="Division of Administration">Division of Administration</option>
+                          <option value ="Division of Governmental and Community Affairs">Division of Governmental and Community Affairs</option>
+                          <option value ="Division of Information Technology">Division of Information Technology</option>
+                          <option value ="Division of Public Relations">Division of Public Relations</option>
+                          <option value ="Division of Research and Economic Development">Division of Research and Economic Development</option>
+                          <option value ="Division of Student Affairs">Division of Student Affairs</option>
+                          <option value ="Haub School">Haub School</option>
+                          <option value ="Honors College">Honors College</option>
+                          <option value ="Office of Engagement">Office of Engagement</option>
+                          <option value ="Office of the President">Office of the President</option>
+                          <option value ="School of Energy Resources">School of Energy Resources</option>
+                          <option value ="University Libraries">University Libraries</option>
+                          <option value ="University of Wyoming Foundation">University of Wyoming Foundation</option>
+                          <option value ="University Operations">University Operations</option>
+
+
+                        </select>
+                    </div>
+
+                    <!--Department-->
+                    <div class="form-group">
+                        Department<select required id="department" class="form-control" name = "department" formControlName= "dept" >
+                          <option value ="A&S Computer Fee">A&S Computer Fee</option>
+                          <option value ="A&S Dean's Office">A&S Dean's Office</option>
+                          <option value ="A&S/Natural Science">A&S/Natural Science</option>
+                          <option value ="Academic & Student Programs">Academic & Student Programs</option>
+                          <option value ="Accounting and Finance">Accounting and Finance</option>
+                          <option value ="Accounting Office">Accounting Office</option>
+                          <option value ="Accounts Receivable">Accounts Receivable</option>
+                          <option value ="ADA/SEO Computer Fee">ADA/SEO Computer Fee</option>
+                          <option value ="Admissions">Admissions</option>
+                          <option value ="Advising Career & Expl Studies">Advising Career & Expl Studies</option>
+                          <option value ="Advising Services">Advising Services</option>
+                          <option value ="Aerospace Studies">Aerospace Studies</option>
+                          <option value ="Agric Admin Business Office">Agric Admin Business Office</option>
+                          <option value ="Agric Experiment Station">Agric Experiment Station</option>
+                          <option value ="Agricultural & Applied Econ">Agricultural & Applied Econ</option>
+                          <option value ="Agriculture Computer Fee">Agriculture Computer Fee</option>
+                          <option value ="Agriculture Dean's Office">Agriculture Dean's Office</option>
+                          <option value ="AHC/American Heritage Center">AHC/American Heritage Center</option>
+                          <option value ="Allied Health Professions">Allied Health Professions</option>
+                          <option value ="Alumni Relations">Alumni Relations</option>
+                          <option value ="American Studies & History">American Studies & History</option>
+                          <option value ="Animal Science">Animal Science</option>
+                          <option value ="Anthropology">Anthropology</option>
+                          <option value ="Arena Auditorium">Arena Auditorium</option>
+                          <option value ="Asset Management">Asset Management</option>
+                          <option value ="Assoc VP Administration">Assoc VP Administration</option>
+                          <option value ="Assoc VP Operations">Assoc VP Operations</option>
+                          <option value ="ASUW">ASUW</option>
+                          <option value ="Athl/Basketball - Men">Athl/Basketball - Men</option>
+                          <option value ="Athl/Basketball - Women">Athl/Basketball - Women</option>
+                          <option value ="Athl/Business Mgr Office">Athl/Business Mgr Office</option>
+                          <option value ="Athl/City Recreation">Athl/City Recreation</option>
+                          <option value ="Athl/Compliance">Athl/Compliance</option>
+                          <option value ="Athl/Concessions">Athl/Concessions</option>
+                          <option value ="Athl/Drug Education">Athl/Drug Education</option>
+                          <option value ="Athl/Equipment">Athl/Equipment</option>
+                          <option value ="Athl/Facilities">Athl/Facilities</option>
+                          <option value ="Athl/Football">Athl/Football</option>
+                          <option value ="Athl/Golf-Men">Athl/Golf-Men</option>
+                          <option value ="Athl/Golf-Women">Athl/Golf-Women</option>
+                          <option value ="Athl/Media Relations">Athl/Media Relations</option>
+                          <option value ="Athl/Pepsters">Athl/Pepsters</option>
+                          <option value ="Athl/Promotions & Marketing">Athl/Promotions & Marketing</option>
+                          <option value ="Athl/Soccer">Athl/Soccer</option>
+                          <option value ="Athl/Swimming - Men">Athl/Swimming - Men</option>
+                          <option value ="Athl/Swimming - Women">Athl/Swimming - Women</option>
+                          <option value ="Athl/Tennis">Athl/Tennis</option>
+                          <option value ="Athl/Ticket Office">Athl/Ticket Office</option>
+                          <option value ="Athl/Track - Men">Athl/Track - Men</option>
+                          <option value ="Athl/Track - Women">Athl/Track - Women</option>
+                          <option value ="Athl/Training Room">Athl/Training Room</option>
+                          <option value ="Athl/Volleyball">Athl/Volleyball</option>
+                          <option value ="Athl/Weight Room">Athl/Weight Room</option>
+                          <option value ="Athl/Wrestling">Athl/Wrestling</option>
+                          <option value ="Athletic Training Table">Athletic Training Table</option>
+                          <option value ="Atmospheric Sciences">Atmospheric Sciences</option>
+                          <option value ="Auxiliary Services">Auxiliary Services</option>
+                          <option value ="Auxiliary Services Dir's Ofc">Auxiliary Services Dir's Ofc</option>
+                          <option value ="AVP of Enrollment Management">AVP of Enrollment Management</option>
+                          <option value ="AVP of Global Engagement">AVP of Global Engagement</option>
+                          <option value ="AVP of Graduate Education">AVP of Graduate Education</option>
+                          <option value ="AWARE">AWARE</option>
+                          <option value ="Band">Band</option>
+                          <option value ="Biodiversity Institute">Biodiversity Institute</option>
+                          <option value ="Botany">Botany</option>
+                          <option value ="Budget Office">Budget Office</option>
+                          <option value ="Building Automation">Building Automation</option>
+                          <option value ="Bulk Mail">Bulk Mail</option>
+                          <option value ="Business Academic Advising">Business Academic Advising</option>
+                          <option value ="Business Computer Fee">Business Computer Fee</option>
+                          <option value ="Business Dean's Office">Business Dean's Office</option>
+                          <option value ="Business Services">Business Services</option>
+                          <option value ="Campus Recreation">Campus Recreation</option>
+                          <option value ="Carbon Management Institute">Carbon Management Institute</option>
+                          <option value ="Career Services">Career Services</option>
+                          <option value ="Carpentry Shop">Carpentry Shop</option>
+                          <option value ="Cashiers Office">Cashiers Office</option>
+                          <option value ="Center for Global Studies">Center for Global Studies</option>
+                          <option value ="Center Innov Flow Porous Media">Center Innov Flow Porous Media</option>
+                          <option value ="Central Energy Plant">Central Energy Plant</option>
+                          <option value ="Central Scheduling">Central Scheduling</option>
+                          <option value ="Chemical Engineering">Chemical Engineering</option>
+                          <option value ="Chemistry">Chemistry</option>
+                          <option value ="Chief of Police">Chief of Police</option>
+                          <option value ="Civil/Arch Engineering">Civil/Arch Engineering</option>
+                          <option value ="College of Ag & Nat Resources">College of Ag & Nat Resources</option>
+                          <option value ="College of Arts & Sciences">College of Arts & Sciences</option>
+                          <option value ="College of Business">College of Business</option>
+                          <option value ="College of Education">College of Education</option>
+                          <option value ="College of Engr & Applied Sci">College of Engr & Applied Sci</option>
+                          <option value ="College of Health Sciences">College of Health Sciences</option>
+                          <option value ="College of Law">College of Law</option>
+                          <option value ="Communication & Journalism">Communication & Journalism</option>
+                          <option value ="Communication Disorders">Communication Disorders</option>
+                          <option value ="Computer Science">Computer Science</option>
+                          <option value ="Controls Shop">Controls Shop</option>
+                          <option value ="Copier Services">Copier Services</option>
+                          <option value ="Counselor Education">Counselor Education</option>
+                          <option value ="Cowboy Joe Club">Cowboy Joe Club</option>
+                          <option value ="Criminal Justice & Sociology">Criminal Justice & Sociology</option>
+                          <option value ="Custodial Services">Custodial Services</option>
+                          <option value ="Dean of Students Office">Dean of Students Office</option>
+                          <option value ="Dental Hygiene">Dental Hygiene</option>
+                          <option value ="Division of Research Support">Division of Research Support</option>
+                          <option value ="Economics">Economics</option>
+                          <option value ="Ecosystem Science & Management">Ecosystem Science & Management</option>
+                          <option value ="Ed/Graduate Studies & Research">Ed/Graduate Studies & Research</option>
+                          <option value ="Ed/Univ Wyoming Lab School">Ed/Univ Wyoming Lab School</option>
+                          <option value ="Education Abroad">Education Abroad</option>
+                          <option value ="Education Computer Fee">Education Computer Fee</option>
+                          <option value ="Education Dean's Office">Education Dean's Office</option>
+                          <option value ="Electrical & Computer Engr">Electrical & Computer Engr</option>
+                          <option value ="Electrical Shop">Electrical Shop</option>
+                          <option value ="Ellbogen CTL">Ellbogen CTL</option>
+                          <option value ="Engineering Computer Fee">Engineering Computer Fee</option>
+                          <option value ="Engineering Science">Engineering Science</option>
+                          <option value ="Engineering/Microcomputer Ofc">Engineering/Microcomputer Ofc</option>
+                          <option value ="English">English</option>
+                          <option value ="Engr & Applied Sci Dean's Ofc">Engr & Applied Sci Dean's Ofc</option>
+                          <option value ="Enhanced Oil Recovery Inst">Enhanced Oil Recovery Inst</option>
+                          <option value ="EPSCoR-IDEA">EPSCoR-IDEA</option>
+                          <option value ="Equal Opp Report & Response">Equal Opp Report & Response</option>
+                          <option value ="Equipment Services">Equipment Services</option>
+                          <option value ="Facilities Construction Mgt">Facilities Construction Mgt</option>
+                          <option value ="Facilities Engineering">Facilities Engineering</option>
+                          <option value ="Facilities Management">Facilities Management</option>
+                          <option value ="Facilities Services">Facilities Services</option>
+                          <option value ="Faculty Senate">Faculty Senate</option>
+                          <option value ="Family & Consumer Sciences">Family & Consumer Sciences</option>
+                          <option value ="Financial Serv Business Office">Financial Serv Business Office</option>
+                          <option value ="Financial Services">Financial Services</option>
+                          <option value ="Fine Arts Outreach">Fine Arts Outreach</option>
+                          <option value ="Fleet Services - Auto Shop">Fleet Services - Auto Shop</option>
+                          <option value ="Fleet Services - Car Pool">Fleet Services - Car Pool</option>
+                          <option value ="Foundation">Foundation</option>
+                          <option value ="General Counsel">General Counsel</option>
+                          <option value ="Geography">Geography</option>
+                          <option value ="Geology & Geophysics">Geology & Geophysics</option>
+                          <option value ="Greenhouse">Greenhouse</option>
+                          <option value ="Grounds Services">Grounds Services</option>
+                          <option value ="Haub School of ENR">Haub School of ENR</option>
+                          <option value ="Health Sciences Computer Fee">Health Sciences Computer Fee</option>
+                          <option value ="Health Sciences Dean's Office">Health Sciences Dean's Office</option>
+                          <option value ="Human Resources">Human Resources</option>
+                          <option value ="Human Resources Ofc">Human Resources Ofc</option>
+                          <option value ="INBRE Program">INBRE Program</option>
+                          <option value ="Inst Innovation & Entrepreneur">Inst Innovation & Entrepreneur</option>
+                          <option value ="Institutional Analysis">Institutional Analysis</option>
+                          <option value ="Institutional Communications">Institutional Communications</option>
+                          <option value ="Institutional Marketing">Institutional Marketing</option>
+                          <option value ="Instructional Technology Ctr">Instructional Technology Ctr</option>
+                          <option value ="Intercoll Athl Director's Ofc">Intercoll Athl Director's Ofc</option>
+                          <option value ="Intercollegiate Athletics">Intercollegiate Athletics</option>
+                          <option value ="Internal Audit">Internal Audit</option>
+                          <option value ="Internships & Online Programs">Internships & Online Programs</option>
+                          <option value ="IT/Application & Database Svcs">IT/Application & Database Svcs</option>
+                          <option value ="IT/Business Svcs">IT/Business Svcs</option>
+                          <option value ="IT/Client Support Svcs">IT/Client Support Svcs</option>
+                          <option value ="IT/Computer Fee">IT/Computer Fee</option>
+                          <option value ="IT/Research Support">IT/Research Support</option>
+                          <option value ="IT/Telecom System Support Svcs">IT/Telecom System Support Svcs</option>
+                          <option value ="IT/TSS/Operations">IT/TSS/Operations</option>
+                          <option value ="IT/TSS/Systems Development">IT/TSS/Systems Development</option>
+                          <option value ="Jacoby Golf Course">Jacoby Golf Course</option>
+                          <option value ="Kinesiology and Health">Kinesiology and Health</option>
+                          <option value ="Laramie Clinic">Laramie Clinic</option>
+                          <option value ="Law Computer Fee">Law Computer Fee</option>
+                          <option value ="Law Dean's Office">Law Dean's Office</option>
+                          <option value ="Law Library">Law Library</option>
+                          <option value ="LeaRN Synergy & STEP">LeaRN Synergy & STEP</option>
+                          <option value ="Lib/Access Services">Lib/Access Services</option>
+                          <option value ="Lib/Administrative Office">Lib/Administrative Office</option>
+                          <option value ="Lib/Brinkerhoff Library">Lib/Brinkerhoff Library</option>
+                          <option value ="Lib/Coe Reference">Lib/Coe Reference</option>
+                          <option value ="Lib/Collection Development">Lib/Collection Development</option>
+                          <option value ="Lib/Digital Collections">Lib/Digital Collections</option>
+                          <option value ="Lib/Learning Resource Center">Lib/Learning Resource Center</option>
+                          <option value ="Lib/Science Library">Lib/Science Library</option>
+                          <option value ="Lib/Special Collections">Lib/Special Collections</option>
+                          <option value ="Lib/Systems">Lib/Systems</option>
+                          <option value ="Lib/Technical Services">Lib/Technical Services</option>
+                          <option value ="Life Science Program">Life Science Program</option>
+                          <option value ="Literacy Resear Cntr & Clinic">Literacy Resear Cntr & Clinic</option>
+                          <option value ="Lock Shop">Lock Shop</option>
+                          <option value ="Management & Marketing">Management & Marketing</option>
+                          <option value ="Manufacturing-Works">Manufacturing-Works</option>
+                          <option value ="Material Services">Material Services</option>
+                          <option value ="Mathematics & Statistics">Mathematics & Statistics</option>
+                          <option value ="MBA Program">MBA Program</option>
+                          <option value ="Mechanical Engineering">Mechanical Engineering</option>
+                          <option value ="Mechanical Trades">Mechanical Trades</option>
+                          <option value ="Medical Educ & Public Health">Medical Educ & Public Health</option>
+                          <option value ="Medical Education Admin Div">Medical Education Admin Div</option>
+                          <option value ="Medical Technology">Medical Technology</option>
+                          <option value ="Military Science">Military Science</option>
+                          <option value ="Modern & Classical Languages">Modern & Classical Languages</option>
+                          <option value ="Molecular Biology">Molecular Biology</option>
+                          <option value ="Multicultural Affairs">Multicultural Affairs</option>
+                          <option value ="Music">Music</option>
+                          <option value ="Neuroscience">Neuroscience</option>
+                          <option value ="Nontraditional/Women's Ctr">Nontraditional/Women's Ctr</option>
+                          <option value ="Nursing/Off-Campus Programs">Nursing/Off-Campus Programs</option>
+                          <option value ="Ofc Academic Support-Athletics">Ofc Academic Support-Athletics</option>
+                          <option value ="Offc Diversity Equity & Inclus">Offc Diversity Equity & Inclus</option>
+                          <option value ="Office of Distance Ed Support">Office of Distance Ed Support</option>
+                          <option value ="Office of Engagement&Outreach">Office of Engagement&Outreach</option>
+                          <option value ="Office of Risk Management">Office of Risk Management</option>
+                          <option value ="Office of Sponsored Programs">Office of Sponsored Programs</option>
+                          <option value ="Office of Teacher Education">Office of Teacher Education</option>
+                          <option value ="Office of The President">Office of The President</option>
+                          <option value ="Office of the Registrar">Office of the Registrar</option>
+                          <option value ="Paint Shop">Paint Shop</option>
+                          <option value ="Payroll">Payroll</option>
+                          <option value ="Petroleum Engineering">Petroleum Engineering</option>
+                          <option value ="Philosophy & Religious Studies">Philosophy & Religious Studies</option>
+                          <option value ="Photo Service">Photo Service</option>
+                          <option value ="Physics & Astronomy">Physics & Astronomy</option>
+                          <option value ="Plant Sciences">Plant Sciences</option>
+                          <option value ="Plumbing Shop">Plumbing Shop</option>
+                          <option value ="Postal Services">Postal Services</option>
+                          <option value ="President">President</option>
+                          <option value ="Preventive Maintenance">Preventive Maintenance</option>
+                          <option value ="Procurement & Payment Services">Procurement & Payment Services</option>
+                          <option value ="Program in Ecology">Program in Ecology</option>
+                          <option value ="Project Management">Project Management</option>
+                          <option value ="Psychology">Psychology</option>
+                          <option value ="R&E Center/Archer">R&E Center/Archer</option>
+                          <option value ="R&E Center/Laramie">R&E Center/Laramie</option>
+                          <option value ="R&E Center/Powell">R&E Center/Powell</option>
+                          <option value ="R&E Center/SAREC">R&E Center/SAREC</option>
+                          <option value ="R&E Center/Sheridan">R&E Center/Sheridan</option>
+                          <option value ="R&E Center/Torrington">R&E Center/Torrington</option>
+                          <option value ="Real Estate Operations">Real Estate Operations</option>
+                          <option value ="Recycling">Recycling</option>
+                          <option value ="Regional Centers">Regional Centers</option>
+                          <option value ="Research Products Center">Research Products Center</option>
+                          <option value ="Residence Life & Dining Svs">Residence Life & Dining Svs</option>
+                          <option value ="Rodeo">Rodeo</option>
+                          <option value ="Ruckelshaus Institute of ENR">Ruckelshaus Institute of ENR</option>
+                          <option value ="Schl Cnslng Ldrshp Advoc & Des">Schl Cnslng Ldrshp Advoc & Des</option>
+                          <option value ="Schl of Cultr Gendr & Soc Just">Schl of Cultr Gendr & Soc Just</option>
+                          <option value ="Schl Pol Pub Affrs & Intl Stud">Schl Pol Pub Affrs & Intl Stud</option>
+                          <option value ="Scholarships and Financial Aid">Scholarships and Financial Aid</option>
+                          <option value ="School of Energy Resources">School of Energy Resources</option>
+                          <option value ="School of Nursing">School of Nursing</option>
+                          <option value ="School of Pharmacy">School of Pharmacy</option>
+                          <option value ="School of Teacher Education">School of Teacher Education</option>
+                          <option value ="Science & Math Teaching Center">Science & Math Teaching Center</option>
+                          <option value ="Science Initiative">Science Initiative</option>
+                          <option value ="Seed Certification">Seed Certification</option>
+                          <option value ="SEO/Academic Services">SEO/Academic Services</option>
+                          <option value ="SEO/CACG">SEO/CACG</option>
+                          <option value ="SEO/ETS/EOC">SEO/ETS/EOC</option>
+                          <option value ="SEO/Gear-UP">SEO/Gear-UP</option>
+                          <option value ="SEO/McNair">SEO/McNair</option>
+                          <option value ="SEO/Student Support Services">SEO/Student Support Services</option>
+                          <option value ="SEO/UB/MSIP">SEO/UB/MSIP</option>
+                          <option value ="SEO/Univ Disability Supt Svs">SEO/Univ Disability Supt Svs</option>
+                          <option value ="SEO/Women's/Adult Student">SEO/Women's/Adult Student</option>
+                          <option value ="Shipping & Receiving">Shipping & Receiving</option>
+                          <option value ="Small Business Development Ctr">Small Business Development Ctr</option>
+                          <option value ="Social Work">Social Work</option>
+                          <option value ="Soil Testing Facility">Soil Testing Facility</option>
+                          <option value ="Special Education">Special Education</option>
+                          <option value ="Staff Senate">Staff Senate</option>
+                          <option value ="Stock Farm">Stock Farm</option>
+                          <option value ="Stores">Stores</option>
+                          <option value ="Structural Trades">Structural Trades</option>
+                          <option value ="Student Affairs Computer Fee">Student Affairs Computer Fee</option>
+                          <option value ="Student EducationalOpportunity">Student EducationalOpportunity</option>
+                          <option value ="Student Financial Operations">Student Financial Operations</option>
+                          <option value ="Student Health Service">Student Health Service</option>
+                          <option value ="Student Media">Student Media</option>
+                          <option value ="Summer High School Institute">Summer High School Institute</option>
+                          <option value ="Systems & Inst Effectiveness">Systems & Inst Effectiveness</option>
+                          <option value ="Technical Services">Technical Services</option>
+                          <option value ="Theatre & Dance">Theatre & Dance</option>
+                          <option value ="Transfer Relations">Transfer Relations</option>
+                          <option value ="Transfr Artic & Studnt Success">Transfr Artic & Studnt Success</option>
+                          <option value ="Transit & Parking Services">Transit & Parking Services</option>
+                          <option value ="Trustees Education Initiative">Trustees Education Initiative</option>
+                          <option value ="Undeclared Computer Fee">Undeclared Computer Fee</option>
+                          <option value ="Union Activities Center">Union Activities Center</option>
+                          <option value ="Union Copy Center">Union Copy Center</option>
+                          <option value ="Union Facilities">Union Facilities</option>
+                          <option value ="Univ Operations Exec Dir Ofc">Univ Operations Exec Dir Ofc</option>
+                          <option value ="Univ Studies - First Year Prog">Univ Studies - First Year Prog</option>
+                          <option value ="University Art Museum">University Art Museum</option>
+                          <option value ="University Counseling Center">University Counseling Center</option>
+                          <option value ="University Honors Program">University Honors Program</option>
+                          <option value ="University Investments">University Investments</option>
+                          <option value ="University Libraries">University Libraries</option>
+                          <option value ="University of Wyoming Trustees">University of Wyoming Trustees</option>
+                          <option value ="University Operations">University Operations</option>
+                          <option value ="University Police">University Police</option>
+                          <option value ="University Public Relations">University Public Relations</option>
+                          <option value ="University Store">University Store</option>
+                          <option value ="Utilities Management">Utilities Management</option>
+                          <option value ="UW Child Care Center">UW Child Care Center</option>
+                          <option value ="UW Extension">UW Extension</option>
+                          <option value ="UW Fmly Med Resid Progm Casper">UW Fmly Med Resid Progm Casper</option>
+                          <option value ="UW Fmly Med Resid Progm Chey">UW Fmly Med Resid Progm Chey</option>
+                          <option value ="UW Foundation">UW Foundation</option>
+                          <option value ="UW Legal Affairs">UW Legal Affairs</option>
+                          <option value ="UW Licensing Office">UW Licensing Office</option>
+                          <option value ="UW National Park Research">UW National Park Research</option>
+                          <option value ="UW Rifle Team">UW Rifle Team</option>
+                          <option value ="UW-Casper">UW-Casper</option>
+                          <option value ="UWE/4-H Youth Programs">UWE/4-H Youth Programs</option>
+                          <option value ="UWE/Agric Programs">UWE/Agric Programs</option>
+                          <option value ="UWE/Communication & Tech">UWE/Communication & Tech</option>
+                          <option value ="UWE/Community Development Educ">UWE/Community Development Educ</option>
+                          <option value ="UWE/EFNEP Programs">UWE/EFNEP Programs</option>
+                          <option value ="UWE/Nutrition Programs">UWE/Nutrition Programs</option>
+                          <option value ="UWE/Range Programs">UWE/Range Programs</option>
+                          <option value ="Vending Services">Vending Services</option>
+                          <option value ="Veterans Services Ctr">Veterans Services Ctr</option>
+                          <option value ="Veterinary Science">Veterinary Science</option>
+                          <option value ="Visual & Literary Arts">Visual & Literary Arts</option>
+                          <option value ="VP Academic Affairs">VP Academic Affairs</option>
+                          <option value ="VP Academic Affairs' Office">VP Academic Affairs' Office</option>
+                          <option value ="VP Administration">VP Administration</option>
+                          <option value ="VP Administration's Office">VP Administration's Office</option>
+                          <option value ="VP Gov&Comm Affrs/Legal Affrs">VP Gov&Comm Affrs/Legal Affrs</option>
+                          <option value ="VP Government&Community Affrs">VP Government&Community Affrs</option>
+                          <option value ="VP Govt & Community Affrs Ofc">VP Govt & Community Affrs Ofc</option>
+                          <option value ="VP Info Tech & CIO">VP Info Tech & CIO</option>
+                          <option value ="VP Institutional Advancement">VP Institutional Advancement</option>
+                          <option value ="VP IT & CIO's Office">VP IT & CIO's Office</option>
+                          <option value ="VP Research & Economic Dev">VP Research & Economic Dev</option>
+                          <option value ="VP Research & Economic Dev Ofc">VP Research & Economic Dev Ofc</option>
+                          <option value ="VP Student Affairs">VP Student Affairs</option>
+                          <option value ="VP Student Affairs' Office">VP Student Affairs' Office</option>
+                          <option value ="Writing Center">Writing Center</option>
+                          <option value ="WVAC/Wy Volunteer Asst Corp">WVAC/Wy Volunteer Asst Corp</option>
+                          <option value ="WWAMI">WWAMI</option>
+                          <option value ="Wy School/Univ Partnership">Wy School/Univ Partnership</option>
+                          <option value ="WYGISC">WYGISC</option>
+                          <option value ="Wyo INstitute for Disabilities">Wyo INstitute for Disabilities</option>
+                          <option value ="Wyo Natural Diversity Database">Wyo Natural Diversity Database</option>
+                          <option value ="Wyo Technology Business Ctr">Wyo Technology Business Ctr</option>
+                          <option value ="Wyoming Cooperative Unit">Wyoming Cooperative Unit</option>
+                          <option value ="Wyoming Public Media">Wyoming Public Media</option>
+                          <option value ="Wyoming Union">Wyoming Union</option>
+                          <option value ="WyoOne ID Office">WyoOne ID Office</option>
+                          <option value ="WYSAC">WYSAC</option>
+                          <option value ="Zoology & Physiology">Zoology & Physiology</option>
+
+                        </select>
+                    </div>
+                </div>
+
+            </fieldset>
+
+            <fieldset class="form-group">
+                <legend><font color="black">Event Information</font></legend>
+
+                <div class="container-fluid">
+
+                    <div class="form-group">
+                        Event Name<input type="text" maxlength="100" class="form-control" id="eventName"  required name = "eventname" formControlName= "evename" >
+                    </div>
+
+                    <!--Event Description-->
+
+
+                    <div class="form-group">
+                        Event Description<textarea maxlength="500" class="form-control" id="eventInfo" rows="3" required name = "eventdesc" formControlName= "evedesc" ></textarea>
+                    </div>
+                
+
+                					  <!-- Event Type and Fee-->
+						<div class="form-row">
+							<div class="col">
+								<label for="eventtype"></label>
+								Event Type: <select id="eventType" required class="form-control" name = "eventtype" formControlName = "evetype" >
+									<option value ="Athletic Events/Training">Athletic Events/Training</option>
+									<option value ="Community College Collaboration">Community College Collaboration</option>
+									<option value ="Direct Client/Patient Care">Direct Client/Patient Care</option>
+									<option value ="Government or Non-profit Assistance/Collaboration/Technology Transfer">Government or Non-profit Assistance/Collaboration/Technology Transfer</option>
+									<option value ="Industry Assistance/Collaboration/Technology Transfer">Industry Assistance/Collaboration/Technology Transfer</option>
+									<option value ="Other">Other</option>
+									<option value ="Policy Work and Evaluation Support">Policy Work and Evaluation Support</option>
+									<option value ="Pre-K through 12 Education Collaboration">Pre-K through 12 Education Collaboration</option>
+									<option value ="Professional Development, Training Programs, and Non-credit Courses">Professional Development, Training Programs, and Non-credit Courses</option>
+									<option value ="Recruiting or Alumni Engagement">Recruiting or Alumni Engagement</option>
+									<option value ="Research or Extension">Research or Extension</option>
+									<option value ="Seminar/Public talk or Performance/Exhibition">Seminar/Public talk or Performance/Exhibition</option>
+								</select>
+							</div>
+							
+							<div class="col">
+								Open to the Public?: <select id="private" required class="form-control" name="priv" formControlName= "priv" >
+															<option value = "YES">Yes</option>
+															<option value = "NO">No</option>
+														</select>
+							</div>
+							
+							<div class="col">
+								Fee to Attend the Event: <input required type="number" class="form-control" id="fee" name="fee" formControlName="fee" > 
+							</div>
+							
+                        </div>
+                        
+                        <div class="form-row">											
+							<div class="col">
+								Event Start Date: <input required type="date" value ="2018-07-23" class="form-control" id="eventSDate" name = "evestdate" formControlName="evestdate"  >
+							</div>
+							<div class="col">
+								Event Start Time: <input required type="time" value="00:00" class="form-control" id="eventStartTime" name= "evesttime"  formControlName= "evesttime" >
+							</div>
+							<div class="col">
+								Event End Date: <input required type="date" value ="2018-07-23" class="form-control" id="eventEDate" formControlName= "eveenddate" >
+							</div>
+							<div class="col">
+								Event End Time: <input required type="time" value = "00:30" class="form-control" id="eventEndTime" formControlName= "eveendtime">
+							</div>
+                        </div>
+                        
+                        <div style="text-align:center">
+							<input type="file"  id="file" name="upload" accept="image/png, image/jpeg application/pdf" formControlName= "file"/>
+                        </div>
+                        
+                        <h4>Speakers</h4>
+                        <table id="sTable" class="table table-bordered" formGroupName = "speakers">
+                          <tbody>
+                            <tr>
+                              <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="fSEvent" placeholder="First name" formControlName = "firstname">  </td>
+                              <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="lSEvent" placeholder="Last name" formControlName = "lastname">   </td>
+                              <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="mSEvent" placeholder="Middle name" formControlName = "middlename"> </td>
+                              <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="emailSEvent" placeholder="Email" formControlName = "email"> </td>
+                              <td> <input type="button" id ="delSpeaker" value="Delete" onclick = "deleteRow(this)">  </td>
+                            </tr>
+                          </tbody>
+                         </table>
+
+                         <div class="col-md-10 text-center"> 
+                            <button type="button" class="btn btn-primary" align="center" id ="addSpeaker">Add Speaker</button>
+                        </div>
+                    <br/>
+                    <br/>
+                    <h4>Location</h4>
+						<div class="form-group">
+							Building and Room<input type="text" class="form-control" maxlength="100" id="buildingroom" placeholder="Building and Room number">
+                        </div>
+                        <div class="form-group">
+                            Address line 1 <input required type="text" class="form-control" maxlength="200" id="address1" placeholder="1234 Main St">
+                        </div>
+                        <div class="form-group">
+                            Address line 2<input type="text" class="form-control" maxlength="200" id="address2" placeholder="Apartment, studio, or floor">
+                        </div>
+                    
+                        <div class="form-row">
+							<div class="form-group col-md-2">
+								County<select required id="county" class="form-control">
+									<option value ="Albany County">Albany County</option>
+									<option value ="Big Horn County">Big Horn County</option>
+									<option value ="Campbell County">Campbell County</option>
+									<option value ="Carbon County">Carbon County</option>
+									<option value ="Converse County">Converse County</option>
+									<option value ="Crook County">Crook County</option>
+									<option value ="Fremont County">Fremont County</option>
+									<option value ="Goshen County">Goshen County</option>
+									<option value ="Grand Teton National Park">Grand Teton National Park</option>
+									<option value ="Hot Springs County">Hot Springs County</option>
+									<option value ="Johnson County">Johnson County</option>
+									<option value ="Laramie County">Laramie County</option>
+									<option value ="Lincoln County">Lincoln County</option>
+									<option value ="Natrona County">Natrona County</option>
+									<option value ="Niobrara County">Niobrara County</option>
+									<option value ="Park County">Park County</option>
+									<option value ="Platte County">Platte County</option>
+									<option value ="Sheridan County">Sheridan County</option>
+									<option value ="Sublette County">Sublette County</option>
+									<option value ="Sweetwater County">Sweetwater County</option>
+									<option value ="Teton County">Teton County</option>
+									<option value ="Uinta County">Uinta County</option>
+									<option value ="Washakie County">Washakie County</option>
+									<option value ="Weston County">Weston County</option>
+									<option value ="Wind River Indian Reservation">Wind River Indian Reservation</option>
+									<option value ="Yellowstone National Park">Yellowstone National Park</option>
+								</select>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                City<select required id="city" class="form-control">
+                                      <option value ="Afton">Afton</option>
+                                      <option value ="Albin">Albin</option>
+                                      <option value ="Alcova">Alcova</option>
+                                      <option value ="Alpine">Alpine</option>
+                                      <option value ="Arapahoe">Arapahoe</option>
+                                      <option value ="Atlantic City">Atlantic City</option>
+                                      <option value ="Auburn">Auburn</option>
+                                      <option value ="Baggs">Baggs</option>
+                                      <option value ="Bairoil">Bairoil</option>
+                                      <option value ="Banner">Banner</option>
+                                      <option value ="Bar Nunn">Bar Nunn</option>
+                                      <option value ="Basin">Basin</option>
+                                      <option value ="Bear River">Bear River</option>
+                                      <option value ="Beulah">Beulah</option>
+                                      <option value ="Big Piney">Big Piney</option>
+                                      <option value ="Big Sandy">Big Sandy</option>
+                                      <option value ="Bondurant">Bondurant</option>
+                                      <option value ="Boulder">Boulder</option>
+                                      <option value ="Buffalo">Buffalo</option>
+                                      <option value ="Burlington">Burlington</option>
+                                      <option value ="Burns">Burns</option>
+                                      <option value ="Byron">Byron</option>
+                                      <option value ="Casper">Casper</option>
+                                      <option value ="Centennial">Centennial</option>
+                                      <option value ="Cheyenne">Cheyenne</option>
+                                      <option value ="Chugwater">Chugwater</option>
+                                      <option value ="Clark">Clark</option>
+                                      <option value ="Clearmont">Clearmont</option>
+                                      <option value ="Cody">Cody</option>
+                                      <option value ="Cokeville">Cokeville</option>
+                                      <option value ="Cowley">Cowley</option>
+                                      <option value ="Crowheart">Crowheart</option>
+                                      <option value ="Daniel">Daniel</option>
+                                      <option value ="Dayton">Dayton</option>
+                                      <option value ="Deaver">Deaver</option>
+                                      <option value ="Diamondville">Diamondville</option>
+                                      <option value ="Douglas">Douglas</option>
+                                      <option value ="Dubois">Dubois</option>
+                                      <option value ="East Thermopolis">East Thermopolis</option>
+                                      <option value ="Eden">Eden</option>
+                                      <option value ="Edgerton">Edgerton</option>
+                                      <option value ="Elk Mountain">Elk Mountain</option>
+                                      <option value ="Encampment">Encampment</option>
+                                      <option value ="Ethete">Ethete</option>
+                                      <option value ="Etna">Etna</option>
+                                      <option value ="Evanston">Evanston</option>
+                                      <option value ="Evansville">Evansville</option>
+                                      <option value ="Fort Laramie">Fort Laramie</option>
+                                      <option value ="Fort Washakie">Fort Washakie</option>
+                                      <option value ="Frannie">Frannie</option>
+                                      <option value ="Gillette">Gillette</option>
+                                      <option value ="Glendo">Glendo</option>
+                                      <option value ="Glenrock">Glenrock</option>
+                                      <option value ="Granger">Granger</option>
+                                      <option value ="Green River">Green River</option>
+                                      <option value ="Greybull">Greybull</option>
+                                      <option value ="Guernsey">Guernsey</option>
+                                      <option value ="Hanna">Hanna</option>
+                                      <option value ="Hudson">Hudson</option>
+                                      <option value ="Hulett">Hulett</option>
+                                      <option value ="Jackson">Jackson</option>
+                                      <option value ="Jeffrey City">Jeffrey City</option>
+                                      <option value ="Kaycee">Kaycee</option>
+                                      <option value ="Kemmerer">Kemmerer</option>
+                                      <option value ="Kinnear">Kinnear</option>
+                                      <option value ="Kirby">Kirby</option>
+                                      <option value ="La Barge">La Barge</option>
+                                      <option value ="Lake">Lake</option>
+                                      <option value ="Lander">Lander</option>
+                                      <option value ="Laramie">Laramie</option>
+                                      <option value ="Lingle">Lingle</option>
+                                      <option value ="Lost Springs">Lost Springs</option>
+                                      <option value ="Lovell">Lovell</option>
+                                      <option value ="Lusk">Lusk</option>
+                                      <option value ="Lyman">Lyman</option>
+                                      <option value ="Mammoth">Mammoth</option>
+                                      <option value ="Manderson">Manderson</option>
+                                      <option value ="Manville">Manville</option>
+                                      <option value ="Marbleton">Marbleton</option>
+                                      <option value ="Meeteetse">Meeteetse</option>
+                                      <option value ="Midwest">Midwest</option>
+                                      <option value ="Mills">Mills</option>
+                                      <option value ="Moneta">Moneta</option>
+                                      <option value ="Moorcroft">Moorcroft</option>
+                                      <option value ="Moose">Moose</option>
+                                      <option value ="Moran">Moran</option>
+                                      <option value ="Mountain View">Mountain View</option>
+                                      <option value ="Natrona">Natrona</option>
+                                      <option value ="Newcastle">Newcastle</option>
+                                      <option value ="Old Faithful">Old Faithful</option>
+                                      <option value ="Opal">Opal</option>
+                                      <option value ="Pavillion">Pavillion</option>
+                                      <option value ="Pine Bluffs">Pine Bluffs</option>
+                                      <option value ="Pine Haven">Pine Haven</option>
+                                      <option value ="Pinedale">Pinedale</option>
+                                      <option value ="Powell">Powell</option>
+                                      <option value ="Ranchester">Ranchester</option>
+                                      <option value ="Rawlins">Rawlins</option>
+                                      <option value ="Riverside">Riverside</option>
+                                      <option value ="Riverton">Riverton</option>
+                                      <option value ="Rock River">Rock River</option>
+                                      <option value ="Rock Springs">Rock Springs</option>
+                                      <option value ="Rolling Hills">Rolling Hills</option>
+                                      <option value ="Saratoga">Saratoga</option>
+                                      <option value ="Sheridan">Sheridan</option>
+                                      <option value ="Shoshoni">Shoshoni</option>
+                                      <option value ="Sinclair">Sinclair</option>
+                                      <option value ="Smoot">Smoot</option>
+                                      <option value ="Star Valley Ranch">Star Valley Ranch</option>
+                                      <option value ="Story">Story</option>
+                                      <option value ="Sundance">Sundance</option>
+                                      <option value ="Superior">Superior</option>
+                                      <option value ="Ten Sleep">Ten Sleep</option>
+                                      <option value ="Thane">Thane</option>
+                                      <option value ="Thermopolis">Thermopolis</option>
+                                      <option value ="Torrington">Torrington</option>
+                                      <option value ="Ucross">Ucross</option>
+                                      <option value ="Upton">Upton</option>
+                                      <option value ="Van Tassell">Van Tassell</option>
+                                      <option value ="Wamsutter">Wamsutter</option>
+                                      <option value ="Wheatland">Wheatland</option>
+                                      <option value ="Worland">Worland</option>
+                                      <option value ="Wright">Wright</option>
+                                      <option value ="Yoder">Yoder</option>
+                                </select>
+                            </div>
+                        
+                        <div class="form-group col-md-2">
+                                State<select required id="state" class="form-control">
+                                  <option value = "Alabama">Alabama</option>
+                                  <option value = "Alaska">Alaska</option>
+                                  <option value = "Arizona">Arizona</option>
+                                  <option value = "Arkansas">Arkansas</option>
+                                  <option value = "California">California</option>
+                                  <option value = "Colorado">Colorado</option>
+                                  <option value = "Connecticut">Connecticut</option>
+                                  <option value = "Delaware">Delaware</option>
+                                  <option value = "Florida">Florida</option>
+                                  <option value = "Georgia">Georgia</option>
+                                  <option value = "Hawaii">Hawaii</option>
+                                  <option value = "Idaho">Idaho</option>
+                                  <option value = "Illinois">Illinois</option>
+                                  <option value = "Indiana">Indiana</option>
+                                  <option value = "Iowa">Iowa</option>
+                                  <option value = "Kansas">Kansas</option>
+                                  <option value = "Kentucky">Kentucky</option>
+                                  <option value = "Louisiana">Louisiana</option>
+                                  <option value = "Maine">Maine</option>
+                                  <option value = "Maryland">Maryland</option>
+                                  <option value = "Massachusetts">Massachusetts</option>
+                                  <option value = "Michigan">Michigan</option>
+                                  <option value = "Minnesota">Minnesota</option>
+                                  <option value = "Mississippi">Mississippi</option>
+                                  <option value = "Missouri">Missouri</option>
+                                  <option value = "Montana">Montana</option>
+                                  <option value = "Nebraska">Nebraska</option>
+                                  <option value = "Nevada">Nevada</option>
+                                  <option value = "New Hampshire">New Hampshire</option>
+                                  <option value = "New Jersey">New Jersey</option>
+                                  <option value = "New Mexico">New Mexico</option>
+                                  <option value = "New York">New York</option>
+                                  <option value = "North Carolina">North Carolina</option>
+                                  <option value = "North Dakota">North Dakota</option>
+                                  <option value = "Ohio">Ohio</option>
+                                  <option value = "Oklahoma">Oklahoma</option>
+                                  <option value = "Oregon">Oregon</option>
+                                  <option value = "Pennsylvania">Pennsylvania</option>
+                                  <option value = "Rhode Island">Rhode Island</option>
+                                  <option value = "South Carolina">South Carolina</option>
+                                  <option value = "South Dakota">South Dakota</option>
+                                  <option value = "Tennessee">Tennessee</option>
+                                  <option value = "Texas">Texas</option>
+                                  <option value = "Utah">Utah</option>
+                                  <option value = "Vermont">Vermont</option>
+                                  <option value = "Virginia">Virginia</option>
+                                  <option value = "Washington">Washington</option>
+                                  <option value = "West Virginia">West Virginia</option>
+                                  <option value = "Wisconsin">Wisconsin</option>
+                                  <option value = "Wyoming">Wyoming</option>
+                                </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            Country<select required id="country" class="form-control">
+                                <option value="United States">United States</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            Zip<input required type="number" class="form-control" id="zip">
+                        </div>
+                            
+                    </div>
+
+                        
+            </div>
+            </fieldset>
+
+        
+              <!--Contact Information-->
+              <fieldset class="form-group">
+                <legend><font color= "black">Contact Information </font></legend>
+
+                <div class="container-fluid">
+                
+                      <!-- First Name and Last Name-->
+                      <div class="form-row">
+                          <div class="col">
+                              First Name: <input type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="cfname">
+                          </div>
+                          <div class="col">
+                              Last Name: <input type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="clname">
+                          </div>
+                          <div class="col">
+                              Sponsoring Department: <input required type="text" maxlength = "100" class="form-control" id="csdept">
+                          </div>
+                      </div>
+                  
+                      <br>
+                    <!--Email-->
+                        <div class="form-row">
+                          <div class="col">
+                              Primary Email: <input required type="email" maxlength="100" pattern="*[@uwyo.edu]" class="form-control" id="cpemail">
+                          </div>
+                          <div class="col">
+                              Secondary Email: <input type="email" maxlength="100" pattern="*[@uwyo.edu]" class="form-control" id="csemail">
+                          </div>
+                      </div>
+                      
+                      <br>
+                      <!-- telephone and website-->
+                      <div class="form-row">
+                          <div class="col">
+                              Phone Number: <input type="number" maxlength="20" class="form-control" id="telephone" placeholder="Enter phone number">
+                          </div>
+                          <div class="col">
+                              website: <input type="url" maxlength="100" class="form-control" id="curl" placeholder="Enter website">
+                          </div>
+                      </div>
+                </div>
+
+            </fieldset>
+
+
+            
+              <!--Additional Information-->
+              <fieldset class="form-group">
+                <legend><font color = "black"> Additional Information </font></legend>
+
+                <div class="container-fluid">
+                      
+                      <!--anticpated cost and attendees-->						
+                        <div class="form-row">											
+                          <div class="col">
+                              Anticipated Overall Cost of the Event: <input type="number" maxlength="20" class="form-control" id="aocostevent" >
+                          </div>
+                          <div class="col">
+                              Anticipated number of attendes: <input type="number" maxlength="20" class="form-control" id="anattendess" >
+                          </div>
+                      </div>
+                      
+                      <br>
+                      
+                      <!--funding sources-->
+                      <div class="form-row">											
+                          <div class="col">
+                              <label for="selectfundingsource"></label>
+                              Select Funding Source: <select id="sfundsource" class="form-control">
+                                  <option selected = ""></option>
+                                  <option value ="Federal grants">Federal grants</option>
+                                  <option value ="Special Appropriations (legislative)">Special Appropriations (legislative)</option>
+                                  <option value ="State grants and other non-federal grants">State grants and other non-federal grants</option>
+                                  <option value ="Student Fees">Student Fees</option>
+                                  <option value ="University operating funds including revenue funds">University operating funds including revenue funds</option>
+                                  <option value ="UW Foundation and other gifts">UW Foundation and other gifts</option>
+
+                              </select>
+                          </div>
+                          <div class="col">
+                              <label for="selectfundingsource2"></label>
+                              Select Second Funding Source: <select id="sfundsource2" class="form-control">
+                                  <option selected = ""></option>
+                                  <option value ="Federal grants">Federal grants</option>
+                                  <option value ="Special Appropriations (legislative)">Special Appropriations (legislative)</option>
+                                  <option value ="State grants and other non-federal grants">State grants and other non-federal grants</option>
+                                  <option value ="Student Fees">Student Fees</option>
+                                  <option value ="University operating funds including revenue funds">University operating funds including revenue funds</option>
+                                  <option value ="UW Foundation and other gifts">UW Foundation and other gifts</option>
+
+                              </select>
+                          </div>
+                      </div>
+                      
+                      <br>
+                      
+                      <div class="form-group">
+                          <label for="otherFunding">Other Sources of Funding:</label>
+                          <textarea maxlength="200" class="form-control" id="othersfund" rows="2"></textarea>
+                      </div>
+                      
+                      
+                      <div class="form-row">											
+                          <div class="col">
+                              Funding amount from first source: <input type="number" class="form-control" id="costFunding1" >
+                          </div>
+                          <div class="col">
+                              Funding amount from second source: <input type="number" class="form-control" id="costFunding2" >
+                          </div>
+                          <div class="col">
+                              Funding amount from other sources: <input type="number" class="form-control" id="costFunding3" >
+                          </div>
+                      </div>	
+                      <br>
+                    <!--Co-Sponsors-->
+                      <h4>Co-sponsors</h4>
+                      <table id="sTableC" class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="cosname" placeholder="Co-sponsor Name">  </td>
+                            <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="cosemail" placeholder="Co-sponsor Email">   </td>
+                            <td> <input style="border:none" type="number" maxlength="20" class="form-control" id="cosnumber" placeholder="Co-sponsor Phone number"> </td>
+                            <td> <input style="border:none" type="url" maxlength="100" class="form-control" id="coswebsite" placeholder="Co-sponsor website"> </td>
+                            <td> <input type="button" id ="delCos" value="Delete" onclick = "deleteRowC(this)">  </td>
+                          </tr>
+                        </tbody>
+                       </table>
+                  <div class="col-md-10 text-center"> 
+                      <button type="button" class="btn btn-primary" align="center" id ="addcos" onclick = "addC()">Add Co-sponsor</button>
+                  </div>
+                  <div class ="col-md-10 text-center">
+                      <input type="submit"  id="submit" name="submit" accept="image/png, image/jpeg application/pdf"/>
+                  </div>
+
+                </div>
+
+            </fieldset>
+
+
+          </form>
+
+        </font>
+      </div>
+
