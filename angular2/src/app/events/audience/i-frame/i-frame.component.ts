@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core'
 import {EngagementService} from '../../services/engagement.service'
 import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 import {ActivatedRoute} from '@angular/router'
-import {EngEvent} from '../../services/engevent.model'
 import { map } from 'rxjs/operators';
 import {Observable, of } from 'rxjs'
 import { Response } from "@angular/http"
@@ -17,7 +16,7 @@ import { Http } from '@angular/http';
 export class IfRameComponent implements OnInit{
     private p: number = 0;
     private cpage;
-    private events: EngEvent[];
+    private events: any;
     private pages: number;
     private formfilter: any;
     private keyword: any;
