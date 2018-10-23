@@ -1,13 +1,9 @@
 export class EngEvent {
     public organization	:	string	;
-    public item : Array<Cosponsors>;
-    constructor(org:string ='', cospo:Array<Cosponsors>){
-        this.organization = org;
-        this.item = cospo;
-    }
+    public speakers : Array<Speakers>;
 }
 
-class Cosponsors{
+export class Cosponsors{
     co_sponsor_name: string;
     co_sponsor_email: string;
     co_sponsor_phone_number: number;
@@ -18,6 +14,13 @@ class Cosponsors{
         this.co_sponsor_phone_number=co_sponsor_phone_number;
         this.co_sponsor_website=co_sponsor_website;
     }
+}
+
+export class Speakers{
+    first_name : string;
+    last_name : string;
+    middle_name : string;
+    email : string;
 }
 
 /*

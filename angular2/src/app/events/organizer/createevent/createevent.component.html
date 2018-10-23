@@ -1,31 +1,85 @@
-<h3 class="page-header">Add Invoice</h3>
-<form [formGroup]="invoiceForm">
-  <div formArrayName="itemRows">
-    <div *ngFor="let itemrow of itemRows.controls; let i=index" [formGroupName]="i">
-      <h4>Invoice Row #{{ i + 1 }}</h4>
-      <div class="form-group">
-        <label>Item Name</label>
-        <input formControlName="itemname" class="form-control">
+<div class = "container-fluid" style="    border-style: solid; background-color: white;"><font color="black">
+          <!-- all your great content here -->
+
+
+          <!--Main heading-->
+          <h1 align="center">Register Event</h1>
+
+          <form  novalidate #ocf="ngForm" (ngSubmit)="onSubmit(ocf)">
+            <fieldset class="form-group">
+                <legend><font color="black">Sponsor Info</font></legend>
+
+                <div class="container-fluid">
+
+                    <!--Organization-->
+                    <div class="form-group">
+                        Organization<select required id="organization" class="form-control" name = "organization" ngModel>
+                          <option value ="American Heritage Center and Art Museum">American Heritage Center and Art Museum</option>
+                          <option value ="Athletics">Athletics</option>
+                          <option value ="College of Agriculture and Natural Resources">College of Agriculture and Natural Resources</option>
+                          <option value ="College of Arts and Sciences">College of Arts and Sciences</option>
+                          <option value ="College of Business">College of Business</option>
+                          <option value ="College of Education">College of Education</option>
+                          <option value ="College of Engineering and Applied Science">College of Engineering and Applied Science</option>
+                          <option value ="College of Health Sciences">College of Health Sciences</option>
+                          <option value ="College of Law">College of Law</option>
+                          <option value ="Division of Academic Affairs">Division of Academic Affairs</option>
+                          <option value ="Division of Administration">Division of Administration</option>
+                          <option value ="Division of Governmental and Community Affairs">Division of Governmental and Community Affairs</option>
+                          <option value ="Division of Information Technology">Division of Information Technology</option>
+                          <option value ="Division of Public Relations">Division of Public Relations</option>
+                          <option value ="Division of Research and Economic Development">Division of Research and Economic Development</option>
+                          <option value ="Division of Student Affairs">Division of Student Affairs</option>
+                          <option value ="Haub School">Haub School</option>
+                          <option value ="Honors College">Honors College</option>
+                          <option value ="Office of Engagement">Office of Engagement</option>
+                          <option value ="Office of the President">Office of the President</option>
+                          <option value ="School of Energy Resources">School of Energy Resources</option>
+                          <option value ="University Libraries">University Libraries</option>
+                          <option value ="University of Wyoming Foundation">University of Wyoming Foundation</option>
+                          <option value ="University Operations">University Operations</option>
+
+
+                        </select>
+                    </div>
+
+  <!--
+                      <h4>Co-sponsors</h4>
+                      <table id="sTableC" class="table table-bordered" >
+                        <tbody ngModelGroup="account">
+                          <tr>
+                            <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="cosname" placeholder="Co-sponsor Name" ngModel name = "co_sponsor_name">  </td>
+                            <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="cosemail" placeholder="Co-sponsor Email">   </td>
+                            <td> <input style="border:none" type="number" maxlength="20" class="form-control" id="cosnumber" placeholder="Co-sponsor Phone number"> </td>
+                            <td> <input style="border:none" type="url" maxlength="100" class="form-control" id="coswebsite" placeholder="Co-sponsor website"> </td>
+                            <td> <input type="button" id ="delCos" value="Delete">  </td>
+                          </tr>
+
+                          <tr>
+                            <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="cosname" placeholder="Co-sponsor Name" ngModel name = "co_sponsor_name">  </td>
+                            <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="cosemail" placeholder="Co-sponsor Email">   </td>
+                            <td> <input style="border:none" type="number" maxlength="20" class="form-control" id="cosnumber" placeholder="Co-sponsor Phone number"> </td>
+                            <td> <input style="border:none" type="url" maxlength="100" class="form-control" id="coswebsite" placeholder="Co-sponsor website"> </td>
+                            <td> <input type="button" id ="delCos" value="Delete">  </td>
+                          </tr>
+                        </tbody>
+                       </table>
+                  <div class="col-md-10 text-center"> 
+                      <button type="button" class="btn btn-primary" align="center" id ="addcos">Add Co-sponsor</button>
+                  </div>
+                  <div class ="col-md-10 text-center">
+                    <button type="submit" class="btn btn-success" [disabled]="!ocf.form.valid">Submit</button>
+                  </div>
+
+                
+            -->
+        </div>
+            </fieldset>
+
+
+          </form>
+          <pre>{{ ocf.value | json }}</pre>
+
+        </font>
       </div>
-      <div class="form-group">
-        <label>Quantity</label>
-        <input formControlName="itemqty" class="form-control">
-      </div>
-      <div class="form-group">
-         <label>Unit Cost</label>
-         <input formControlName="itemrate" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Tax</label>
-        <input formControlName="itemtax" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Amount</label>
-        <input formControlName="amount" class="form-control">
-      </div>
-      <button *ngIf="i > 1" (click)="deleteRow(i)" class="btn btn-danger">Delete Button</button>
-    </div>
-  </div>
-  <button type="button" (click)="addNewRow()" class="btn btn-primary">Add new Row</button>
-</form>
-<p>{{invoiceForm.value | json}}</p>
+

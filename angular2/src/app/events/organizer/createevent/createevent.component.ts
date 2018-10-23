@@ -393,15 +393,47 @@ export class OrgCreateEvent{
         'Zoology & Physiology'
     ]
 
+    sps:any[];
+   
+    constructor(private _fb: FormBuilder, private model: EngEvent) {
+        var sps1 = new Array(this._fb.group({
+            // list all your form controls here, which belongs to your form array
+            first_name : 'gfsgfgffg',
+            last_name : '',
+            middle_name : '',
+            email : ''
+        }));
+        sps1.splice(0,1);
 
-    constructor(private _fb: FormBuilder) { }
+        //const sps: Speakers[] = [{first_name : 'jaga', last_name : 'bapa', middle_name: 'mid', email:"email"}];
+        this.model.organization = 'American Heritage Center and Art Museum';
+        this.model.speakers=[{first_name : 'jaga', last_name : 'bapa', middle_name: 'mid', email:"email"}];
+       /* this.sps = [this._fb.group({
+            // list all your form controls here, which belongs to your form array
+            first_name : 'gfsfg',
+            last_name : '',
+            middle_name : '',
+            email : ''
+        }), this._fb.group({
+            // list all your form controls here, which belongs to your form array
+            first_name : 'gfsgfgffg',
+            last_name : '',
+            middle_name : '',
+            email : ''
+        })]*/
+
+        
+        sps1.push(this._fb.group(this.model.speakers[0]));
+        sps1.push(this._fb.group(this.model.speakers[0]));
+        this.sps=sps1;
+
+     }
 
     ngOnInit() {
-        this.invoiceForm = this._fb.group({
-          itemRows: this._fb.array([this.initItemRows()]), // here
-          speakers: this._fb.array([this.inItSpeakers()]),
+            this.invoiceForm = this._fb.group({
+          speakers: this._fb.array(this.spfunc()),
           organization : new FormControl(),
-          department : new FormControl(),
+         /* department : new FormControl(),
           event_name : new FormControl(),
           event_desc : new FormControl(),
             priv : new FormControl(),
@@ -447,9 +479,11 @@ export class OrgCreateEvent{
                 co_sponsor_email : new FormControl(),
                 co_sponsor_phone_number : new FormControl(),
                 co_sponsor_website : new FormControl()
-            })
-          
+            })*/
         });
+
+        //this.invoiceForm = this._fb.group(this.model);
+
       }
   
       /*
@@ -457,6 +491,12 @@ export class OrgCreateEvent{
       into an array. So we are pushing an object to the formarray 'itemrows' that
       has the property 'itemname'. 
       */
+
+      spfunc()
+      {
+          return this.sps;
+      }
+
      initItemRows() {
         return this._fb.group({
             // list all your form controls here, which belongs to your form array
@@ -472,7 +512,9 @@ export class OrgCreateEvent{
             last_name : '',
             middle_name : '',
             email : ''
-        });
+        }
+            );
+        //return this._fb.group(this.model.speakers);
     }
 
     addNewSpeaker() {

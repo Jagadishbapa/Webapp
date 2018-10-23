@@ -1,18 +1,7 @@
 <div class = "container-fluid" style="    border-style: solid; background-color: white;"><font color="black">
     <h1 align="center">Register Event</h1>
     <form [formGroup]="invoiceForm" novalidate  (ngSubmit)="save(invoiceForm.value, invoiceForm.valid)" class ="form-group">
-    <div formArrayName="itemRows">
-      <!-- Check the correct way to iterate your form array -->
-      <div *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">
-        <h4>Invoice Row #{{ i + 1 }}</h4>
-        <div class="form-group">
-          <label>Item Name</label>
-          <input formControlName="itemname" class="form-control">
-        </div>
-        <button *ngIf="invoiceForm.controls.itemRows.controls.length > 1" (click)="deleteRow(i)" class="btn btn-danger">Delete Button</button>
-      </div>
-    </div>
-    <button type="button" (click)="addNewRow()" class="btn btn-primary">Add new Row</button>
+
 
     <legend><font color="black">Sponsor Info</font></legend>
     <div class="form-group">
@@ -23,7 +12,7 @@
               </option>
         </select>
     </div>
-
+    <!--
     <div class="form-group">
         department
         <select required id="department" class="form-control" formControlName = "department" >
@@ -41,23 +30,23 @@
     <div class="form-group">
         Event Description<textarea maxlength="500" class="form-control" id="eventInfo" rows="3" formControlName= "event_desc" ></textarea>
     </div>
-
+    -->
       <div formArrayName="speakers">
       <h4>Speakers</h4>
       <table id="sTable" class="table table-bordered">
-        <tbody>
+        <tbody >
           <tr *ngFor="let itemrow of invoiceForm.controls.speakers.controls; let i=index"  [formGroupName]="i">
-            <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="fSEvent" placeholder="First name" formControlName = "first_name">  </td>
-            <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="lSEvent" placeholder="Last name" formControlName = "last_name">   </td>
-            <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="mSEvent" placeholder="Middle name" formControlName = "middle_name"> </td>
-            <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="emailSEvent" placeholder="Email" formControlName = "email"> </td>
+            <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="fSEvent" placeholder="First name" formControlName = "first_name">{{itemrow.first_name}}  </td>
+            <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="lSEvent" placeholder="Last name" formControlName = "last_name"> {{itemrow.last_name}}  </td>
+            <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="mSEvent" placeholder="Middle name" formControlName = "middle_name"> {{itemrow.middle_name}}</td>
+            <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="emailSEvent" placeholder="Email" formControlName = "email"> {{itemrow.email}}</td>
             <td> <button *ngIf="invoiceForm.controls.speakers.controls.length > 1" (click)="deleteSpeaker(i)" class="btn btn-danger">Delete Button</button>  </td>
           </tr>
         </tbody>
        </table>
        <button type="button" (click)="addNewSpeaker()" class="btn btn-primary">Add Speaker</button>
         </div>
-
+    
     <button type="submit">Submit</button>
   </form>
 </font>

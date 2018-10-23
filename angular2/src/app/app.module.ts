@@ -22,6 +22,7 @@ import { FormsModule }   from '@angular/forms';
 import {OrgCreateEvent} from './events/organizer/createevent/createevent.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { NgForm } from '@angular/forms'
+import {EngEvent} from './events/services/engevent.model'
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { NgForm } from '@angular/forms'
     OrgNavBarComponent,
     OrgCreateEvent
   ],
-  providers: [EngagementService,EngEventsResolver, OrgLoginService, OrgLoginAuthguard, NgForm],
+  providers: [EngagementService,EngEventsResolver, OrgLoginService, OrgLoginAuthguard, NgForm, EngEvent],
   imports: [
     BrowserModule,
     HttpClientModule,
