@@ -12,10 +12,11 @@ import { NG_MODEL_WITH_FORM_CONTROL_WARNING } from '@angular/forms/src/directive
 @Component({
     selector: 'orgcreateeventform',
     templateUrl: './test.html',
+    styleUrls : ['./createevent.component.css']
 })
 
 export class OrgCreateEvent{
-    public invoiceForm: FormGroup;
+    public registerform: FormGroup;
     orgoptions = [
                 'American Heritage Center and Art Museum',
                 'Athletics',
@@ -41,7 +42,7 @@ export class OrgCreateEvent{
                 'University Libraries',
                 'University of Wyoming Foundation',
                 'University Operations'
-    ]
+    ];
 
     deptoptions =[
         'A&S Computer Fee',
@@ -391,23 +392,245 @@ export class OrgCreateEvent{
         'WyoOne ID Office',
         'WYSAC',
         'Zoology & Physiology'
+    ];
+
+    event_type = [
+        'Athletic Events/Training',
+        'Community College Collaboration',
+        'Direct Client/Patient Care',
+        'Government or Non-profit Assistance/Collaboration/Technology Transfer',
+        'Industry Assistance/Collaboration/Technology Transfer',
+        'Other',
+        'Policy Work and Evaluation Support',
+        'Pre-K through 12 Education Collaboration',
+        'Professional Development, Training Programs, and Non-credit Courses',
+        'Recruiting or Alumni Engagement',
+        'Research or Extension',
+        'Seminar/Public talk or Performance/Exhibition'
     ]
 
+    counties = [
+        'Albany County',
+        'Big Horn County',
+        'Campbell County',
+        'Carbon County',
+        'Converse County',
+        'Crook County',
+        'Fremont County',
+        'Goshen County',
+        'Grand Teton National Park',
+        'Hot Springs County',
+        'Johnson County',
+        'Laramie County',
+        'Lincoln County',
+        'Natrona County',
+        'Niobrara County',
+        'Park County',
+        'Platte County',
+        'Sheridan County',
+        'Sublette County',
+        'Sweetwater County',
+        'Teton County',
+        'Uinta County',
+        'Washakie County',
+        'Weston County',
+        'Wind River Indian Reservation',
+        'Yellowstone National Park'
+    ]
+
+    cities = [
+        'Afton',
+        'Albin',
+        'Alcova',
+        'Alpine',
+        'Arapahoe',
+        'Atlantic City',
+        'Auburn',
+        'Baggs',
+        'Bairoil',
+        'Banner',
+        'Bar Nunn',
+        'Basin',
+        'Bear River',
+        'Beulah',
+        'Big Piney',
+        'Big Sandy',
+        'Bondurant',
+        'Boulder',
+        'Buffalo',
+        'Burlington',
+        'Burns',
+        'Byron',
+        'Casper',
+        'Centennial',
+        'Cheyenne',
+        'Chugwater',
+        'Clark',
+        'Clearmont',
+        'Cody',
+        'Cokeville',
+        'Cowley',
+        'Crowheart',
+        'Daniel',
+        'Dayton',
+        'Deaver',
+        'Diamondville',
+        'Douglas',
+        'Dubois',
+        'East Thermopolis',
+        'Eden',
+        'Edgerton',
+        'Elk Mountain',
+        'Encampment',
+        'Ethete',
+        'Etna',
+        'Evanston',
+        'Evansville',
+        'Fort Laramie',
+        'Fort Washakie',
+        'Frannie',
+        'Gillette',
+        'Glendo',
+        'Glenrock',
+        'Granger',
+        'Green River',
+        'Greybull',
+        'Guernsey',
+        'Hanna',
+        'Hudson',
+        'Hulett',
+        'Jackson',
+        'Jeffrey City',
+        'Kaycee',
+        'Kemmerer',
+        'Kinnear',
+        'Kirby',
+        'La Barge',
+        'Lake',
+        'Lander',
+        'Laramie',
+        'Lingle',
+        'Lost Springs',
+        'Lovell',
+        'Lusk',
+        'Lyman',
+        'Mammoth',
+        'Manderson',
+        'Manville',
+        'Marbleton',
+        'Meeteetse',
+        'Midwest',
+        'Mills',
+        'Moneta',
+        'Moorcroft',
+        'Moose',
+        'Moran',
+        'Mountain View',
+        'Natrona',
+        'Newcastle',
+        'Old Faithful',
+        'Opal',
+        'Pavillion',
+        'Pine Bluffs',
+        'Pine Haven',
+        'Pinedale',
+        'Powell',
+        'Ranchester',
+        'Rawlins',
+        'Riverside',
+        'Riverton',
+        'Rock River',
+        'Rock Springs',
+        'Rolling Hills',
+        'Saratoga',
+        'Sheridan',
+        'Shoshoni',
+        'Sinclair',
+        'Smoot',
+        'Star Valley Ranch',
+        'Story',
+        'Sundance',
+        'Superior',
+        'Ten Sleep',
+        'Thane',
+        'Thermopolis',
+        'Torrington',
+        'Ucross',
+        'Upton',
+        'Van Tassell',
+        'Wamsutter',
+        'Wheatland',
+        'Worland',
+        'Wright',
+        'Yoder'
+    ]
+    
+
+
+    states:any[] = [
+        {value:"AL",text:"Alabama"},
+        {value:"AK",text:"Alaska"},
+        {value:"AZ",text:"Arizona"},
+        {value:"AR",text:"Arkansas"},
+        {value:"CA",text:"California"},
+        {value:"CO",text:"Colorado"},
+        {value:"CT",text:"Connecticut"},
+        {value:"DE",text:"Delaware"},
+        {value:"FL",text:"Florida"},
+        {value:"GA",text:"Georgia"},
+        {value:"HI",text:"Hawaii"},
+        {value:"ID",text:"Idaho"},
+        {value:"IL",text:"Illinois"},
+        {value:"IN",text:"Indiana"},
+        {value:"IA",text:"Iowa"},
+        {value:"KS",text:"Kansas"},
+        {value:"KY",text:"Kentucky"},
+        {value:"LA",text:"Louisiana"},
+        {value:"ME",text:"Maine"},
+        {value:"MD",text:"Maryland"},
+        {value:"MA",text:"Massachusetts"},
+        {value:"MI",text:"Michigan"},
+        {value:"MN",text:"Minnesota"},
+        {value:"MS",text:"Mississippi"},
+        {value:"MO",text:"Missouri"},
+        {value:"MT",text:"Montana"},
+        {value:"NE",text:"Nebraska"},
+        {value:"NV",text:"Nevada"},
+        {value:"NH",text:"New Hampshire"},
+        {value:"NJ",text:"New Jersey"},
+        {value:"NM",text:"New Mexico"},
+        {value:"NY",text:"New York"},
+        {value:"NC",text:"North Carolina"},
+        {value:"ND",text:"North Dakota"},
+        {value:"OH",text:"Ohio"},
+        {value:"OK",text:"Oklahoma"},
+        {value:"OR",text:"Oregon"},
+        {value:"PA",text:"Pennsylvania"},
+        {value:"RI",text:"Rhode Island"},
+        {value:"SC",text:"South Carolina"},
+        {value:"SD",text:"South Dakota"},
+        {value:"TN",text:"Tennessee"},
+        {value:"TX",text:"Texas"},
+        {value:"UT",text:"Utah"},
+        {value:"VT",text:"Vermont"},
+        {value:"VA",text:"Virginia"},
+        {value:"WA",text:"Washington"},
+        {value:"WV",text:"West Virginia"},
+        {value:"WI",text:"Wisconsin"},
+        {value:"WY",text:"Wyoming"}
+    ]
+
+    countries = [{value:"USA",text:"United States of America"}]
     sps:any[];
    
     constructor(private _fb: FormBuilder, private model: EngEvent) {
-        var sps1 = new Array(this._fb.group({
-            // list all your form controls here, which belongs to your form array
-            first_name : 'gfsgfgffg',
-            last_name : '',
-            middle_name : '',
-            email : ''
-        }));
-        sps1.splice(0,1);
+
 
         //const sps: Speakers[] = [{first_name : 'jaga', last_name : 'bapa', middle_name: 'mid', email:"email"}];
-        this.model.organization = 'American Heritage Center and Art Museum';
-        this.model.speakers=[{first_name : 'jaga', last_name : 'bapa', middle_name: 'mid', email:"email"}];
+       this.model.organization = 'American Heritage Center and Art Museum';
+       this.model.department = 'A&S Computer Fee';
+       this.model.event_name = 'eve name';
+       this.model.speakers=[{first_name : 'jaga', last_name : 'bapa', middle_name: 'mid', email:"email"}];
        /* this.sps = [this._fb.group({
             // list all your form controls here, which belongs to your form array
             first_name : 'gfsfg',
@@ -420,49 +643,52 @@ export class OrgCreateEvent{
             last_name : '',
             middle_name : '',
             email : ''
-        })]*/
+        })]
 
-        
+        var sps1 = new Array(this._fb.group({
+            // list all your form controls here, which belongs to your form array
+            first_name : 'gfsgfgffg',
+            last_name : '',
+            middle_name : '',
+            email : ''
+        }));
+        sps1.splice(0,1);
         sps1.push(this._fb.group(this.model.speakers[0]));
         sps1.push(this._fb.group(this.model.speakers[0]));
-        this.sps=sps1;
-
+        this.sps=sps1;*/
      }
 
     ngOnInit() {
-            this.invoiceForm = this._fb.group({
-          speakers: this._fb.array(this.spfunc()),
-          organization : new FormControl(),
-         /* department : new FormControl(),
-          event_name : new FormControl(),
-          event_desc : new FormControl(),
-            priv : new FormControl(),
-            fee : new FormControl(),
-            event_start_date_time : new FormControl(),
-            eve_st_time : new FormControl(),
-            event_end_date_time : new FormControl(),
-            eve_en_time : new FormControl(),
+            this.registerform = this._fb.group({
+            speakers: this._fb.array([this.inItSpeakers()]),
+            organization : ['', Validators.required],
+            department : ['', Validators.required],
+            event_name : ['', [Validators.required, Validators.maxLength(100)]],
+            event_desc : ['', [Validators.required, Validators.maxLength(500)]],
+            event_type : ['', [Validators.required]],
+            priv : ['', [Validators.required]],
+            fee : ['', [Validators.required]],
             event_file : new FormControl(),
-            event_cost : new FormControl(),
-            //location
+            event_start_date_time : ['', [Validators.required]],
+            event_end_date_time : ['', [Validators.required]],
             building_room : new FormControl(),
-            address_line1 : new FormControl(),
+            address_line1 : ['', [Validators.required, Validators.maxLength(200)]],
             address_line2 : new FormControl(),
-            county : new FormControl(),
-            city : new FormControl(),
-            state : new FormControl(),
-            country : new FormControl(),
-            other_city : new FormControl(),
-            zip : new FormControl(),
-            //contact info
-            first_name : new FormControl(),
-            last_name : new FormControl(),
-            sponsoring_department : new FormControl(),
-            email_1 : new FormControl(),
-            email_2 : new FormControl(),
-            phone_number : new FormControl(),
-            website : new FormControl(),
+            county : ['', [Validators.required, Validators.maxLength(100)]],
+            city : ['', [Validators.required, Validators.maxLength(100)]],
+            state : ['', [Validators.required, Validators.maxLength(100)]],
+            country : ['', [Validators.required, Validators.maxLength(3)]],
+            other_city : ['', [Validators.maxLength(100)]],
+            zip : ['', [Validators.required]],
 
+            //to-do
+            first_name : ['', Validators.maxLength(100)],
+            last_name : ['', Validators.maxLength(100)],
+            sponsoring_department : ['', [Validators.required, Validators.maxLength(100)]],
+            email_1 :  ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
+            email_2 :  ['', [Validators.email, Validators.maxLength(100)]],
+            phone_number : new FormControl(),
+            website : ['', Validators.maxLength(100)],
             anticipated_cost : new FormControl(),
             anticipated_num_attendees: new FormControl(),
             funding_source1 : new FormControl(),
@@ -472,18 +698,77 @@ export class OrgCreateEvent{
             cost_funding2 : new FormControl(),
             cost_funding_other : new FormControl(),
             attendees_count : new FormControl(),
-            created_by : new FormControl(),
-            cancelled : new FormControl(),
-            co_sponsors : new FormGroup({
-                co_sponsor_name : new FormControl(),
-                co_sponsor_email : new FormControl(),
-                co_sponsor_phone_number : new FormControl(),
-                co_sponsor_website : new FormControl()
-            })*/
+            co_sponsors: this._fb.array([this.inItcosponsors()])
         });
 
-        //this.invoiceForm = this._fb.group(this.model);
+        //this.registerform = this._fb.group(this.model);
 
+      }
+    
+    
+    inItSpeakers() {
+    return this._fb.group({
+        // list all your form controls here, which belongs to your form array
+        first_name : ['', Validators.maxLength(100)],
+        last_name : ['', Validators.maxLength(100)],
+        middle_name : ['', Validators.maxLength(100)],
+        email : ['', [Validators.email, Validators.maxLength(100)]],
+    }
+        );
+    //return this._fb.group(this.model.speakers);
+    }
+
+    addNewSpeaker() {
+        // control refers to your formarray
+        const control = <FormArray>this.registerform.controls['speakers'];
+        // add new formgroup
+        control.push(this.inItSpeakers());
+    }
+    
+    deleteSpeaker(index: number) {
+        // control refers to your formarray
+        const control = <FormArray>this.registerform.controls['speakers'];
+        // remove the chosen row
+        control.removeAt(index);
+    }
+
+    inItcosponsors() {
+        return this._fb.group({
+            // list all your form controls here, which belongs to your form array
+            co_sponsor_name : ['', Validators.maxLength(100)],
+            co_sponsor_email : ['', [Validators.email,Validators.maxLength(100)]],
+            co_sponsor_phone_number : new FormControl(),
+            co_sponsor_website : ['', Validators.maxLength(100)]
+        }
+            );
+        //return this._fb.group(this.model.speakers);
+        }
+    
+        addNewcosponsor() {
+            // control refers to your formarray
+            const control = <FormArray>this.registerform.controls['co_sponsors'];
+            // add new formgroup
+            control.push(this.inItSpeakers());
+        }
+        
+        deletecosponsor(index: number) {
+            // control refers to your formarray
+            const control = <FormArray>this.registerform.controls['co_sponsors'];
+            // remove the chosen row
+            control.removeAt(index);
+        }
+
+
+
+
+    /*spfunc()
+    {
+        return this.sps;
+    }*/
+
+      save(model:EngEvent, formvalid:any)
+      {
+          console.log(model);
       }
   
       /*
@@ -491,11 +776,8 @@ export class OrgCreateEvent{
       into an array. So we are pushing an object to the formarray 'itemrows' that
       has the property 'itemname'. 
       */
+/*
 
-      spfunc()
-      {
-          return this.sps;
-      }
 
      initItemRows() {
         return this._fb.group({
@@ -505,17 +787,7 @@ export class OrgCreateEvent{
         });
     }
 
-    inItSpeakers() {
-        return this._fb.group({
-            // list all your form controls here, which belongs to your form array
-            first_name : '',
-            last_name : '',
-            middle_name : '',
-            email : ''
-        }
-            );
-        //return this._fb.group(this.model.speakers);
-    }
+
 
     addNewSpeaker() {
         // control refers to your formarray
@@ -544,10 +816,7 @@ export class OrgCreateEvent{
         control.removeAt(index);
     }
 
-    save(model:EngEvent, formvalid:any)
-    {
-        console.log(model.organization);
-    }
+
 
 
    /* submitted = false;

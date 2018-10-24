@@ -1,36 +1,204 @@
 <div class = "container-fluid" style="    border-style: solid; background-color: white;"><font color="black">
     <h1 align="center">Register Event</h1>
-    <form [formGroup]="invoiceForm" novalidate  (ngSubmit)="save(invoiceForm.value, invoiceForm.valid)" class ="form-group">
+    <form [formGroup]="registerform" (ngSubmit)="save(registerform.value, registerform.valid)" class ="form-group">
 
 
     <legend><font color="black">Sponsor Info</font></legend>
-    <div class="form-group">
-        Organization
-        <select id="organization" class="form-control" formControlName = "organization" >
+    <div class="form-group" >
+        <div class = "custom">Organization</div>
+        <select id="organization" class="form-control" formControlName = "organization">
             <option *ngFor="let org of orgoptions" [value]="org">
                 {{org}}
               </option>
         </select>
-    </div>
-    <!--
-    <div class="form-group">
-        department
-        <select required id="department" class="form-control" formControlName = "department" >
-            <option *ngFor="let dept of deptoptions" [value]="dept">
-                {{dept}}
-              </option>
-        </select>
-    </div>
 
-    <legend><font color="black">Event Information</font></legend>
-    <div class="form-group">
-        Event Name<input type="text" maxlength="100" class="form-control" id="eventName"  formControlName= "event_name" >
+        <div *ngIf="!registerform.controls.organization.valid && (registerform.controls.organization.dirty || registerform.controls.organization.touched)" class="alert alert-danger">
+            <div [hidden] *ngIf = "!registerform.controls.organization.required">
+                organization is required
+            </div>
+        </div>
     </div>
+    
+    <div class="form-group">
+            <div class = "custom">department</div>
+            <select id="department" class="form-control" formControlName = "department">
+                <option *ngFor="let dept of deptoptions" [value]="dept">
+                    {{dept}}
+                  </option>
+            </select>
+            <div *ngIf="!registerform.controls.department.valid && (registerform.controls.department.dirty || registerform.controls.department.touched)" class="alert alert-danger">
+                    <div [hidden] *ngIf = "!registerform.controls.department.required">
+                        department is required
+                    </div>
+            </div>
+    </div>
+        <legend><font color="black">Event Information</font></legend>
+        <div class = "custom">Event Name</div>
+        <div class="form-group">
+            <input type="text" maxlength="100" class="form-control" id="event_name" formControlName = "event_name">
+        </div>
+    
+        <div class="form-group">
+                <div class = "custom">Event Description</div>
+                <textarea maxlength="500" class="form-control" id="event_desc" rows="3" formControlName = "event_desc"></textarea>
+        </div>
 
+        
+        <div class="form-row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                    <div class = "custom">Event Type</div>
+                    <select id="event_type" class="form-control" formControlName = "event_type">
+                    <option *ngFor="let type of event_type" [value]="type">
+                            {{type}}
+                    </option>
+                    </select>
+                </div>
+                </div>
+                
+                <div class="col-xs-4">
+                        <div class="form-group">
+                        <div class = "custom">Open to Everyone? </div> 
+                        <select id="priv" class="form-control" formControlName = "priv">
+                                                <option value = "YES">Yes</option>
+                                                <option value = "NO">No</option>
+                                            </select>
+                                        </div>
+                </div>
+                
+                <div class="col-xs-4">
+                        <div class="form-group">
+                    <div class = "custom">Fee to attend the event </div> 
+                        <input type="number" min = "0" class="form-control" id="fee" formControlName = "fee"> 
+                    </div>
+                    </div>
+
+                
+            </div>
+
+            
+
+
+            <div class="form-row">											
+                    <div class="col-xs-6">
+                            <div class="form-group">
+                            <div class = "custom">Event Start Date and Time </div>
+                        <input type="datetime-local" class="form-control" id="event_start_date_time" formControlName = "event_start_date_time">
+                    </div>
+                    </div>
+                    <div class="col-xs-6">
+                            <div class="form-group">
+                        <div class = "custom">Event End Date and Time</div>
+                            <input type="datetime-local" class="form-control" id="event_end_date_time" formControlName = "event_end_date_time">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" align="center">
+                    <input type="file"  id="event_file" name="upload" accept="image/png, image/jpeg, application/pdf" formControlName = "event_file">
+                </div>
+
+        
+        <div class="form-group">
+            <div formArrayName="speakers">
+                    <legend><font color="black">Speakers</font></legend>
+            <table id="sTable" class="table table-bordered">
+              <tbody >
+                <tr *ngFor="let speaker of registerform.controls.speakers.controls; let i=index"  [formGroupName]="i">
+                  <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="first_name" placeholder="First name" formControlName = "first_name">{{speaker.first_name}}  </td>
+                  <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="last_name" placeholder="Last name" formControlName = "last_name"> {{speaker.last_name}}  </td>
+                  <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="middle_name" placeholder="Middle name" formControlName = "middle_name"> {{speaker.middle_name}}</td>
+                  <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="email" placeholder="Email" formControlName = "email"> {{speaker.email}}</td>
+                  <td> <button *ngIf="registerform.controls.speakers.controls.length > 1" (click)="deleteSpeaker(i)" class="btn btn-danger">Delete Button</button>  </td>
+                </tr>
+              </tbody>
+             </table>
+             <button type="button" (click)="addNewSpeaker()" class="btn btn-primary">Add Speaker</button>
+              </div>
+        </div>
+        
+        <legend><font color="black">Location</font></legend>
+            <div class="form-group">
+                    Building and Room
+                    <input type="text" class="form-control" maxlength="100" id="buildingroom" formControlName = "building_room"placeholder="Building and Room number">
+                </div>
+            <div class="form-group">
+                    <div class = "custom">Address line 1</div>
+                <input type="text" class="form-control" maxlength="200" id="address1" formControlName = "address_line1" placeholder="1234 Main St">
+            </div>
+            <div class="form-group">
+                Address line 2
+                <input type="text" class="form-control" maxlength="200" id="address2" formControlName = "address_line2" placeholder="Apartment, studio, or floor">
+            </div>
+
+            <div class="form-row">											
+                    <div class="col-xs-3">
+                            <div class="form-group">
+                                <div class = "custom">County </div>
+                                <select id="county" class="form-control" formControlName = "county">
+                                <option *ngFor="let county of counties" [value]="county">
+                                        {{county}}
+                                </option>
+                            </select>
+                            </div>
+                    </div>
+                    <div class="col-xs-3">
+                            <div class="form-group">
+                                <div class = "custom">City </div>
+                                <select id="city" class="form-control" formControlName = "city">
+                                <option *ngFor="let city of cities" [value]="city">
+                                        {{city}}
+                                </option>
+                            </select>
+                            </div>
+                    </div>
+                    <div class="col-xs-3">
+                            <div class="form-group">
+                                Other City
+                                <input type="text" maxlength="100" class="form-control" id="other_city" formControlName = "other_city">
+                            </div>
+                    </div>
+                    <div class="col-xs-3">
+                            <div class="form-group">
+                                <div class = "custom">State </div>
+                                <select id="state" class="form-control" formControlName = "state">
+                                        <option *ngFor="let state of states" [value]="state.value">
+                                                {{state.text}}
+                                        </option>
+                                    </select>
+                            </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row">	
+                <div class="col-xs-6">
+                        <div class="form-group">
+                            <div class = "custom">zip </div>
+                            <input type="number" min = "1" maxlength="10" class="form-control" id="zip" formControlName = "zip">
+                        </div>
+                </div>
+                <div class="col-xs-6">
+                        <div class="form-group">
+                            <div class = "custom">Country </div>
+                            <select id="country" class="form-control" formControlName = "country">
+                                    <option *ngFor="let country of countries" [value]="country.value">
+                                            {{country.text}}
+                                    </option>
+                                </select>
+                        </div>
+                </div>
+                </div>
+
+
+            <!--
+
+
+    
     <div class="form-group">
         Event Description<textarea maxlength="500" class="form-control" id="eventInfo" rows="3" formControlName= "event_desc" ></textarea>
     </div>
-    -->
+    
       <div formArrayName="speakers">
       <h4>Speakers</h4>
       <table id="sTable" class="table table-bordered">
@@ -45,9 +213,9 @@
         </tbody>
        </table>
        <button type="button" (click)="addNewSpeaker()" class="btn btn-primary">Add Speaker</button>
-        </div>
+        </div>-->
     
-    <button type="submit">Submit</button>
-  </form>
-</font>
+            <button type="submit" [disabled]="!registerform.valid">Submit</button>
+        </form>
+    </font>
  </div> 
