@@ -59,5 +59,9 @@ all events button
 
 DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 //
-Register form validations{event end date and time > event start date and time. City or other_city. validations on top for each mandatory fields}, Add speaker and submit button in center
+Register form validations{event end date and time > event start date and time. validations on top for each mandatory fields},
 sponsoring depat, primary email(contact_info), phone_number(3rd column)
+test file input
+maximum size for file//
+
+cancelled = no for audience query

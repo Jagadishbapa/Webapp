@@ -51,6 +51,7 @@ public class EventsController {
 
 	@RequestMapping(value="/save", method=RequestMethod.POST, headers= {"content-type=application/json"} )
 	public EventsDbModel saveEvent(@RequestBody EventsDbModel event) {
+		System.out.println(event.getDepartment());
 		return eventService.saveEvent(event);
 	}
 	

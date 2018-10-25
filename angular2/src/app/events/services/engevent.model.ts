@@ -6,8 +6,8 @@ export class EngEvent {
     public event_type	:	string	;
     public priv	:	string	;
     public fee	:	number	;
-    public event_start_date_time	:	Date	;
-    public event_end_date_time	:	Date	;
+    public event_start_date_time	:	String	;
+    public event_end_date_time	:	String	;
     public event_cost	:	number	;
     public anticipated_cost	:	number	;
     public anticipated_num_attendees	:	number	;

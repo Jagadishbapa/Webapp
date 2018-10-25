@@ -45,7 +45,7 @@ public class EventsDbModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="event_id")
-	private Integer id;
+	private Integer event_id;
 	
 	
 	@Column(name="organization")
@@ -54,7 +54,6 @@ public class EventsDbModel {
 	@Column(name="department")
 	private String department;
 	
-
 	@Column(name="event_desc")
 	private String event_desc;
 	
@@ -134,7 +133,7 @@ public class EventsDbModel {
 	
     @ElementCollection
     @JoinTable(name="speakers", joinColumns=@JoinColumn(name="event_id"))
-    private java.util.Set<Speakers> speakers = new HashSet<Speakers>();
+    private java.util.List<Speakers> speakers;
     
     @Column(name="building_room", table = "location")
     private String building_room;
@@ -201,19 +200,22 @@ public class EventsDbModel {
 	//private String flag;
 	
 	public EventsDbModel() {}
+	
+	
+	
 
-	public EventsDbModel(Integer id, String organization, String department, String event_desc, String event_type,
+	public EventsDbModel(Integer event_id, String organization, String department, String event_desc, String event_type,
 			String priv, Integer fee, Timestamp event_start_date_time, Timestamp event_end_date_time, Blob event_file,
 			Integer event_cost, Integer anticipated_cost, Integer anticipated_num_attendees, String funding_source1,
 			String funding_source2, String funding_other, Integer cost_funding1, Integer cost_funding2,
 			Integer cost_funding_other, Integer attendees_count, String created_by, String cancelled,
-			Date cancellation_date, String cancelled_by, String event_name, Set<Speakers> speakers,
+			Date cancellation_date, String cancelled_by, String event_name, List<Speakers> speakers,
 			String building_room, String address_line1, String address_line2, String county, String city, String state,
 			String country, String other_city, String zip, String first_name, String last_name,
 			String sponsoring_department, String email_1, String email_2, String phone_number, String website,
 			List<CoSponsors> co_sponsors) {
 		super();
-		this.id = id;
+		this.event_id = event_id;
 		this.organization = organization;
 		this.department = department;
 		this.event_desc = event_desc;
@@ -258,12 +260,15 @@ public class EventsDbModel {
 		this.co_sponsors = co_sponsors;
 	}
 
-	public Integer getId() {
-		return id;
+
+
+
+	public Integer getEvent_id() {
+		return event_id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setEvent_id(Integer event_id) {
+		this.event_id = event_id;
 	}
 
 	public String getOrganization() {
@@ -458,11 +463,11 @@ public class EventsDbModel {
 		this.event_name = event_name;
 	}
 
-	public java.util.Set<Speakers> getSpeakers() {
+	public java.util.List<Speakers> getSpeakers() {
 		return speakers;
 	}
 
-	public void setSpeakers(java.util.Set<Speakers> speakers) {
+	public void setSpeakers(java.util.List<Speakers> speakers) {
 		this.speakers = speakers;
 	}
 
@@ -601,5 +606,8 @@ public class EventsDbModel {
 	public void setCo_sponsors(java.util.List<CoSponsors> co_sponsors) {
 		this.co_sponsors = co_sponsors;
 	}
+	
+	
+
 
 }

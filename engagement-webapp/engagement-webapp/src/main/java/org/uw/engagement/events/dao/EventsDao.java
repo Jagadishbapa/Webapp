@@ -21,7 +21,6 @@ import org.springframework.data.jpa.repository.Query;
 @Repository
 public interface EventsDao extends CrudRepository<EventsDbModel, Integer>, JpaRepository<EventsDbModel, Integer> {
 
-	public List<EventsDbModel> findById (int eventId);
 	
 	public EventsDbModel save(EventsDbModel event);
 	

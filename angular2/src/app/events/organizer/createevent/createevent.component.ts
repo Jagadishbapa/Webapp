@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import {  FormArray,  FormBuilder, Validators } from '@angular/forms';
+import {  FormArray,  FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import {EngEvent} from '../../services/engevent.model'
 import { FormGroup, FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
 import { NG_MODEL_WITH_FORM_CONTROL_WARNING } from '@angular/forms/src/directives';
+import {EngagementService} from '../../services/engagement.service';
+import {DatePipe,formatDate} from '@angular/common';
+
 
 
 @Component({
@@ -439,6 +442,7 @@ export class OrgCreateEvent{
     ]
 
     cities = [
+        '',
         'Afton',
         'Albin',
         'Alcova',
@@ -562,7 +566,8 @@ export class OrgCreateEvent{
         'Wheatland',
         'Worland',
         'Wright',
-        'Yoder'
+        'Yoder',
+        'Other'
     ]
     
 
@@ -620,17 +625,41 @@ export class OrgCreateEvent{
         {value:"WY",text:"Wyoming"}
     ]
 
-    countries = [{value:"USA",text:"United States of America"}]
+    countries = [{value:"USA",text:"United States of America"}];
+
+    fundingsrcs = [
+        'Federal grants',
+        'Special Appropriations (legislative)',
+        'State grants and other non-federal grants',
+        'Student Fees',
+        'University operating funds including revenue funds',
+        'UW Foundation and other gifts'
+    ]
     sps:any[];
    
-    constructor(private _fb: FormBuilder, private model: EngEvent) {
+    constructor(private _fb: FormBuilder, private model: EngEvent, private engservice: EngagementService) {
 
 
         //const sps: Speakers[] = [{first_name : 'jaga', last_name : 'bapa', middle_name: 'mid', email:"email"}];
-       this.model.organization = 'American Heritage Center and Art Museum';
+      /* this.model.organization = 'American Heritage Center and Art Museum';
        this.model.department = 'A&S Computer Fee';
-       this.model.event_name = 'eve name';
-       this.model.speakers=[{first_name : 'jaga', last_name : 'bapa', middle_name: 'mid', email:"email"}];
+       this.model.event_type = 'Athletic Events/Training';
+       this.model.priv = 'Yes';
+       this.model.fee = 0;
+       let myDate = new Date(); 
+
+       var datePipe = new DatePipe('en-US');
+       this.model.event_start_date_time= datePipe.transform(myDate, 'yyyy-MM-dd h:mm a');
+
+       let myDate1 = new Date(); 
+       this.model.event_start_date_time= datePipe.transform(myDate1, 'yyyy-MM-dd h:mm a');
+
+       this.model.event_file=null;
+
+       this.model.speakers=[{first_name : '', last_name : '', middle_name: '', email:''}];
+       this.model.building_room='';
+       this.model.address_line1=''
+        */
        /* this.sps = [this._fb.group({
             // list all your form controls here, which belongs to your form array
             first_name : 'gfsfg',
@@ -698,8 +727,10 @@ export class OrgCreateEvent{
             cost_funding2 : new FormControl(),
             cost_funding_other : new FormControl(),
             attendees_count : new FormControl(),
+            event_cost : new FormControl(),
             co_sponsors: this._fb.array([this.inItcosponsors()])
-        });
+        }, { validator: this.cityvalidator('city', 'other_city', 'event_start_date_time', 'event_end_date_time') 
+            });
 
         //this.registerform = this._fb.group(this.model);
 
@@ -748,7 +779,7 @@ export class OrgCreateEvent{
             // control refers to your formarray
             const control = <FormArray>this.registerform.controls['co_sponsors'];
             // add new formgroup
-            control.push(this.inItSpeakers());
+            control.push(this.inItcosponsors());
         }
         
         deletecosponsor(index: number) {
@@ -756,6 +787,21 @@ export class OrgCreateEvent{
             const control = <FormArray>this.registerform.controls['co_sponsors'];
             // remove the chosen row
             control.removeAt(index);
+        }
+
+        cityvalidator(c: string, oc : string, evstdate : string, evendate : string)
+        {
+            let op  = false;
+            let cv = false;
+            if((c.match('')===null || oc.match('') ===null) || (c.match('Other') || oc.match('')===null))
+                cv=true;
+            
+            let dv = false;
+            let esd = new Date(evstdate);
+            let eed = new Date(evendate);
+            if(esd<eed)
+                dv = true;
+            return (cv && dv);
         }
 
 
@@ -768,8 +814,16 @@ export class OrgCreateEvent{
 
       save(model:EngEvent, formvalid:any)
       {
-          console.log(model);
-      }
+
+
+  
+        var datePipe = new DatePipe('en-US');
+        model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
+        model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
+        model.created_by = 'jbapanap@uwyo.edu';
+        this.engservice.saveEvent(model);
+
+    }
   
       /*
       This creates a new formgroup. You can think of it as adding an empty object
