@@ -1,7 +1,8 @@
-import { Component, OnInit} from '@angular/core'
+import { Component, OnInit, Input} from '@angular/core'
 import {EngagementService} from '../../services/engagement.service'
 import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 import {ActivatedRoute} from '@angular/router'
+import {EngEvent} from '../../services/engevent.model'
 import { map } from 'rxjs/operators';
 import {Observable, of } from 'rxjs'
 import { Response } from "@angular/http"
@@ -9,11 +10,14 @@ import {HttpClient,HttpParams} from '@angular/common/http'
 import { Http } from '@angular/http';
 
 @Component({
-    selector: 'aud-iframe',
+    selector : 'orgiframe',
     templateUrl: './i-frame.component.html'
 })
 
-export class IfRameComponent implements OnInit{
+export class OrgIfRameComponent{
+
+    
+
     private p: number = 0;
     private cpage;
     private events: any;

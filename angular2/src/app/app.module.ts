@@ -23,6 +23,8 @@ import {OrgCreateEvent} from './events/organizer/createevent/createevent.compone
 import { ReactiveFormsModule } from '@angular/forms'
 import { NgForm } from '@angular/forms'
 import {EngEvent} from './events/services/engevent.model'
+import {EventSubmitComponent} from './events/organizer/eventsubmit/eventsubmit.component'
+import {OrgIfRameComponent} from './events/organizer/org-iframe/i-frame.component'
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import {EngEvent} from './events/services/engevent.model'
     OrganizerComponent,
     EngAudAppComponent,
     OrgNavBarComponent,
-    OrgCreateEvent
+    OrgCreateEvent,
+    EventSubmitComponent,
+    OrgIfRameComponent
   ],
   providers: [EngagementService,EngEventsResolver, OrgLoginService, OrgLoginAuthguard, NgForm, EngEvent],
   imports: [

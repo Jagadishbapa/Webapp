@@ -614,8 +614,8 @@
             <tr style="border:1px solid rgb(0, 0, 0);">
                 <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0); ">Event Name</td>
                 <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0);">Event Information</td>
+                <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0);">Contact Information</td>
                 <td align="center"style="font-size:18px; border:1px solid rgb(0, 0, 0);">Event start date and time</td>
-                <td align="center"style="font-size:18px; border:1px solid rgb(0, 0, 0);">Event end date and time</td>
                 <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0);">Location</td>
                 <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0);">Additional Information</td>
             </tr>
@@ -624,14 +624,14 @@
             <tr style="border:1px solid rgb(0, 0, 0);" >
                 <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{event.event_name}}</td>
                 <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{event.event_desc}}</td>
+                <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{"sponsor:"+ event.sponsoring_department}}<br> {{event.email_1}}<br> {{event.phone_number}} </td>
                 <td align="center" style="font-size: 15px; border:1px solid rgb(0, 0, 0);">{{event.event_start_date_time | date:'medium'  }}</td>
-                <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{event.event_end_date_time | date:'medium'}}</td>
                 <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{
-                        event.building_room + ", " + event.address_line1 + ", " +
-                        event.address_line2 + ", " +
+                        event.building_room + event.address_line1 + ", " +
+                        event.address_line2 + 
                         event.county+ ", " +
                         event.other_city +
-                        event.city + ", " +
+                        event.city + 
                         event.state+ ", " +
                         event.country+ ", " +
                         event.zip}}</td>

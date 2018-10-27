@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import {  FormArray,  FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import {  FormArray,  FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import {EngEvent} from '../../services/engevent.model'
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
 import { NG_MODEL_WITH_FORM_CONTROL_WARNING } from '@angular/forms/src/directives';
 import {EngagementService} from '../../services/engagement.service';
@@ -13,12 +13,16 @@ import {DatePipe,formatDate} from '@angular/common';
 
 
 @Component({
-    selector: 'orgcreateeventform',
+    selector: 'orgcreateevent',
     templateUrl: './test.html',
     styleUrls : ['./createevent.component.css']
 })
 
 export class OrgCreateEvent{
+    @ViewChild('submitted') eventsubmitcomponent: TemplateRef<any>;
+    @Input() userid:string;
+    @Input() register:boolean;
+    events:any;
     public registerform: FormGroup;
     orgoptions = [
                 'American Heritage Center and Art Museum',
@@ -637,7 +641,7 @@ export class OrgCreateEvent{
     ]
     sps:any[];
    
-    constructor(private _fb: FormBuilder, private model: EngEvent, private engservice: EngagementService) {
+    constructor(private _fb: FormBuilder, private model: EngEvent, private engservice: EngagementService, private cdRef:ChangeDetectorRef) {
 
 
         //const sps: Speakers[] = [{first_name : 'jaga', last_name : 'bapa', middle_name: 'mid', email:"email"}];
@@ -688,6 +692,7 @@ export class OrgCreateEvent{
      }
 
     ngOnInit() {
+        this.register=true;
             this.registerform = this._fb.group({
             speakers: this._fb.array([this.inItSpeakers()]),
             organization : ['', Validators.required],
@@ -704,7 +709,7 @@ export class OrgCreateEvent{
             address_line1 : ['', [Validators.required, Validators.maxLength(200)]],
             address_line2 : new FormControl(),
             county : ['', [Validators.required, Validators.maxLength(100)]],
-            city : ['', [Validators.required, Validators.maxLength(100)]],
+            city : ['', [Validators.maxLength(100)]],
             state : ['', [Validators.required, Validators.maxLength(100)]],
             country : ['', [Validators.required, Validators.maxLength(3)]],
             other_city : ['', [Validators.maxLength(100)]],
@@ -729,14 +734,17 @@ export class OrgCreateEvent{
             attendees_count : new FormControl(),
             event_cost : new FormControl(),
             co_sponsors: this._fb.array([this.inItcosponsors()])
-        }, { validator: this.cityvalidator('city', 'other_city', 'event_start_date_time', 'event_end_date_time') 
-            });
+        }, { validator:  this.allvalidator
+              }
+            );
 
         //this.registerform = this._fb.group(this.model);
 
       }
     
-    
+      //(formGroup: FormGroup) => {
+     //   return this.cityvalidator(formGroup);
+     // }
     inItSpeakers() {
     return this._fb.group({
         // list all your form controls here, which belongs to your form array
@@ -789,20 +797,68 @@ export class OrgCreateEvent{
             control.removeAt(index);
         }
 
-        cityvalidator(c: string, oc : string, evstdate : string, evendate : string)
+       /* cityvalidator(group: FormGroup)
         {
-            let op  = false;
-            let cv = false;
-            if((c.match('')===null || oc.match('') ===null) || (c.match('Other') || oc.match('')===null))
-                cv=true;
+
+            //group.controls['city']
             
-            let dv = false;
+            //console.log(c,oc,evstdate,evendate)
+ 
+            //let cv = false;
+            //console.log("gsbdgkjsbgljgbbxflbgnlsgbn")
+            if((group.controls['city'].value==="" || group.controls['city'].value==="Other") && (group.controls['other_city'].value === ""))
+                
+            {
+                console.log("true");
+                return true;
+            }
+            else 
+            {
+                console.log("null");
+                return null;
+            }
+           /* let dv = false;
             let esd = new Date(evstdate);
             let eed = new Date(evendate);
             if(esd<eed)
                 dv = true;
             return (cv && dv);
-        }
+        }*/
+
+        allvalidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+            const c = control.get('city');
+            const oc = control.get('other_city');
+            const stdate = new Date(control.get('event_start_date_time').value);
+            const endate = new Date(control.get('event_end_date_time').value);
+            
+            console.log(stdate);
+            console.log(endate);
+            console.log(stdate<endate);
+
+            let cv = false;
+            let dv = false;
+            if(((c.value==="" || c.value==="Other") && (oc.value === ""))) 
+            {
+                console.log("cv");
+                cv=true;
+                
+            }
+
+            if(stdate>=endate)
+            {
+                dv = true;
+            }
+
+            if(!cv && !dv)
+            {
+                return null;
+                
+            }
+            else
+                return {'cityvalid':true};
+          
+            //return name && alterEgo && name.value === alterEgo.value ? { 'identityRevealed': true } : null;
+          };
 
 
 
@@ -814,14 +870,72 @@ export class OrgCreateEvent{
 
       save(model:EngEvent, formvalid:any)
       {
-
-
+        if(model.other_city==="")
+        {
+            console.log("yes");
+        }
+        console.log(model);
   
         var datePipe = new DatePipe('en-US');
         model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
         model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
-        model.created_by = 'jbapanap@uwyo.edu';
-        this.engservice.saveEvent(model);
+        model.created_by = this.userid;
+
+          //delete model['speakers']
+
+          var j=0;
+          for(var i =0;i<model['speakers'].length ;i++)
+          {
+              if(model['speakers'][i]['first_name']==='' && model['speakers'][i]['last_name']==='' && model['speakers'][i]['middle_name']==='' && model['speakers'][i]['email']==='')
+              {
+                  model['speakers'].splice(i,1);
+                  i=i-1;
+              }
+              else
+                  j=1;
+          }
+
+          if(j===0)
+          {
+            delete model['speakers'];
+          }
+
+
+          var k=0;
+          for(var i =0;i<model['co_sponsors'].length ;i++)
+          {
+
+              if(model['co_sponsors'][i]['co_sponsor_name']==='' && model['co_sponsors'][i]['co_sponsor_email']==='' && model['co_sponsors'][i]['co_sponsor_phone_number']===null && model['co_sponsors'][i]['co_sponsor_website']==='')
+              {
+                  model['co_sponsors'].splice(i,1);
+                  i=i-1;
+              }
+              else
+                  k=1;
+          }
+
+          if(k===0)
+          {
+            delete model['co_sponsors'];
+          }
+
+        this.engservice.saveEvent(model)
+        .subscribe(
+            eventss=>{ 
+                console.log("submittedgdsgsdglgsg")
+                console.log(eventss);
+                this.events=eventss;
+                console.log(eventss['event_name'])
+                console.log("printing this")
+                console.log(this.events);
+                this.register=false;
+                this.cdRef.detectChanges();
+                this.register=false;
+             });
+
+
+
+
 
     }
   

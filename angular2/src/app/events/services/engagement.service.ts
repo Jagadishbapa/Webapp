@@ -80,6 +80,7 @@ export class EngagementService {
               //'Authorization': 'my-auth-token'
             })
           };
+          /*
           //delete model['speakers']
 
           var j=0;
@@ -116,9 +117,11 @@ export class EngagementService {
           if(k===0)
           {
             delete model['co_sponsors'];
-          }
-       this.http.post<EngEvent>('/engagement-webapp/events/save', JSON.stringify(model), httpOptions).subscribe(
-           eventss=>{ console.log(eventss);}
-       );
+          }*/
+       return this.http.post<EngEvent>('/engagement-webapp/events/save', JSON.stringify(model), httpOptions);
+       /*.subscribe(
+           eventss=>{ console.log(eventss);
+            return eventss}
+       );*/
     }
 }

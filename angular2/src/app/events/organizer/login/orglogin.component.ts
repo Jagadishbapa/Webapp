@@ -11,6 +11,7 @@ import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 
 export class OrgloginComponent{
     loginval:any;
+    error:boolean = false;
     constructor(private route: Router, private orglogin: OrgLoginService)
     {
 
@@ -18,7 +19,6 @@ export class OrgloginComponent{
 
     loginorg(userid,password)
     {
-        console.log(userid+password);
         this.orglogin.isLoggedIn(userid,password).subscribe(res=>{
             this.navdec(res, userid);
         });
@@ -28,9 +28,14 @@ export class OrgloginComponent{
     {
         if(res==true)
         { 
+            this.error=false;
             this.orglogin.userid = id;
             this.orglogin.userloggedin=true;   
-            this.route.navigateByUrl('uw-engagement/organizer');
+            this.route.navigate(['uw-engagement/organizer',  { loginid: this.orglogin.userid}]);
+        }
+        else
+        {
+            this.error = true;
         }
     }
 
