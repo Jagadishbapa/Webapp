@@ -6,6 +6,6 @@ FROM uw_engagement uw_eng, location loc, contact_info co_info
 WHERE uw_eng.event_id = loc.event_id AND
       uw_eng.event_id=co_info.event_id AND
       flag = 'N' AND
-      TRUNC(CAST(event_start_date_time as DATE)) between to_date(CURRENT_DATE, 'DD-MON-YY') AND to_date(CURRENT_DATE+7, 'DD-MON-YY') AND
+      TRUNC(CAST(event_start_date_time as DATE)) >= to_date(CURRENT_DATE, 'DD-MON-YY') AND
       cancelled = 'NO'
 ORDER BY uw_eng.event_start_date_time;
