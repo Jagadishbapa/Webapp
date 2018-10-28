@@ -1,4 +1,4 @@
-/*package org.uw.engagement.events.model;
+package org.uw.engagement.events.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,17 +9,38 @@ import javax.persistence.Table;
 @Table(name="UW_USERS")
 public class UWUsers {
 	@Id
-	@Column(name="UWYO_EMAIL")
-	private String uwyo_email;
+	@Column(name="uwyo_email")
+	private String email;
+	
+	@Column(name = "password")
+	private String pwd;
 
-	public String getUwyo_email() {
-		return uwyo_email;
+	public UWUsers()
+	{
+	
 	}
 
-	public void setUwyo_email(String uwyo_email) {
-		this.uwyo_email = uwyo_email;
+	public UWUsers(String email, String pwd) {
+		super();
+		this.email = email;
+		this.pwd = pwd;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 
 }
-*/
+

@@ -45,7 +45,7 @@ public class EventsDbModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="event_id")
-	private Integer id;
+	private Integer event_id;
 	
 	
 	@Column(name="organization")
@@ -54,7 +54,6 @@ public class EventsDbModel {
 	@Column(name="department")
 	private String department;
 	
-
 	@Column(name="event_desc")
 	private String event_desc;
 	
@@ -133,8 +132,8 @@ public class EventsDbModel {
 	private String event_name;
 	
     @ElementCollection
-    @JoinTable(name="speakers", joinColumns=@JoinColumn(name="event_id"))
-    private java.util.Set<Speakers> speakers = new HashSet<Speakers>();
+    @CollectionTable(name="speakers", joinColumns=@JoinColumn(name="event_id"))
+    private java.util.Set<Speakers> speakers;
     
     @Column(name="building_room", table = "location")
     private String building_room;
@@ -185,24 +184,24 @@ public class EventsDbModel {
     private String website;
 	
     @ElementCollection
-    @JoinTable(name="co_sponsors", joinColumns=@JoinColumn(name="event_id"))
-    private java.util.List<CoSponsors> co_sponsors;
+    @CollectionTable(name="co_sponsors", joinColumns=@JoinColumn(name="event_id"))
+    private java.util.Set<CoSponsors> co_sponsors;
 
-	//@Column(name="creation_date")
-	//@JsonIgnore private java.util.Date creation_date;
+	@Column(name="creation_date")
+	@JsonIgnore private java.util.Date creation_date;
 	
-	//@Column(name="last_update_date")
-	//@JsonIgnore private Date last_update_date;
+	@Column(name="last_update_date")
+	@JsonIgnore private Date last_update_date;
 	
-    //@Column(name = "updated_by")
-    //@JsonIgnore private String updated_by;
+    @Column(name = "updated_by")
+    @JsonIgnore private String updated_by;
     
-	//@Column(name="flag")
-	//private String flag;
+	@Column(name="flag")
+	private String flag;
 	
 	public EventsDbModel() {}
 
-	public EventsDbModel(Integer id, String organization, String department, String event_desc, String event_type,
+	public EventsDbModel(Integer event_id, String organization, String department, String event_desc, String event_type,
 			String priv, Integer fee, Timestamp event_start_date_time, Timestamp event_end_date_time, Blob event_file,
 			Integer event_cost, Integer anticipated_cost, Integer anticipated_num_attendees, String funding_source1,
 			String funding_source2, String funding_other, Integer cost_funding1, Integer cost_funding2,
@@ -211,9 +210,10 @@ public class EventsDbModel {
 			String building_room, String address_line1, String address_line2, String county, String city, String state,
 			String country, String other_city, String zip, String first_name, String last_name,
 			String sponsoring_department, String email_1, String email_2, String phone_number, String website,
-			List<CoSponsors> co_sponsors) {
+			Set<CoSponsors> co_sponsors, java.util.Date creation_date, Date last_update_date, String updated_by,
+			String flag) {
 		super();
-		this.id = id;
+		this.event_id = event_id;
 		this.organization = organization;
 		this.department = department;
 		this.event_desc = event_desc;
@@ -256,14 +256,18 @@ public class EventsDbModel {
 		this.phone_number = phone_number;
 		this.website = website;
 		this.co_sponsors = co_sponsors;
+		this.creation_date = creation_date;
+		this.last_update_date = last_update_date;
+		this.updated_by = updated_by;
+		this.flag = flag;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getEvent_id() {
+		return event_id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setEvent_id(Integer event_id) {
+		this.event_id = event_id;
 	}
 
 	public String getOrganization() {
@@ -594,12 +598,44 @@ public class EventsDbModel {
 		this.website = website;
 	}
 
-	public java.util.List<CoSponsors> getCo_sponsors() {
+	public java.util.Set<CoSponsors> getCo_sponsors() {
 		return co_sponsors;
 	}
 
-	public void setCo_sponsors(java.util.List<CoSponsors> co_sponsors) {
+	public void setCo_sponsors(java.util.Set<CoSponsors> co_sponsors) {
 		this.co_sponsors = co_sponsors;
+	}
+
+	public java.util.Date getCreation_date() {
+		return creation_date;
+	}
+
+	public void setCreation_date(java.util.Date creation_date) {
+		this.creation_date = creation_date;
+	}
+
+	public Date getLast_update_date() {
+		return last_update_date;
+	}
+
+	public void setLast_update_date(Date last_update_date) {
+		this.last_update_date = last_update_date;
+	}
+
+	public String getUpdated_by() {
+		return updated_by;
+	}
+
+	public void setUpdated_by(String updated_by) {
+		this.updated_by = updated_by;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 }

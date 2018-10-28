@@ -30,26 +30,39 @@ import org.uw.engagement.events.service.EventService;
 @RequestMapping(value="/events")
 public class EventsController {
 	//audience view used
-	@Autowired
-	private EngEventsViewRepository eevr;
+
 	
 	@Autowired
 	private EventService eventService;
+	
 	
 	// used
 	@GetMapping("/listfilter")
 	public Page<EngEventsView> showPageFilter(@RequestParam("filterquery") String filterquery, @RequestParam("datefrom") String datefroms, @RequestParam("dateto") String datetos, @RequestParam("county") String v_county, @RequestParam("city") String v_city, @RequestParam("organization") String v_org, @RequestParam("department") String v_dept, @RequestParam("eventtype") String v_eventtype, @RequestParam("keyword") String v_keyword, @RequestParam("page") int page) {
 		Pageable pageableRequest = new PageRequest(page, 25);
-			return eventService.getFilterEvents(eevr, filterquery, datefroms, datetos, v_county, v_city, v_org, v_dept, v_eventtype, v_keyword, page, pageableRequest);
+			return eventService.getFilterEvents( filterquery, datefroms, datetos, v_county, v_city, v_org, v_dept, v_eventtype, v_keyword, page, pageableRequest);
 	}
 	
 	
 	@GetMapping("/organizerlogin")
-	public boolean orgauthenticate() {
+	public boolean orgauthenticate(@RequestParam("userid") String userid, @RequestParam("password") String pwd) {
 		System.out.println("called");
-					return true;
-				}
+		return eventService.uservalid(userid,pwd);
+	}
 
+	@RequestMapping(value="/save", method=RequestMethod.POST, headers= {"content-type=application/json"} )
+	public EventsDbModel saveEvent(@RequestBody EventsDbModel event) {
+		System.out.println(event.getDepartment());
+		return eventService.saveEvent(event);
+	}
+	
+	
+	@GetMapping("/listorgfilter")
+	public Page<EventsDbModel> showPageOrgFilter(@RequestParam("filterquery") String filterquery, @RequestParam("datefrom") String datefroms, @RequestParam("dateto") String datetos, @RequestParam("county") String v_county, @RequestParam("city") String v_city, @RequestParam("organization") String v_org, @RequestParam("department") String v_dept, @RequestParam("eventtype") String v_eventtype, @RequestParam("keyword") String v_keyword, @RequestParam("page") int page) {
+		Pageable pageableRequest = new PageRequest(page, 25);
+			return eventService.getFilterEvents1( filterquery, datefroms, datetos, v_county, v_city, v_org, v_dept, v_eventtype, v_keyword, page, pageableRequest);
+	}
+	
 	
 //	@Autowired
 	//private AudEventsDao audeventsDao;

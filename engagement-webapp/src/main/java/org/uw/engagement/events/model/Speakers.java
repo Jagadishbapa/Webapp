@@ -8,6 +8,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Speakers implements Serializable{
 	
+	//@Column(name="event_id")
+	//private Integer event_id;
 	
 	@Column(name="first_name")
 	private String first_name;
@@ -24,14 +26,26 @@ public class Speakers implements Serializable{
 public Speakers()
 {}
 
-public Speakers(String first_name, String last_name, String middle_name, String email) {
+public Speakers(
+		//Integer event_id,
+		String first_name, String last_name, String middle_name, String email) {
 	super();
+	//this.event_id = event_id;
 	this.first_name = first_name;
 	this.last_name = last_name;
 	this.middle_name = middle_name;
 	this.email = email;
 }
 
+/*
+public Integer getEvent_id() {
+	return event_id;
+}
+
+public void setEvent_id(Integer event_id) {
+	this.event_id = event_id;
+}
+*/
 public String getFirst_name() {
 	return first_name;
 }
@@ -63,6 +77,7 @@ public String getEmail() {
 public void setEmail(String email) {
 	this.email = email;
 }
+
 
 
 	

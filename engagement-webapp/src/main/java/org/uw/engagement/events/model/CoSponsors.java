@@ -7,6 +7,9 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class CoSponsors implements Serializable{
+	
+	//@Column(name="event_id")
+	//private Integer event_id;
 
 	@Column(name="co_sponsor_name")
 	private String co_sponsor_name;
@@ -22,14 +25,25 @@ public class CoSponsors implements Serializable{
 	
 	public CoSponsors() {}
 
-	public CoSponsors(String co_sponsor_name, String co_sponsor_email, String co_sponsor_phone_number,
+	public CoSponsors(
+			//Integer event_id, 
+			String co_sponsor_name, String co_sponsor_email, String co_sponsor_phone_number,
 			String co_sponsor_website) {
 		super();
+		//this.event_id = event_id;
 		this.co_sponsor_name = co_sponsor_name;
 		this.co_sponsor_email = co_sponsor_email;
 		this.co_sponsor_phone_number = co_sponsor_phone_number;
 		this.co_sponsor_website = co_sponsor_website;
 	}
+
+	/*public Integer getEvent_id() {
+		return event_id;
+	}
+
+	public void setEvent_id(Integer event_id) {
+		this.event_id = event_id;
+	}*/
 
 	public String getCo_sponsor_name() {
 		return co_sponsor_name;
@@ -61,6 +75,8 @@ public class CoSponsors implements Serializable{
 
 	public void setCo_sponsor_website(String co_sponsor_website) {
 		this.co_sponsor_website = co_sponsor_website;
-	}	
+	}
+
+
 
 }
