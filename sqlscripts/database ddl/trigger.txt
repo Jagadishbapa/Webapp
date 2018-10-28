@@ -18,5 +18,7 @@ BEGIN
     END IF;
   ELSIF INSERTING THEN
     :new.creation_date := SYSDATE;
+    :new.cancelled := 'NO';
+    :new.flag := 'N';
   END IF;
 END;
