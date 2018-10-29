@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core'
+import { Component, OnInit, Input, ChangeDetectorRef} from '@angular/core'
 import {EngagementService} from '../../services/engagement.service'
 import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 import {ActivatedRoute} from '@angular/router'
@@ -16,8 +16,9 @@ import { Http } from '@angular/http';
 
 export class OrgIfRameComponent{
 
-    
-
+    @Input() userid : string;
+    event : any;
+    private levent : boolean= false;
     private p: number = 0;
     private cpage;
     private events: any;
@@ -27,7 +28,7 @@ export class OrgIfRameComponent{
     eventlist: any
     errormsg:any
     private eventscase: String = "default";;
-    constructor(private engService: EngagementService, private engService1: EngEventsResolver, private route: ActivatedRoute){
+    constructor(private engService: EngagementService, private engService1: EngEventsResolver, private route: ActivatedRoute, private cdRef:ChangeDetectorRef){
 
     }
 
@@ -69,11 +70,12 @@ export class OrgIfRameComponent{
         if(this.eventscase==="default")
         {
             
-        this.engService.getAudienceEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
+        this.engService.getOrgEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
             console.log(eventss);
             this.events = eventss['content'];
             this.pages = eventss['totalElements'];
 
+            /*
             for(var i=0; i<this.events.length;i++)
             {
                 if(this.events[i].building_room === null)
@@ -99,14 +101,15 @@ export class OrgIfRameComponent{
                /* if(this.events[i].phone_number === null || this.events[i].phone_number === "")
                     this.events[i].phone_number="";
                 else
-                    this.events[i].phone_number=","+this.events[i].phone_number;    */   
+                    this.events[i].phone_number=","+this.events[i].phone_number;    
 
-            }
+            }*/
         
         });
         }
         else if(this.eventscase==="filter")
         {
+            console.log("datefrom"+this.formfilter.datefrom);
             if(this.formfilter.datefrom==='')
             {
                 this.formfilter.datefrom = undefined;  
@@ -136,10 +139,11 @@ export class OrgIfRameComponent{
                 this.formfilter.eventtype = '%';  
             }
             console.log(this.formfilter)
-            this.engService.getAudienceEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
+            this.engService.getOrgEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
                 console.log(eventss['content']);
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
+                /*
                 for(var i=0; i<this.events.length;i++)
                 {
                     if(this.events[i].building_room === null)
@@ -165,9 +169,9 @@ export class OrgIfRameComponent{
                    /* if(this.events[i].phone_number === null || this.events[i].phone_number === "")
                         this.events[i].phone_number="";
                     else
-                        this.events[i].phone_number=","+this.events[i].phone_number;    */   
+                        this.events[i].phone_number=","+this.events[i].phone_number;      
     
-                }
+                }*/
             });
         }
 
@@ -175,10 +179,11 @@ export class OrgIfRameComponent{
         {
             console.log(this.eventscase);
             console.log(this.keyword);
-            this.engService.getAudienceEvents(this.p, this.eventscase, this.keyword).subscribe(eventss => {
+            this.engService.getOrgEvents(this.p, this.eventscase, this.keyword).subscribe(eventss => {
                 console.log(eventss['content']);
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
+                /*
                 for(var i=0; i<this.events.length;i++)
                 {
                     if(this.events[i].building_room === null)
@@ -204,9 +209,9 @@ export class OrgIfRameComponent{
                    /* if(this.events[i].phone_number === null || this.events[i].phone_number === "")
                         this.events[i].phone_number="";
                     else
-                        this.events[i].phone_number=","+this.events[i].phone_number;    */   
+                        this.events[i].phone_number=","+this.events[i].phone_number;       
     
-                }
+                }*/
             });
         }
 
@@ -223,4 +228,28 @@ export class OrgIfRameComponent{
                 this.events[i].address_line2=this.events[i].address_line2+",";*/
 
     } 
+
+    loadevent(event:any)
+    {
+        this.event=event;
+        this.levent=false;
+        this.cdRef.detectChanges();
+        this.levent=true;
+    }
+
+    cancelevent(event: any){
+        console.log("call cancelled");
+        for(var i=0;i<this.events.length;i++)
+        {
+            if(this.events[i].event_id === event.event_id)
+                {
+                    this.events[i].cancelled='YES';
+                    break;
+                }
+        }
+        //this.event.cancelled='YES';
+        this.levent=false;
+        this.cdRef.detectChanges();
+        this.levent=false;
+    }
 }  

@@ -59,9 +59,15 @@ all events button
 
 DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 //
-Register form validations{event end date and time > event start date and time. validations on top for each mandatory fields},
 sponsoring depat, primary email(contact_info), phone_number(3rd column)
 test file input
 maximum size for file//
 
 cancelled = no for audience query
+
+|| !(registerform.control['created_by'] === userd_id)
+
+RELIEF108
+
+
+db cancelled not null

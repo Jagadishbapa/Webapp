@@ -3,6 +3,7 @@ BEFORE INSERT OR UPDATE ON UW_ENGAGEMENT
 FOR EACH ROW
 BEGIN
   IF UPDATING THEN
+    :new.creation_date := :old.creation_date;
     :new.last_update_date := SYSDATE;
     :new.updated_by := :new.created_by;
     :new.created_by := :old.created_by;

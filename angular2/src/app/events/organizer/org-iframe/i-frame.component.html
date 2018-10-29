@@ -12,7 +12,7 @@
 </div>-->
 
 
-<div class = "container-fluid" style="    border-style: solid; border-color: black;">
+<div *ngIf="!levent" class = "container-fluid" style="    border-style: solid; border-color: black;">
 
         <br>
                 <form #form="ngForm" (ngSubmit)="applyFilter(form.value)">
@@ -640,8 +640,8 @@
 
                                 <td style="font-size:15px; border:1px solid rgb(0, 0, 0);">
                                     
-                                    <button type="button" >update/view</button><br>
-                                    <button type="button" >cancel event</button>
+                                    <button type="button" *ngIf="event.created_by===userid" (click)=loadevent(event) >{{event.cancelled==='NO'? 'update event' : 'view'}}</button><br>
+                                    <button  type="button" [disabled] = "event.cancelled==='YES'"   (click) = cancelevent(event) >{{event.cancelled==='NO'? 'cancel event' : 'cancelled'}}</button>
 
                                 </td>
                     </tr>
@@ -657,4 +657,6 @@
         -->
             <!--<pagination-controls class = "myPagination" (pageChange)="p = $event" maxSize ="4"></pagination-controls>-->
         </div>
+
+<updateevent *ngIf="levent" [eventd] =  "event" [userid]=userid></updateevent>
         

@@ -39,6 +39,8 @@ export class OrgNavBarComponent{
     }
 
     home(){
+        this.loadevents=false;
+        this.cdRef.detectChanges();
         this.loadevents = true;
         this.loadregister=false;
         this.loadsubmit=false;

@@ -25,6 +25,7 @@ import { NgForm } from '@angular/forms'
 import {EngEvent} from './events/services/engevent.model'
 import {EventSubmitComponent} from './events/organizer/eventsubmit/eventsubmit.component'
 import {OrgIfRameComponent} from './events/organizer/org-iframe/i-frame.component'
+import{UpdateEventComponent} from './events/organizer/updateevent/updateevent.component'
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {OrgIfRameComponent} from './events/organizer/org-iframe/i-frame.componen
     OrgNavBarComponent,
     OrgCreateEvent,
     EventSubmitComponent,
-    OrgIfRameComponent
+    OrgIfRameComponent,
+    UpdateEventComponent
   ],
   providers: [EngagementService,EngEventsResolver, OrgLoginService, OrgLoginAuthguard, NgForm, EngEvent],
   imports: [

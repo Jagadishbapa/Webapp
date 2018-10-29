@@ -70,6 +70,37 @@ export class EngagementService {
         return this.http.get('/engagement-webapp/events/listfilter', {params: this.params});
     }
 
+    getOrgEvents(page: number, filterquery: any, formfilter:any)
+    {
+        if(filterquery==='filter')
+        {
+            console.log(formfilter.datefrom);
+            this.params = new HttpParams().set('filterquery', filterquery).set('datefrom', formfilter.datefrom).
+            set('dateto', formfilter.dateto).set('county', formfilter.county).set('city', formfilter.city).
+            set('organization', formfilter.organization).set('department', formfilter.department).
+            set('eventtype', formfilter.eventtype).set('keyword',"").set('page', String(page)); 
+        }
+        else if(filterquery==='default')
+        {
+            console.log('default req');
+            this.params = new HttpParams().set('filterquery', filterquery).set('datefrom', '').
+            set('dateto', '').set('county', '').set('city', '').
+            set('organization', '').set('department', '').
+            set('eventtype', '').set('keyword','').set('page', String(page)); 
+        }
+
+        else if(filterquery==='keysearch')
+        {
+            console.log('keyword req');
+            this.params = new HttpParams().set('filterquery', filterquery).set('datefrom', '').
+            set('dateto', '').set('county', '').set('city', '').
+            set('organization', '').set('department', '').
+            set('eventtype', '').set('keyword',formfilter).set('page', String(page)); 
+        }
+        //params.set('p1', String(p1))
+        return this.http.get('/engagement-webapp/events/listorgfilter', {params: this.params});
+    }
+
 
     saveEvent(model:any)
     {
