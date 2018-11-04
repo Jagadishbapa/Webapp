@@ -693,7 +693,7 @@ export class UpdateEventComponent{
 
     ngOnInit() {
         this.register=true;
-        console.log(this.userid);
+        //console.log(this.userid);
         console.log(this.eventd);
         // event_id = 100;
 
@@ -711,7 +711,7 @@ export class UpdateEventComponent{
             priv : ['', [Validators.required]],
             fee : ['', [Validators.required]],
             event_file : new FormControl(),
-            event_start_date_time : [this.stdate(), [Validators.required]],
+            event_start_date_time : ['', [Validators.required]],
             event_end_date_time : ['', [Validators.required]],
             building_room : new FormControl(),
             address_line1 : ['', [Validators.required, Validators.maxLength(200)]],
@@ -747,6 +747,8 @@ export class UpdateEventComponent{
               }
             );
             this.registerform.patchValue(this.eventd);
+            this.registerform.controls['event_start_date_time'].setValue(this.stdate());
+            this.registerform.controls['event_end_date_time'].setValue(this.endate());
             /*console.log("1"+this.registerform.status);
             this.registerform.patchValue(this.eventd);
             console.log("2"+this.registerform.status);
@@ -819,11 +821,28 @@ export class UpdateEventComponent{
      stdate()
      {
 
-        let dateString = '2018-11-16T00:00:00' 
-        var datePipe = new DatePipe('en-US');
-        datePipe.transform(dateString, 'MM/dd/yyyy h:mm a');
-        let newDate = new Date(dateString);
-        return dateString;
+        //let dateString = '2018-11-16 00:00:00' 
+        //var datePipe = new DatePipe('en-US');
+        //datePipe.transform(dateString, 'MM/dd/yyyy h:mm a');
+        //let newDate = new Date(dateString);
+        //console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11));
+
+        console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5));
+        return this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5);
+     }
+
+
+     endate()
+     {
+
+        //let dateString = '2018-11-16 00:00:00' 
+        //var datePipe = new DatePipe('en-US');
+        //datePipe.transform(dateString, 'MM/dd/yyyy h:mm a');
+        //let newDate = new Date(dateString);
+        //console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11));
+
+        console.log(this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5));
+        return this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5);
      }
     inItSpeakers() {
         var sps1 = new Array(this._fb.group({
@@ -835,7 +854,7 @@ export class UpdateEventComponent{
         }));
         if(this.eventd.speakers.length>0)
         {
-            console.log("ddgdkjabspeaker1")
+           // console.log("ddgdkjabspeaker1")
             sps1.splice(0,1);
         for(var i =0; i<this.eventd.speakers.length;i++)
         {
@@ -903,7 +922,7 @@ export class UpdateEventComponent{
 
         if(this.eventd.co_sponsors.length>0)
         {
-            console.log("ddgdkjabspeaker1")
+            //console.log("ddgdkjabspeaker1")
             csp.splice(0,1);
         for(var i =0; i<this.eventd.co_sponsors.length;i++)
         {
@@ -1026,9 +1045,9 @@ export class UpdateEventComponent{
       {
         if(model.other_city==="")
         {
-            console.log("yes");
+            //console.log("yes");
         }
-        console.log(model);
+        //console.log(model);
   
         var datePipe = new DatePipe('en-US');
         model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');

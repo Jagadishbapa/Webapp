@@ -831,15 +831,15 @@ export class OrgCreateEvent{
             const stdate = new Date(control.get('event_start_date_time').value);
             const endate = new Date(control.get('event_end_date_time').value);
             
-            console.log(stdate);
-            console.log(endate);
-            console.log(stdate<endate);
+            //console.log(stdate);
+            //console.log(endate);
+            //console.log(stdate<endate);
 
             let cv = false;
             let dv = false;
             if(((c.value==="" || c.value==="Other") && (oc.value === ""))) 
             {
-                console.log("cv");
+               // console.log("cv");
                 cv=true;
                 
             }
@@ -851,6 +851,7 @@ export class OrgCreateEvent{
 
             if(!cv && !dv)
             {
+                console.log("true");
                 return null;
                 
             }
@@ -872,7 +873,7 @@ export class OrgCreateEvent{
       {
         if(model.other_city==="")
         {
-            console.log("yes");
+            //console.log("yes");
         }
         console.log(model);
   

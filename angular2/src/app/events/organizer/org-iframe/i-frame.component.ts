@@ -34,9 +34,9 @@ export class OrgIfRameComponent{
 
     setPage(event:any)
     {
-        console.log("set page");
+        //console.log("set page");
         //event.preventDefault();
-        console.log(event);
+        //console.log(event);
         this.cpage=event;
         this.p=event-1;
         this.getEventsList();
@@ -71,7 +71,7 @@ export class OrgIfRameComponent{
         {
             
         this.engService.getOrgEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
-            console.log(eventss);
+            //console.log(eventss);
             this.events = eventss['content'];
             this.pages = eventss['totalElements'];
 
@@ -177,10 +177,10 @@ export class OrgIfRameComponent{
 
         else if(this.eventscase==="keysearch")
         {
-            console.log(this.eventscase);
-            console.log(this.keyword);
+            //console.log(this.eventscase);
+            //console.log(this.keyword);
             this.engService.getOrgEvents(this.p, this.eventscase, this.keyword).subscribe(eventss => {
-                console.log(eventss['content']);
+                //console.log(eventss['content']);
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
                 /*
@@ -231,6 +231,7 @@ export class OrgIfRameComponent{
 
     loadevent(event:any)
     {
+        console.log(event);
         this.event=event;
         this.levent=false;
         this.cdRef.detectChanges();
@@ -238,7 +239,18 @@ export class OrgIfRameComponent{
     }
 
     cancelevent(event: any){
-        console.log("call cancelled");
+        //console.log("call cancelled");
+
+        event.cancelled='YES';
+        this.levent=false;
+        this.cdRef.detectChanges();
+        this.levent=false;
+
+        this.engService.cancelevent(event)
+        .subscribe(
+            eventss=>{
+             });
+
         for(var i=0;i<this.events.length;i++)
         {
             if(this.events[i].event_id === event.event_id)
@@ -247,9 +259,5 @@ export class OrgIfRameComponent{
                     break;
                 }
         }
-        //this.event.cancelled='YES';
-        this.levent=false;
-        this.cdRef.detectChanges();
-        this.levent=false;
     }
 }  

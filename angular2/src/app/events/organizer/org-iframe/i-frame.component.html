@@ -640,8 +640,8 @@
 
                                 <td style="font-size:15px; border:1px solid rgb(0, 0, 0);">
                                     
-                                    <button type="button" *ngIf="event.created_by===userid" (click)=loadevent(event) >{{event.cancelled==='NO'? 'update event' : 'view'}}</button><br>
-                                    <button  type="button" [disabled] = "event.cancelled==='YES'"   (click) = cancelevent(event) >{{event.cancelled==='NO'? 'cancel event' : 'cancelled'}}</button>
+                                    <button type="button" *ngIf="event.created_by===userid" (click)=loadevent(event) >{{event.cancelled==='NO' && event.flag==='N'? 'update event' : 'view'}}</button><br>
+                                    <button  type="button" *ngIf="event.created_by===userid" [disabled] = "event.cancelled==='YES' || event.flag==='Y'"   (click) = cancelevent(event) >{{event.cancelled==='NO'? 'cancel event' : 'cancelled'}}</button>
 
                                 </td>
                     </tr>

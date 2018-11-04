@@ -31,8 +31,8 @@ public class EventService {
 	@Autowired
 	private EngEventsViewRepository eevr;
 	
-	//@Autowired
-	//private EventsDao eventsDao;
+	@Autowired
+	private UWEngAdminsDao adminsDao;
 	
 	//--done
 	
@@ -82,6 +82,12 @@ public class EventService {
 	
 	
 	//Org login
+	public boolean adminvalid(String userid, String pwd)
+	{
+		return adminsDao.existsByEmailAndPassword(userid,pwd);
+	}
+	
+	//Org login
 	public boolean uservalid(String userid, String pwd)
 	{
 		return uwusersDao.existsByEmailAndPwd(userid,pwd);
@@ -99,11 +105,12 @@ public class EventService {
 		//return orgeventsDao.save(event);
 	//}
 	
+	/*
 	@Transactional
 	public int cancelEvent(String status, Integer eventid)
 	{
 		return orgeventsDao.eventCancel(status, eventid);
-	}
+	}*/
 	
 	@Transactional
 	public EventsDbModel saveEvent(EventsDbModel event) {

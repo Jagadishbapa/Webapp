@@ -388,7 +388,7 @@
            <button type="button" (click)="addNewSpeaker()" class="btn btn-primary">Add Speaker</button>
             </div>-->
         
-                <button type="submit" [disabled]="!registerform.valid || !(registerform.controls['cancelled'].value==='NO')">Submit</button>
+                <button type="submit" [disabled]="!registerform.valid || !(registerform.controls['cancelled'].value==='NO') || !(registerform.controls['flag'].value==='N')">Submit</button>
             </form>
         </font>
      </div> 

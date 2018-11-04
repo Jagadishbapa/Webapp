@@ -155,4 +155,59 @@ export class EngagementService {
             return eventss}
        );*/
     }
+
+
+    cancelevent(model:any)
+    {
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type':  'application/json'
+              //'Authorization': 'my-auth-token'
+            })
+          };
+          /*
+          //delete model['speakers']
+
+          var j=0;
+          for(var i =0;i<model['speakers'].length ;i++)
+          {
+              if(model['speakers'][i]['first_name']==='' && model['speakers'][i]['last_name']==='' && model['speakers'][i]['middle_name']==='' && model['speakers'][i]['email']==='')
+              {
+                  model['speakers'].splice(i,1);
+                  i=i-1;
+              }
+              else
+                  j=1;
+          }
+
+          if(j===0)
+          {
+            delete model['speakers'];
+          }
+
+
+          var k=0;
+          for(var i =0;i<model['co_sponsors'].length ;i++)
+          {
+
+              if(model['co_sponsors'][i]['co_sponsor_name']==='' && model['co_sponsors'][i]['co_sponsor_email']==='' && model['co_sponsors'][i]['co_sponsor_phone_number']===null && model['co_sponsors'][i]['co_sponsor_website']==='')
+              {
+                  model['co_sponsors'].splice(i,1);
+                  i=i-1;
+              }
+              else
+                  k=1;
+          }
+
+          if(k===0)
+          {
+            delete model['co_sponsors'];
+          }*/
+       return this.http.post<EngEvent>('/engagement-webapp/events/save', JSON.stringify(model), httpOptions);
+       /*.subscribe(
+           eventss=>{ console.log(eventss);
+            return eventss}
+       );*/
+    }
 }

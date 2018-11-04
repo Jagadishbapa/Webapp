@@ -49,6 +49,12 @@ public class EventsController {
 		System.out.println("called");
 		return eventService.uservalid(userid,pwd);
 	}
+	
+	@GetMapping("/adminlogin")
+	public boolean adminauthenticate(@RequestParam("userid") String userid, @RequestParam("password") String pwd) {
+		System.out.println("called");
+		return eventService.adminvalid(userid,pwd);
+	}
 
 	@RequestMapping(value="/save", method=RequestMethod.POST, headers= {"content-type=application/json"} )
 	public EventsDbModel saveEvent(@RequestBody EventsDbModel event) {
