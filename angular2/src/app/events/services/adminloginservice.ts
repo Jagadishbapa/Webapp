@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map'
 
 
 @Injectable()
-export class OrgLoginService {
+export class AdminLoginService {
     userloggedin:boolean = false;
     userid:string = null;
     params:any;
@@ -21,7 +21,9 @@ export class OrgLoginService {
 
     public isLoggedIn(id:string, password:string) 
     {
+        console.log("admin userid"+id);
         this.params = new HttpParams().set('userid', id).set('password', password);
+        console.log('admin');
         return this.http.get('/engagement-webapp/events/adminlogin', {params : this.params } );
  
     }

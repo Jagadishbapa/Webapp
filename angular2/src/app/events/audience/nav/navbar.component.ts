@@ -15,18 +15,14 @@ constructor(private orglogservice: OrgLoginService, private route: Router)
 
     logincheck()
     {
-        /*
-        console.log("called");
-        console.log(this.orglogservice.userloggedin)
-        if(this.orglogservice.userloggedin)
-        {
-            this.route.navigateByUrl('uw-engagement/organizer');
-        }
-        else{
-            this.route.navigateByUrl('uw-engagement/organizerlogin');
-            
-        }*/
         this.route.navigateByUrl('uw-engagement/organizerlogin');
     }
+
+    admincheck()
+    {
+        this.route.navigateByUrl('uw-engagement/adminlogin');
+    }
+
+
 
 }

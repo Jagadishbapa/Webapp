@@ -822,12 +822,15 @@ export class UpdateEventComponent{
      {
 
         //let dateString = '2018-11-16 00:00:00' 
-        //var datePipe = new DatePipe('en-US');
-        //datePipe.transform(dateString, 'MM/dd/yyyy h:mm a');
-        //let newDate = new Date(dateString);
-        //console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11));
-
-        console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5));
+        var datePipe = new DatePipe('en-US');
+        this.eventd.event_start_date_time=datePipe.transform(this.eventd.event_start_date_time, 'yyyy-MM-dd H:mm');
+       /* let newDate = new Date(this.eventd.event_start_date_time);
+        console.log("new date"+newDate);
+        console.log("hours"+ newDate.toLocaleDateString());
+        console.log("eventstring"+ this.eventd.event_start_date_time);
+        console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11));
+*/
+        //console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5));
         return this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5);
      }
 
@@ -841,7 +844,11 @@ export class UpdateEventComponent{
         //let newDate = new Date(dateString);
         //console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11));
 
-        console.log(this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5));
+        //console.log(this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5));
+
+        var datePipe = new DatePipe('en-US');
+        this.eventd.event_end_date_time=datePipe.transform(this.eventd.event_end_date_time, 'yyyy-MM-dd H:mm');
+
         return this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5);
      }
     inItSpeakers() {
@@ -891,6 +898,7 @@ export class UpdateEventComponent{
 
     addNewSpeaker() {
         // control refers to your formarray
+        //var value:any;
         var sps1 = this._fb.group({
             // list all your form controls here, which belongs to your form array
             first_name : ['', Validators.maxLength(100)],
@@ -899,7 +907,9 @@ export class UpdateEventComponent{
             email : ['', Validators.maxLength(100)]
         });
         const control = <FormArray>this.registerform.controls['speakers'];
+        //value = control.value;
         // add new formgroup
+        //value.push(sps1);
         control.push(sps1);
     }
     
@@ -1052,7 +1062,7 @@ export class UpdateEventComponent{
         var datePipe = new DatePipe('en-US');
         model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
         model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
-        //model.created_by = this.uid;
+        model.created_by = this.userid;
 
           //delete model['speakers']
 

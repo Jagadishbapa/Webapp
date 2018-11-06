@@ -27,6 +27,14 @@ import {EventSubmitComponent} from './events/organizer/eventsubmit/eventsubmit.c
 import {OrgIfRameComponent} from './events/organizer/org-iframe/i-frame.component'
 import{UpdateEventComponent} from './events/organizer/updateevent/updateevent.component'
 
+import {AdminComponent} from './events/admin/organizer.component'
+import {AdminCreateEvent} from './events/admin/createevent/createevent.component'
+import {AdminSubmitComponent} from './events/admin/eventsubmit/eventsubmit.component'
+import {AdminloginComponent} from './events/admin/login/orglogin.component'
+import {AdminNavBarComponent} from './events/admin/nav/orgnavbar.component'
+import {AdminIfRameComponent} from './events/admin/org-iframe/i-frame.component'
+import {AdminUpdateEventComponent} from './events/admin/updateevent/updateevent.component'
+import {AdminLoginService} from './events/services/adminloginservice'
 @NgModule({
   declarations: [
     EngagementAppComponent,
@@ -39,9 +47,18 @@ import{UpdateEventComponent} from './events/organizer/updateevent/updateevent.co
     OrgCreateEvent,
     EventSubmitComponent,
     OrgIfRameComponent,
-    UpdateEventComponent
+    UpdateEventComponent,
+    AdminUpdateEventComponent,
+    AdminIfRameComponent,
+    AdminNavBarComponent,
+    AdminloginComponent,
+    AdminSubmitComponent,
+    AdminCreateEvent,
+    AdminComponent
+    
+
   ],
-  providers: [EngagementService,EngEventsResolver, OrgLoginService, OrgLoginAuthguard, NgForm, EngEvent],
+  providers: [EngagementService,EngEventsResolver, OrgLoginService, AdminLoginService, OrgLoginAuthguard, NgForm, EngEvent],
   imports: [
     BrowserModule,
     HttpClientModule,

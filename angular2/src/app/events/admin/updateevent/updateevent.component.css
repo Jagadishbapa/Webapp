@@ -1,0 +1,19 @@
+#label{
+    color : black;
+}
+
+/*
+.label:after{
+     content:" *" ;
+     color:red   
+     }*/
+
+
+
+.custom {
+}
+
+.custom::after{
+    content:"*" ;
+    color:red   
+    }

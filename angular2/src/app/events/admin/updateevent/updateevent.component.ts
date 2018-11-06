@@ -13,15 +13,16 @@ import {DatePipe,formatDate} from '@angular/common';
 
 
 @Component({
-    selector: 'orgcreateevent',
-    templateUrl: './createevent.component.html',
-    styleUrls : ['./createevent.component.css']
+    selector: 'adminupdateevent',
+    templateUrl: './updateevent.component.html',
+    styleUrls : ['./updateevent.component.css']
 })
 
-export class OrgCreateEvent{
-    @ViewChild('submitted') eventsubmitcomponent: TemplateRef<any>;
-    @Input() userid:string;
-    @Input() register:boolean;
+export class AdminUpdateEventComponent{
+    //@ViewChild('submitted') eventsubmitcomponent: TemplateRef<any>;
+    @Input() eventd:any;
+    @Input() userid : string;
+    register : boolean;
     events:any;
     public registerform: FormGroup;
     orgoptions = [
@@ -692,8 +693,16 @@ export class OrgCreateEvent{
 
     ngOnInit() {
         this.register=true;
+        //console.log(this.userid);
+        console.log(this.eventd);
+        // event_id = 100;
+
             this.registerform = this._fb.group({
-            speakers: this._fb.array([this.inItSpeakers()]),
+            event_id : new FormControl(),
+            created_by : new FormControl(),
+            cancelled : new FormControl(),
+            flag : new FormControl(),
+            speakers: this._fb.array(this.inItSpeakers()),
             organization : ['', Validators.required],
             department : ['', Validators.required],
             event_name : ['', [Validators.required, Validators.maxLength(100)]],
@@ -709,7 +718,7 @@ export class OrgCreateEvent{
             address_line2 : new FormControl(),
             county : ['', [Validators.required, Validators.maxLength(100)]],
             city : ['', [Validators.maxLength(100)]],
-            state : ['WY', [Validators.required, Validators.maxLength(100)]],
+            state : ['', [Validators.required, Validators.maxLength(100)]],
             country : ['', [Validators.required, Validators.maxLength(3)]],
             other_city : ['', [Validators.maxLength(100)]],
             zip : ['', [Validators.required]],
@@ -732,36 +741,176 @@ export class OrgCreateEvent{
             cost_funding_other : new FormControl(),
             attendees_count : new FormControl(),
             event_cost : new FormControl(),
-            co_sponsors: this._fb.array([this.inItcosponsors()])
+            co_sponsors: this._fb.array(this.inItcosponsors())
         },
          { validator:  this.allvalidator
               }
             );
+            this.registerform.patchValue(this.eventd);
+            this.registerform.controls['event_start_date_time'].setValue(this.stdate());
+            this.registerform.controls['event_end_date_time'].setValue(this.endate());
+            /*console.log("1"+this.registerform.status);
+            this.registerform.patchValue(this.eventd);
+            console.log("2"+this.registerform.status);
+            //this.registerform.markAsPristine();
+            //this.registerform.updateValueAndValidity();
+            console.log("3"+this.registerform.status);
 
-        //this.registerform = this._fb.group(this.model);
+            this.registerform.get('city').valueChanges.subscribe(
+                (mode: string) => {
+                    console.log("subscribe"+mode);
+                    console.log(this.registerform.status);
+                });*/
+            //form.markAsPristine();
+            /*
+            console.log("printing eventd");
+            console.log(this.eventd);
+            console.log(this.eventd.event_start_date_time);
 
+            var sps1 = new Array(this._fb.group({
+                // list all your form controls here, which belongs to your form array
+                first_name : '',
+                last_name : '',
+                middle_name : '',
+                email : ''
+            }));
+
+            var csp = new Array(this._fb.group({
+                // list all your form controls here, which belongs to your form array
+                co_sponsor_name : '',
+                co_sponsor_email : '',
+                co_sponsor_phone_number : '',
+                co_sponsor_website : ''
+            }));
+            /*
+            if(this.eventd['speakers'].length>0)
+            {
+            sps1.splice(0,1);
+            for(var i =0; i<this.eventd.speakers.length;i++)
+                sps1.push(this._fb.group(this.eventd.speakers[i]));
+            delete this.eventd['speakers'];
+            this.eventd.speakers=sps1;
+            }
+
+            if(this.eventd['co_sponsors'].length>0)
+            {
+                csp.splice(0,1);
+                for(var i =0; i<this.eventd['co_sponsors'].length;i++)
+                    csp.push(this._fb.group(this.eventd.co_sponsors[i]));
+                delete this.eventd['co_sponsors'];
+                this.eventd.co_sponsors=csp;
+            }
+            
+            //delete this.eventd['speakers'];
+            //delete this.eventd['co_sponsors'];
+            //this.eventd.speakers=sps1;
+            //this.eventd.co_sponsors=csp;
+            this.registerform.patchValue(this.eventd);
+            let dateString = '2018-11-16T00:00:00' 
+            let newDate = new Date(dateString);
+            console.log("dkjbadkgjbadkgjb");
+
+            //this.registerform.controls['event_start_date_time'].setValue(new Date(this.eventd.event_start_date_time));
+            //this.registerform.controls['event_start_date_time'].setValue(newDate);*/
       }
     
       //(formGroup: FormGroup) => {
      //   return this.cityvalidator(formGroup);
      // }
+
+     stdate()
+     {
+
+        //let dateString = '2018-11-16 00:00:00' 
+        var datePipe = new DatePipe('en-US');
+        this.eventd.event_start_date_time=datePipe.transform(this.eventd.event_start_date_time, 'yyyy-MM-dd H:mm');
+       /* let newDate = new Date(this.eventd.event_start_date_time);
+        console.log("new date"+newDate);
+        console.log("hours"+ newDate.toLocaleDateString());
+        console.log("eventstring"+ this.eventd.event_start_date_time);
+        console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11));
+*/
+        //console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5));
+        return this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5);
+     }
+
+
+     endate()
+     {
+
+        //let dateString = '2018-11-16 00:00:00' 
+        //var datePipe = new DatePipe('en-US');
+        //datePipe.transform(dateString, 'MM/dd/yyyy h:mm a');
+        //let newDate = new Date(dateString);
+        //console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11));
+
+        //console.log(this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5));
+
+        var datePipe = new DatePipe('en-US');
+        this.eventd.event_end_date_time=datePipe.transform(this.eventd.event_end_date_time, 'yyyy-MM-dd H:mm');
+
+        return this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5);
+     }
     inItSpeakers() {
+        var sps1 = new Array(this._fb.group({
+            // list all your form controls here, which belongs to your form array
+            first_name : ['', Validators.maxLength(100)],
+            last_name : ['', Validators.maxLength(100)],
+            middle_name : ['', Validators.maxLength(100)],
+            email : ['', Validators.maxLength(100)]
+        }));
+        if(this.eventd.speakers.length>0)
+        {
+           // console.log("ddgdkjabspeaker1")
+            sps1.splice(0,1);
+        for(var i =0; i<this.eventd.speakers.length;i++)
+        {
+            
+            sps1.push(this._fb.group({
+                // list all your form controls here, which belongs to your form array
+                first_name : [this.eventd.speakers[i]['first_name'], Validators.maxLength(100)],
+                last_name : [this.eventd.speakers[i]['last_name'], Validators.maxLength(100)],
+                middle_name : [this.eventd.speakers[i]['middle_name'], Validators.maxLength(100)],
+                email : [this.eventd.speakers[i]['email'], Validators.maxLength(100)],
+            }));
+        
+            //sps1.push(this._fb.group(this.eventd.speakers[i]));
+        }
+        //delete this.eventd['speakers'];
+        //this.eventd.speakers=sps1;
+        }
+        return sps1;
+        /*
     return this._fb.group({
+
+
+        
+
         // list all your form controls here, which belongs to your form array
-        first_name : ['', Validators.maxLength(100)],
+        first_name : ['gsdg', Validators.maxLength(100)],
         last_name : ['', Validators.maxLength(100)],
         middle_name : ['', Validators.maxLength(100)],
         email : ['', [Validators.email, Validators.maxLength(100)]],
     }
-        );
+        );*/
     //return this._fb.group(this.model.speakers);
     }
 
     addNewSpeaker() {
         // control refers to your formarray
+        //var value:any;
+        var sps1 = this._fb.group({
+            // list all your form controls here, which belongs to your form array
+            first_name : ['', Validators.maxLength(100)],
+            last_name : ['', Validators.maxLength(100)],
+            middle_name : ['', Validators.maxLength(100)],
+            email : ['', Validators.maxLength(100)]
+        });
         const control = <FormArray>this.registerform.controls['speakers'];
+        //value = control.value;
         // add new formgroup
-        control.push(this.inItSpeakers());
+        //value.push(sps1);
+        control.push(sps1);
     }
     
     deleteSpeaker(index: number) {
@@ -772,14 +921,39 @@ export class OrgCreateEvent{
     }
 
     inItcosponsors() {
-        return this._fb.group({
+        var csp = new Array(this._fb.group({
             // list all your form controls here, which belongs to your form array
             co_sponsor_name : ['', Validators.maxLength(100)],
             co_sponsor_email : ['', [Validators.email,Validators.maxLength(100)]],
             co_sponsor_phone_number : new FormControl(),
             co_sponsor_website : ['', Validators.maxLength(100)]
+        }));
+
+
+        if(this.eventd.co_sponsors.length>0)
+        {
+            //console.log("ddgdkjabspeaker1")
+            csp.splice(0,1);
+        for(var i =0; i<this.eventd.co_sponsors.length;i++)
+        {
+             csp.push(this._fb.group({
+                // list all your form controls here, which belongs to your form array
+                co_sponsor_name : ['', Validators.maxLength(100)],
+                co_sponsor_email : ['', [Validators.email,Validators.maxLength(100)]],
+                co_sponsor_phone_number : new FormControl(),
+                co_sponsor_website : ['', Validators.maxLength(100)]
+            }));
+        
+           // csp.push(this._fb.group(this.eventd.co_sponsors[i]));
         }
-            );
+        //delete this.eventd['speakers'];
+        //this.eventd.co_sponsors=csp;
+        }
+        return csp;
+
+        
+
+
         //return this._fb.group(this.model.speakers);
         }
     
@@ -787,7 +961,17 @@ export class OrgCreateEvent{
             // control refers to your formarray
             const control = <FormArray>this.registerform.controls['co_sponsors'];
             // add new formgroup
-            control.push(this.inItcosponsors());
+           // control.push(this.inItcosponsors());
+
+           var csp = this._fb.group({
+            // list all your form controls here, which belongs to your form array
+            co_sponsor_name : ['', Validators.maxLength(100)],
+            co_sponsor_email : ['', [Validators.email,Validators.maxLength(100)]],
+            co_sponsor_phone_number : new FormControl(),
+            co_sponsor_website : ['', Validators.maxLength(100)]
+        });
+        // add new formgroup
+        control.push(csp);
         }
         
         deletecosponsor(index: number) {
@@ -837,9 +1021,8 @@ export class OrgCreateEvent{
 
             let cv = false;
             let dv = false;
-            if(((c.value==="" || c.value==="Other") && (oc.value === ""))) 
+            if(((c.value==='' || c.value==='Other') && (oc.value === '' || oc.value === null))) 
             {
-               // console.log("cv");
                 cv=true;
                 
             }
@@ -851,7 +1034,6 @@ export class OrgCreateEvent{
 
             if(!cv && !dv)
             {
-                console.log("true");
                 return null;
                 
             }
@@ -875,11 +1057,12 @@ export class OrgCreateEvent{
         {
             //console.log("yes");
         }
-        console.log(model);
+        //console.log(model);
   
         var datePipe = new DatePipe('en-US');
         model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
         model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
+        console.log("this.userid"+this.userid);
         model.created_by = this.userid;
 
           //delete model['speakers']
@@ -920,6 +1103,8 @@ export class OrgCreateEvent{
             delete model['co_sponsors'];
           }
 
+          delete model['creation_date'];
+          console.log(model);
         this.engservice.saveEvent(model)
         .subscribe(
             eventss=>{ 

@@ -121,13 +121,19 @@ public class EngEventsView {
 	@Column(name="phone_number")
 	private	String	phone_number;
 	
+	@Column(name = "sponsoring_department")
+	private String sponsoring_department;
+	
+	@Column(name = "cancelled")
+	private String cancelled;
+	
 	public EngEventsView() {}
 
 	public EngEventsView(Integer event_id, String event_name, String organization, String department, String event_desc,
 			String event_type, String priv, Integer fee, Timestamp event_start_date_time, Timestamp event_end_date_time,
 			String building_room, String address_line1, String address_line2, String county, String city,
 			String other_city, String state, String country, Integer zip, String first_name, String last_name,
-			String email_1, String email_2, String phone_number) {
+			String email_1, String email_2, String phone_number, String sponsoring_department, String cancelled) {
 		super();
 		this.event_id = event_id;
 		this.event_name = event_name;
@@ -153,6 +159,8 @@ public class EngEventsView {
 		this.email_1 = email_1;
 		this.email_2 = email_2;
 		this.phone_number = phone_number;
+		this.sponsoring_department = sponsoring_department;
+		this.cancelled = cancelled;
 	}
 
 	public Integer getEvent_id() {
@@ -347,4 +355,24 @@ public class EngEventsView {
 		this.phone_number = phone_number;
 	}
 
+	public String getSponsoring_department() {
+		return sponsoring_department;
+	}
+
+	public void setSponsoring_department(String sponsoring_department) {
+		this.sponsoring_department = sponsoring_department;
+	}
+
+	public String getCancelled() {
+		return cancelled;
+	}
+
+	public void setCancelled(String cancelled) {
+		this.cancelled = cancelled;
+	}
+	
+	
+
+
+	
 }

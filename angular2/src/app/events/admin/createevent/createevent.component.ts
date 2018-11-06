@@ -13,12 +13,12 @@ import {DatePipe,formatDate} from '@angular/common';
 
 
 @Component({
-    selector: 'orgcreateevent',
+    selector: 'admincreateevent',
     templateUrl: './createevent.component.html',
     styleUrls : ['./createevent.component.css']
 })
 
-export class OrgCreateEvent{
+export class AdminCreateEvent{
     @ViewChild('submitted') eventsubmitcomponent: TemplateRef<any>;
     @Input() userid:string;
     @Input() register:boolean;

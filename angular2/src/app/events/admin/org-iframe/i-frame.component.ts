@@ -10,11 +10,11 @@ import {HttpClient,HttpParams} from '@angular/common/http'
 import { Http } from '@angular/http';
 
 @Component({
-    selector : 'orgiframe',
+    selector : 'adminiframe',
     templateUrl: './i-frame.component.html'
 })
 
-export class OrgIfRameComponent{
+export class AdminIfRameComponent{
 
     @Input() userid : string;
     event : any;
@@ -246,6 +246,8 @@ export class OrgIfRameComponent{
         this.cdRef.detectChanges();
         this.levent=false;
 
+        console.log("admin cancellation"+event.created_by);
+        event.created_by=this.userid;
         this.engService.saveEvent(event)
         .subscribe(
             eventss=>{
