@@ -443,7 +443,8 @@ export class AdminUpdateEventComponent{
         'Washakie County',
         'Weston County',
         'Wind River Indian Reservation',
-        'Yellowstone National Park'
+        'Yellowstone National Park',
+        'Other'
     ]
 
     cities = [

@@ -22,7 +22,7 @@ export class OrgLoginService {
     public isLoggedIn(id:string, password:string) 
     {
         this.params = new HttpParams().set('userid', id).set('password', password);
-        return this.http.get('/engagement-webapp/events/adminlogin', {params : this.params } );
+        return this.http.get('/engagement-webapp/events/organizerlogin', {params : this.params } );
  
     }
 
@@ -30,6 +30,6 @@ export class OrgLoginService {
     {
         this.userloggedin = false;
         this.userid = null;
-        this.route.navigateByUrl('uw-engagement/adminlogin') 
+        this.route.navigateByUrl('uw-engagement/organizerlogin') 
     }
 }
