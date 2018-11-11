@@ -824,7 +824,7 @@ export class UpdateEventComponent{
 
         //let dateString = '2018-11-16 00:00:00' 
         var datePipe = new DatePipe('en-US');
-        this.eventd.event_start_date_time=datePipe.transform(this.eventd.event_start_date_time, 'yyyy-MM-dd H:mm');
+        this.eventd.event_start_date_time=datePipe.transform(this.eventd.event_start_date_time, 'yyyy-MM-dd HH:mm');
        /* let newDate = new Date(this.eventd.event_start_date_time);
         console.log("new date"+newDate);
         console.log("hours"+ newDate.toLocaleDateString());
@@ -832,6 +832,8 @@ export class UpdateEventComponent{
         console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11));
 */
         //console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5));
+        
+
         return this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5);
      }
 
@@ -848,7 +850,7 @@ export class UpdateEventComponent{
         //console.log(this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5));
 
         var datePipe = new DatePipe('en-US');
-        this.eventd.event_end_date_time=datePipe.transform(this.eventd.event_end_date_time, 'yyyy-MM-dd H:mm');
+        this.eventd.event_end_date_time=datePipe.transform(this.eventd.event_end_date_time, 'yyyy-MM-dd HH:mm');
 
         return this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5);
      }

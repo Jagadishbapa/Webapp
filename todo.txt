@@ -77,3 +77,11 @@ db cancelled not null
 
 
 county other option
+
+------- new
+
+set max for numbers
+errors in subscribe
+login
+poste upload
+excel report

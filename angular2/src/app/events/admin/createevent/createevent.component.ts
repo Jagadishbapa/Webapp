@@ -923,7 +923,7 @@ export class AdminCreateEvent{
 
         this.engservice.saveEvent(model)
         .subscribe(
-            eventss=>{ 
+            (eventss)=>{
                 console.log("submittedgdsgsdglgsg")
                 console.log(eventss);
                 this.events=eventss;
@@ -933,7 +933,9 @@ export class AdminCreateEvent{
                 this.register=false;
                 this.cdRef.detectChanges();
                 this.register=false;
-             });
+             },
+            (err)=> {console.log('error save event admin error');}
+            );
 
 
 

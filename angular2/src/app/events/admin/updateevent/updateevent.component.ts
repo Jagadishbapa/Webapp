@@ -824,7 +824,7 @@ export class AdminUpdateEventComponent{
 
         //let dateString = '2018-11-16 00:00:00' 
         var datePipe = new DatePipe('en-US');
-        this.eventd.event_start_date_time=datePipe.transform(this.eventd.event_start_date_time, 'yyyy-MM-dd H:mm');
+        this.eventd.event_start_date_time=datePipe.transform(this.eventd.event_start_date_time, 'yyyy-MM-dd HH:mm');
        /* let newDate = new Date(this.eventd.event_start_date_time);
         console.log("new date"+newDate);
         console.log("hours"+ newDate.toLocaleDateString());
@@ -848,8 +848,9 @@ export class AdminUpdateEventComponent{
         //console.log(this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5));
 
         var datePipe = new DatePipe('en-US');
-        this.eventd.event_end_date_time=datePipe.transform(this.eventd.event_end_date_time, 'yyyy-MM-dd H:mm');
-
+        this.eventd.event_end_date_time=datePipe.transform(this.eventd.event_end_date_time, 'yyyy-MM-dd HH:mm');
+        console.log('st date');
+        console.log(this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5));
         return this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5);
      }
     inItSpeakers() {
@@ -1118,7 +1119,9 @@ export class AdminUpdateEventComponent{
                 this.register=false;
                 this.cdRef.detectChanges();
                 this.register=false;
-             });
+             },
+             (err)=> {console.log(err.error.message);}
+             );
 
 
 

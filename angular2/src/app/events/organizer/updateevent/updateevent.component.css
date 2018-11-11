@@ -10,8 +10,7 @@
 
 
 
-.custom {
-}
+
 
 .custom::after{
     content:"*" ;
