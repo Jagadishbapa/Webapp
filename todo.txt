@@ -82,6 +82,7 @@ county other option
 
 set max for numbers
 errors in subscribe
+set flag for update
 login
 poste upload
 excel report

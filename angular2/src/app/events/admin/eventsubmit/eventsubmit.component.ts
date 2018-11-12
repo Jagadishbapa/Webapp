@@ -21,7 +21,6 @@ import {DatePipe,formatDate} from '@angular/common';
 export class AdminSubmitComponent{
     @Input() event:any;
     constructor() { }
-
     ngOnInit() {
     }
 

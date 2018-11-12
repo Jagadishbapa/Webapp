@@ -24,22 +24,19 @@ export class IfRameComponent implements OnInit{
     errormsg:any
     private eventscase: String = "default";;
     constructor(private engService: EngagementService, private engService1: EngEventsResolver, private route: ActivatedRoute){
-
     }
 
     setPage(event:any)
     {
-        console.log("set page");
-        //event.preventDefault();
-        console.log(event);
         this.cpage=event;
         this.p=event-1;
         this.getEventsList();
     }
     ngOnInit()
     {
-        this.getEventsList();
         this.eventscase = "default";
+        this.getEventsList();
+        
     }
 
     applyFilter(formfilter: any)
@@ -53,7 +50,6 @@ export class IfRameComponent implements OnInit{
 
     searckKeyword(event:any)
     {
-        console.log(event);
         this.keyword=event;
         this.eventscase= "keysearch";
         this.p=0;
@@ -66,7 +62,6 @@ export class IfRameComponent implements OnInit{
         {
             
         this.engService.getAudienceEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
-            console.log(eventss);
             this.events = eventss['content'];
             this.pages = eventss['totalElements'];
 
@@ -91,12 +86,6 @@ export class IfRameComponent implements OnInit{
                     this.events[i].other_city="";
                 else
                     this.events[i].other_city=this.events[i].other_city+",";   
-
-               /* if(this.events[i].phone_number === null || this.events[i].phone_number === "")
-                    this.events[i].phone_number="";
-                else
-                    this.events[i].phone_number=","+this.events[i].phone_number;    */   
-
             }
         
         });
@@ -131,9 +120,9 @@ export class IfRameComponent implements OnInit{
             {
                 this.formfilter.eventtype = '%';  
             }
-            console.log(this.formfilter)
+
             this.engService.getAudienceEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
-                console.log(eventss['content']);
+
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
                 for(var i=0; i<this.events.length;i++)
@@ -157,22 +146,14 @@ export class IfRameComponent implements OnInit{
                         this.events[i].other_city="";
                     else
                         this.events[i].other_city=this.events[i].other_city+",";   
-    
-                   /* if(this.events[i].phone_number === null || this.events[i].phone_number === "")
-                        this.events[i].phone_number="";
-                    else
-                        this.events[i].phone_number=","+this.events[i].phone_number;    */   
-    
+        
                 }
             });
         }
 
         else if(this.eventscase==="keysearch")
         {
-            console.log(this.eventscase);
-            console.log(this.keyword);
             this.engService.getAudienceEvents(this.p, this.eventscase, this.keyword).subscribe(eventss => {
-                console.log(eventss['content']);
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
                 for(var i=0; i<this.events.length;i++)
@@ -197,26 +178,8 @@ export class IfRameComponent implements OnInit{
                     else
                         this.events[i].other_city=this.events[i].other_city+",";   
     
-                   /* if(this.events[i].phone_number === null || this.events[i].phone_number === "")
-                        this.events[i].phone_number="";
-                    else
-                        this.events[i].phone_number=","+this.events[i].phone_number;    */   
-    
                 }
             });
         }
-
-
-
-            /*if(this.events[i].address_line2 === null)
-                this.events[i].address_line2="";
-            else
-                this.events[i].address_line2=this.events[i].address_line2+",";
-
-                if(this.events[i].address_line2 === null)
-                this.events[i].address_line2="";
-            else
-                this.events[i].address_line2=this.events[i].address_line2+",";*/
-
     } 
 }  

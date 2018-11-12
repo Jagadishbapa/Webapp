@@ -16,7 +16,6 @@ export class AdminNavBarComponent{
     loadregister=false;
     loadsubmit=false;
     register=false;
-    @Input() userid : string;
 
     constructor(private adminlogservice: AdminLoginService, private route: Router, private cdRef:ChangeDetectorRef)
     {
@@ -28,23 +27,19 @@ export class AdminNavBarComponent{
     }
 
     opencreateform(){
-        console.log("gskdhbgksdg" + this.register);
-        this.loadregister=false;
-        this.cdRef.detectChanges();
         this.register=true;
         this.loadevents=false;
         this.loadsubmit=false;
         this.loadregister = true;
-        //this.route.navigateByUrl('uw-engagement/organizer/createevent');
+        this.cdRef.detectChanges();
     }
 
     home(){
-        this.loadevents=false;
-        this.cdRef.detectChanges();
         this.loadevents = true;
         this.loadregister=false;
         this.loadsubmit=false;
-        //this.route.navigateByUrl('uw-engagement/organizer/createevent');
+        this.register=false;
+        this.cdRef.detectChanges();
     }
 
 }

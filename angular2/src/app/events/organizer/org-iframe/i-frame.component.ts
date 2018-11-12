@@ -2,12 +2,6 @@ import { Component, OnInit, Input, ChangeDetectorRef} from '@angular/core'
 import {EngagementService} from '../../services/engagement.service'
 import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 import {ActivatedRoute} from '@angular/router'
-import {EngEvent} from '../../services/engevent.model'
-import { map } from 'rxjs/operators';
-import {Observable, of } from 'rxjs'
-import { Response } from "@angular/http"
-import {HttpClient,HttpParams} from '@angular/common/http'
-import { Http } from '@angular/http';
 
 @Component({
     selector : 'orgiframe',
@@ -15,8 +9,6 @@ import { Http } from '@angular/http';
 })
 
 export class OrgIfRameComponent{
-
-    @Input() userid : string;
     event : any;
     private levent : boolean= false;
     private p: number = 0;
@@ -25,26 +17,24 @@ export class OrgIfRameComponent{
     private pages: number;
     private formfilter: any;
     private keyword: any;
+    private created_by: string;
     eventlist: any
     errormsg:any
-    private eventscase: String = "default";;
+    private eventscase: String = "default";
     constructor(private engService: EngagementService, private engService1: EngEventsResolver, private route: ActivatedRoute, private cdRef:ChangeDetectorRef){
-
     }
 
     setPage(event:any)
     {
-        //console.log("set page");
-        //event.preventDefault();
-        //console.log(event);
         this.cpage=event;
         this.p=event-1;
         this.getEventsList();
     }
     ngOnInit()
     {
-        this.getEventsList();
         this.eventscase = "default";
+        this.created_by=sessionStorage.getItem('org_key');
+        this.getEventsList();
     }
 
     applyFilter(formfilter: any)
@@ -58,7 +48,6 @@ export class OrgIfRameComponent{
 
     searckKeyword(event:any)
     {
-        console.log(event);
         this.keyword=event;
         this.eventscase= "keysearch";
         this.p=0;
@@ -71,45 +60,12 @@ export class OrgIfRameComponent{
         {
             
         this.engService.getOrgEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
-            //console.log(eventss);
             this.events = eventss['content'];
-            this.pages = eventss['totalElements'];
-
-            /*
-            for(var i=0; i<this.events.length;i++)
-            {
-                if(this.events[i].building_room === null)
-                    this.events[i].building_room="";
-                else
-                    this.events[i].building_room=this.events[i].building_room+",";
-
-                if(this.events[i].address_line2 === null)
-                    this.events[i].address_line2="";
-                else
-                    this.events[i].address_line2=this.events[i].address_line2+","; 
-                    
-                if(this.events[i].city === null)
-                    this.events[i].city="";
-                else
-                    this.events[i].city=this.events[i].city+",";  
-                    
-                if(this.events[i].other_city === null)
-                    this.events[i].other_city="";
-                else
-                    this.events[i].other_city=this.events[i].other_city+",";   
-
-               /* if(this.events[i].phone_number === null || this.events[i].phone_number === "")
-                    this.events[i].phone_number="";
-                else
-                    this.events[i].phone_number=","+this.events[i].phone_number;    
-
-            }*/
-        
+            this.pages = eventss['totalElements'];        
         });
         }
         else if(this.eventscase==="filter")
         {
-            console.log("datefrom"+this.formfilter.datefrom);
             if(this.formfilter.datefrom==='')
             {
                 this.formfilter.datefrom = undefined;  
@@ -138,150 +94,66 @@ export class OrgIfRameComponent{
             {
                 this.formfilter.eventtype = '%';  
             }
-            console.log(this.formfilter)
             this.engService.getOrgEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
-                console.log(eventss['content']);
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
-                /*
-                for(var i=0; i<this.events.length;i++)
-                {
-                    if(this.events[i].building_room === null)
-                        this.events[i].building_room="";
-                    else
-                        this.events[i].building_room=this.events[i].building_room+",";
-    
-                    if(this.events[i].address_line2 === null)
-                        this.events[i].address_line2="";
-                    else
-                        this.events[i].address_line2=this.events[i].address_line2+","; 
-                        
-                    if(this.events[i].city === null)
-                        this.events[i].city="";
-                    else
-                        this.events[i].city=this.events[i].city+",";  
-                        
-                    if(this.events[i].other_city === null)
-                        this.events[i].other_city="";
-                    else
-                        this.events[i].other_city=this.events[i].other_city+",";   
-    
-                   /* if(this.events[i].phone_number === null || this.events[i].phone_number === "")
-                        this.events[i].phone_number="";
-                    else
-                        this.events[i].phone_number=","+this.events[i].phone_number;      
-    
-                }*/
             });
         }
 
         else if(this.eventscase==="keysearch")
         {
-            //console.log(this.eventscase);
-            //console.log(this.keyword);
             this.engService.getOrgEvents(this.p, this.eventscase, this.keyword).subscribe(eventss => {
-                //console.log(eventss['content']);
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
-                /*
-                for(var i=0; i<this.events.length;i++)
-                {
-                    if(this.events[i].building_room === null)
-                        this.events[i].building_room="";
-                    else
-                        this.events[i].building_room=this.events[i].building_room+",";
-    
-                    if(this.events[i].address_line2 === null)
-                        this.events[i].address_line2="";
-                    else
-                        this.events[i].address_line2=this.events[i].address_line2+","; 
-                        
-                    if(this.events[i].city === null)
-                        this.events[i].city="";
-                    else
-                        this.events[i].city=this.events[i].city+",";  
-                        
-                    if(this.events[i].other_city === null)
-                        this.events[i].other_city="";
-                    else
-                        this.events[i].other_city=this.events[i].other_city+",";   
-    
-                   /* if(this.events[i].phone_number === null || this.events[i].phone_number === "")
-                        this.events[i].phone_number="";
-                    else
-                        this.events[i].phone_number=","+this.events[i].phone_number;       
-    
-                }*/
             });
         }
-
-
-
-            /*if(this.events[i].address_line2 === null)
-                this.events[i].address_line2="";
-            else
-                this.events[i].address_line2=this.events[i].address_line2+",";
-
-                if(this.events[i].address_line2 === null)
-                this.events[i].address_line2="";
-            else
-                this.events[i].address_line2=this.events[i].address_line2+",";*/
-
     } 
 
     loadevent(event:any)
     {
-        console.log(event);
         this.event=event;
-        this.levent=false;
-        this.cdRef.detectChanges();
         this.levent=true;
+        this.cdRef.detectChanges();
+  
     }
 
     cancelevent(event: any){
-        //console.log("call cancelled");
-
         event.cancelled='YES';
-        this.levent=false;
-        this.cdRef.detectChanges();
-        this.levent=false;
-
+        event.created_by=sessionStorage.getItem('org_key');
         this.engService.saveEvent(event)
         .subscribe(
-            eventss=>{
-             });
-
-        for(var i=0;i<this.events.length;i++)
-        {
-            if(this.events[i].event_id === event.event_id)
+            (eventss)=>{
+                for(var i=0;i<this.events.length;i++)
                 {
-                    this.events[i].cancelled='YES';
-                    break;
+                    if(this.events[i].event_id === event.event_id)
+                        {
+                            this.events[i].cancelled='YES';
+                            break;
+                        }
                 }
-        }
+                this.levent=false;
+                this.cdRef.detectChanges();
+             },
+            (err)=>{console.log('cancel event org error')});
     }
 
-
     uncancelevent(event: any){
-        //console.log("call cancelled");
-
         event.cancelled='NO';
-        this.levent=false;
-        this.cdRef.detectChanges();
-        this.levent=false;
-
+        event.created_by=sessionStorage.getItem('org_key');
         this.engService.saveEvent(event)
         .subscribe(
-            eventss=>{
-             });
-
-        for(var i=0;i<this.events.length;i++)
-        {
-            if(this.events[i].event_id === event.event_id)
+            (eventss)=>{
+                for(var i=0;i<this.events.length;i++)
                 {
-                    this.events[i].cancelled='NO';
-                    break;
+                    if(this.events[i].event_id === event.event_id)
+                        {
+                            this.events[i].cancelled='NO';
+                            break;
+                        }
                 }
-        }
+                this.levent=false;
+                this.cdRef.detectChanges();
+             },
+            (err)=>{console.log('uncancel event org error')});
     }
 }  

@@ -1,12 +1,7 @@
 import { Component, OnInit, Input, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import {  FormArray,  FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import {  FormArray,  FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import {EngEvent} from '../../services/engevent.model'
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'
-import { NG_MODEL_WITH_FORM_CONTROL_WARNING } from '@angular/forms/src/directives';
 import {EngagementService} from '../../services/engagement.service';
 import {DatePipe,formatDate} from '@angular/common';
 
@@ -20,8 +15,7 @@ import {DatePipe,formatDate} from '@angular/common';
 
 export class OrgCreateEvent{
     @ViewChild('submitted') eventsubmitcomponent: TemplateRef<any>;
-    @Input() userid:string;
-    @Input() register:boolean;
+    register:boolean;
     events:any;
     public registerform: FormGroup;
     orgoptions = [
@@ -642,57 +636,10 @@ export class OrgCreateEvent{
     sps:any[];
    
     constructor(private _fb: FormBuilder, private model: EngEvent, private engservice: EngagementService, private cdRef:ChangeDetectorRef) {
-
-
-        //const sps: Speakers[] = [{first_name : 'jaga', last_name : 'bapa', middle_name: 'mid', email:"email"}];
-      /* this.model.organization = 'American Heritage Center and Art Museum';
-       this.model.department = 'A&S Computer Fee';
-       this.model.event_type = 'Athletic Events/Training';
-       this.model.priv = 'Yes';
-       this.model.fee = 0;
-       let myDate = new Date(); 
-
-       var datePipe = new DatePipe('en-US');
-       this.model.event_start_date_time= datePipe.transform(myDate, 'yyyy-MM-dd h:mm a');
-
-       let myDate1 = new Date(); 
-       this.model.event_start_date_time= datePipe.transform(myDate1, 'yyyy-MM-dd h:mm a');
-
-       this.model.event_file=null;
-
-       this.model.speakers=[{first_name : '', last_name : '', middle_name: '', email:''}];
-       this.model.building_room='';
-       this.model.address_line1=''
-        */
-       /* this.sps = [this._fb.group({
-            // list all your form controls here, which belongs to your form array
-            first_name : 'gfsfg',
-            last_name : '',
-            middle_name : '',
-            email : ''
-        }), this._fb.group({
-            // list all your form controls here, which belongs to your form array
-            first_name : 'gfsgfgffg',
-            last_name : '',
-            middle_name : '',
-            email : ''
-        })]
-
-        var sps1 = new Array(this._fb.group({
-            // list all your form controls here, which belongs to your form array
-            first_name : 'gfsgfgffg',
-            last_name : '',
-            middle_name : '',
-            email : ''
-        }));
-        sps1.splice(0,1);
-        sps1.push(this._fb.group(this.model.speakers[0]));
-        sps1.push(this._fb.group(this.model.speakers[0]));
-        this.sps=sps1;*/
      }
 
     ngOnInit() {
-        this.register=true;
+            this.register=true;
             this.registerform = this._fb.group({
             speakers: this._fb.array([this.inItSpeakers()]),
             organization : ['', Validators.required],
@@ -714,8 +661,6 @@ export class OrgCreateEvent{
             country : ['', [Validators.required, Validators.maxLength(3)]],
             other_city : ['', [Validators.maxLength(100)]],
             zip : ['', [Validators.required]],
-
-            //to-do
             first_name : ['', Validators.maxLength(100)],
             last_name : ['', Validators.maxLength(100)],
             sponsoring_department : ['', [Validators.required, Validators.maxLength(100)]],
@@ -738,109 +683,58 @@ export class OrgCreateEvent{
          { validator:  this.allvalidator
               }
             );
-
-        //this.registerform = this._fb.group(this.model);
-
       }
     
-      //(formGroup: FormGroup) => {
-     //   return this.cityvalidator(formGroup);
-     // }
     inItSpeakers() {
     return this._fb.group({
-        // list all your form controls here, which belongs to your form array
         first_name : ['', Validators.maxLength(100)],
         last_name : ['', Validators.maxLength(100)],
         middle_name : ['', Validators.maxLength(100)],
         email : ['', [Validators.email, Validators.maxLength(100)]],
     }
         );
-    //return this._fb.group(this.model.speakers);
     }
 
     addNewSpeaker() {
-        // control refers to your formarray
         const control = <FormArray>this.registerform.controls['speakers'];
-        // add new formgroup
         control.push(this.inItSpeakers());
     }
     
     deleteSpeaker(index: number) {
-        // control refers to your formarray
         const control = <FormArray>this.registerform.controls['speakers'];
-        // remove the chosen row
         control.removeAt(index);
     }
 
     inItcosponsors() {
         return this._fb.group({
-            // list all your form controls here, which belongs to your form array
             co_sponsor_name : ['', Validators.maxLength(100)],
             co_sponsor_email : ['', [Validators.email,Validators.maxLength(100)]],
             co_sponsor_phone_number : new FormControl(),
             co_sponsor_website : ['', Validators.maxLength(100)]
         }
             );
-        //return this._fb.group(this.model.speakers);
         }
     
         addNewcosponsor() {
-            // control refers to your formarray
             const control = <FormArray>this.registerform.controls['co_sponsors'];
-            // add new formgroup
             control.push(this.inItcosponsors());
         }
         
         deletecosponsor(index: number) {
-            // control refers to your formarray
             const control = <FormArray>this.registerform.controls['co_sponsors'];
-            // remove the chosen row
             control.removeAt(index);
         }
-
-       /* cityvalidator(group: FormGroup)
-        {
-
-            //group.controls['city']
-            
-            //console.log(c,oc,evstdate,evendate)
- 
-            //let cv = false;
-            //console.log("gsbdgkjsbgljgbbxflbgnlsgbn")
-            if((group.controls['city'].value==="" || group.controls['city'].value==="Other") && (group.controls['other_city'].value === ""))
-                
-            {
-                console.log("true");
-                return true;
-            }
-            else 
-            {
-                console.log("null");
-                return null;
-            }
-           /* let dv = false;
-            let esd = new Date(evstdate);
-            let eed = new Date(evendate);
-            if(esd<eed)
-                dv = true;
-            return (cv && dv);
-        }*/
 
         allvalidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
             const c = control.get('city');
             const oc = control.get('other_city');
             const stdate = new Date(control.get('event_start_date_time').value);
             const endate = new Date(control.get('event_end_date_time').value);
-            
-            //console.log(stdate);
-            //console.log(endate);
-            //console.log(stdate<endate);
 
             let cv = false;
             let dv = false;
             if(((c.value==="" || c.value==="Other") && (oc.value === ""))) 
             {
-               // console.log("cv");
                 cv=true;
                 
             }
@@ -852,39 +746,22 @@ export class OrgCreateEvent{
 
             if(!cv && !dv)
             {
-                console.log("true");
                 return null;
                 
             }
             else
                 return {'cityvalid':true};
-          
-            //return name && alterEgo && name.value === alterEgo.value ? { 'identityRevealed': true } : null;
           };
-
-
-
-
-    /*spfunc()
-    {
-        return this.sps;
-    }*/
 
       save(model:EngEvent, formvalid:any)
       {
         if(model.other_city==="")
         {
-            //console.log("yes");
         }
-        console.log(model);
-  
         var datePipe = new DatePipe('en-US');
         model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
         model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
-        model.created_by = this.userid;
-
-          //delete model['speakers']
-
+        model.created_by = sessionStorage.getItem('org_key');
           var j=0;
           for(var i =0;i<model['speakers'].length ;i++)
           {
@@ -924,154 +801,9 @@ export class OrgCreateEvent{
         this.engservice.saveEvent(model)
         .subscribe(
             eventss=>{ 
-                console.log("submittedgdsgsdglgsg")
-                console.log(eventss);
                 this.events=eventss;
-                console.log(eventss['event_name'])
-                console.log("printing this")
-                console.log(this.events);
                 this.register=false;
                 this.cdRef.detectChanges();
-                this.register=false;
              });
-
-
-
-
-
     }
-  
-      /*
-      This creates a new formgroup. You can think of it as adding an empty object
-      into an array. So we are pushing an object to the formarray 'itemrows' that
-      has the property 'itemname'. 
-      */
-/*
-
-
-     initItemRows() {
-        return this._fb.group({
-            // list all your form controls here, which belongs to your form array
-            itemname: ['']
-
-        });
-    }
-
-
-
-    addNewSpeaker() {
-        // control refers to your formarray
-        const control = <FormArray>this.invoiceForm.controls['speakers'];
-        // add new formgroup
-        control.push(this.inItSpeakers());
-    }
-    
-    deleteSpeaker(index: number) {
-        // control refers to your formarray
-        const control = <FormArray>this.invoiceForm.controls['speakers'];
-        // remove the chosen row
-        control.removeAt(index);
-    }
-    addNewRow() {
-        // control refers to your formarray
-        const control = <FormArray>this.invoiceForm.controls['itemRows'];
-        // add new formgroup
-        control.push(this.initItemRows());
-    }
-    
-    deleteRow(index: number) {
-        // control refers to your formarray
-        const control = <FormArray>this.invoiceForm.controls['itemRows'];
-        // remove the chosen row
-        control.removeAt(index);
-    }
-
-
-
-
-   /* submitted = false;
-    formin : NgForm;
-    
-    constructor()
-    {
-    }
-    onSubmit(f:any) {
-        console.log(f.value);
-      }
-    
-
-    /*
-    eventForm :  FormGroup;
-
-
-    ngOnInit(){
-        this.eventForm = new FormGroup({
-            organization : new FormControl(),
-            department : new FormControl(),
-            event_name : new FormControl(),
-            event_desc : new FormControl(),
-            event_type : new FormControl(),
-            priv : new FormControl(),
-            fee : new FormControl(),
-            event_start_date_time : new FormControl(),
-            eve_st_time : new FormControl(),
-            event_end_date_time : new FormControl(),
-            eve_en_time : new FormControl(),
-            event_file : new FormControl(),
-            event_cost : new FormControl(),
-            speakers : new FormGroup({
-                first_name : new FormControl(),
-                last_name : new FormControl(),
-                middle_name : new FormControl(),
-                email : new FormControl()
-            }),
-
-            building_room : new FormControl(),
-            address_line1 : new FormControl(),
-            address_line2 : new FormControl(),
-            county : new FormControl(),
-            city : new FormControl(),
-            state : new FormControl(),
-            country : new FormControl(),
-            other_city : new FormControl(),
-            zip : new FormControl(),
-
-            first_name : new FormControl(),
-            last_name : new FormControl(),
-            sponsoring_department : new FormControl(),
-            email_1 : new FormControl(),
-            email_2 : new FormControl(),
-            phone_number : new FormControl(),
-            website : new FormControl(),
-
-
-            anticipated_cost : new FormControl(),
-            anticipated_num_attendees: new FormControl(),
-            funding_source1 : new FormControl(),
-            funding_source2 : new FormControl(),
-            funding_other : new FormControl(),
-            cost_funding1 : new FormControl(),
-            cost_funding2 : new FormControl(),
-            cost_funding_other : new FormControl(),
-            attendees_count : new FormControl(),
-            created_by : new FormControl(),
-            cancelled : new FormControl(),
-            co_sponsors : new FormGroup({
-                co_sponsor_name : new FormControl(),
-                co_sponsor_email : new FormControl(),
-                co_sponsor_phone_number : new FormControl(),
-                co_sponsor_website : new FormControl()
-            })
-        })
-    }
-      addC(){
-          var html = '';
-          html+="<tr>";
-          html += "<td>" + "<input style="+ '"border:none"' + "type="+ '"text"'+  "class="+'"form-control"'+ "id="+'"fEvent"' + "placeholder="+ '"First name"'+ ">" + "</td>";
-          html += "<td>" + "<input style="+ '"border:none"' + "type="+ '"text"'+  "class="+'"form-control"'+ "id="+'"fEvent"' + "placeholder="+ '"Last name"'+ ">" + "</td>";
-          html += "<td>" + "<input style="+ '"border:none"' + "type="+ '"text"'+  "class="+'"form-control"'+ "id="+'"fEvent"' + "placeholder="+ '"Middle name"'+ ">" + "</td>";
-          html += "<td>" + "<input style="+ '"border:none"' + "type="+ '"text"'+  "class="+'"form-control"'+ "id="+'"fEvent"' + "placeholder="+ '"Email"'+ ">" + "</td>";
-          html +="<td> <input type="+'"button"'+ "id ="+'"deleteDep"'+ "value="+'"Delete"'+ "onclick ="+' "deleteRow(this)"'+  "</td>";
-          html+="</tr>";
-      }*/
 }

@@ -10,7 +10,6 @@ res: Response
 constructor(private engService: EngagementService ){}
 
 resolve(){
-    //return this.engService.getEvents()
     }
 
 }

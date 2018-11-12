@@ -640,24 +640,16 @@
 
                                 <td style="font-size:15px; border:1px solid rgb(0, 0, 0);">
                                     
-                                    <button type="button" *ngIf="event.created_by===userid" (click)=loadevent(event) >{{event.cancelled==='NO' && event.flag==='N'? 'update event' : 'view'}}</button><br>
-                                    <button  type="button" *ngIf="event.created_by===userid && event.cancelled==='NO'" [disabled] = "event.cancelled==='YES' || event.flag==='Y'"   (click) = cancelevent(event) >cancel event</button>
-                                    <button  type="button" *ngIf="event.created_by===userid && event.cancelled==='YES'" [disabled] = "event.cancelled==='NO' || event.flag==='Y'"   (click) = uncancelevent(event) >uncancel event</button>
+                                    <button type="button" *ngIf="event.created_by===this.created_by" (click)=loadevent(event) >{{event.cancelled==='NO' && event.flag==='N'? 'update event' : 'view'}}</button><br>
+                                    <button  type="button" *ngIf="event.created_by===this.created_by && event.cancelled==='NO'" [disabled] = "event.cancelled==='YES' || event.flag==='Y'"   (click) = cancelevent(event) >cancel event</button>
+                                    <button  type="button" *ngIf="event.created_by===this.created_by && event.cancelled==='YES'" [disabled] = "event.cancelled==='NO' || event.flag==='Y'"   (click) = uncancelevent(event) >uncancel event</button>
 
                                 </td>
                     </tr>
                 </tbody>
             </table>
             <pagination-controls class="paginate" *ngIf="pages > 1" (pageChange)="setPage($event)"></pagination-controls>
-            <!--
-            <ul class="nav nav-pills">
-                <li class ="nav-item" *ngFor="let p of pages; let i=index">
-                    <a class ="nav-link" href="" (click)="setPage(i,$event)">{{i}}</a>
-                </li>
-            </ul>
-        -->
-            <!--<pagination-controls class = "myPagination" (pageChange)="p = $event" maxSize ="4"></pagination-controls>-->
         </div>
 
-<updateevent *ngIf="levent" [eventd] =  "event" [userid]=userid></updateevent>
+<updateevent *ngIf="levent" [eventd] =  "event"></updateevent>
         

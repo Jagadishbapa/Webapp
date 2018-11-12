@@ -1,9 +1,6 @@
 import { Component, Input, ChangeDetectorRef} from '@angular/core'
 import {OrgLoginService} from '../../services/orgloginservice'
 import {Router} from '@angular/router'
-import {OrgIfRameComponent} from '../org-iframe/i-frame.component'
-import {EventSubmitComponent} from '../eventsubmit/eventsubmit.component'
-import {OrgCreateEvent} from '../createevent/createevent.component'
 
 @Component({
     selector: 'org-nav-bar',
@@ -16,7 +13,6 @@ export class OrgNavBarComponent{
     loadregister=false;
     loadsubmit=false;
     register=false;
-    @Input() userid : string;
 
     constructor(private orglogservice: OrgLoginService, private route: Router, private cdRef:ChangeDetectorRef)
     {
@@ -28,23 +24,19 @@ export class OrgNavBarComponent{
     }
 
     opencreateform(){
-        console.log("gskdhbgksdg" + this.register);
-        this.loadregister=false;
-        this.cdRef.detectChanges();
         this.register=true;
         this.loadevents=false;
         this.loadsubmit=false;
         this.loadregister = true;
-        //this.route.navigateByUrl('uw-engagement/organizer/createevent');
+        this.cdRef.detectChanges();
     }
 
     home(){
-        this.loadevents=false;
-        this.cdRef.detectChanges();
         this.loadevents = true;
         this.loadregister=false;
         this.loadsubmit=false;
-        //this.route.navigateByUrl('uw-engagement/organizer/createevent');
+        this.register=false;
+        this.cdRef.detectChanges();
     }
 
 }

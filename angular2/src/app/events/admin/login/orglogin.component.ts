@@ -5,15 +5,12 @@ import { Router} from '@angular/router';
 @Component({
     selector: 'adminlogin',
     templateUrl: './orglogin.component.html',
-    //styleUrls: ['./navbar.component.css']
 })
 
 export class AdminloginComponent{
-    loginval:any;
+    userid:string;
     error:boolean = false;
-    constructor(private route: Router, private orglogin: AdminLoginService)
-    {
-
+    constructor(private route: Router, private orglogin: AdminLoginService){
     }
 
     loginorg(userid,password)
@@ -27,11 +24,9 @@ export class AdminloginComponent{
     {
         if(res==true)
         { 
-            console.log("admin id"+ id);
-            this.error=false;
-            this.orglogin.userid = id;
-            this.orglogin.userloggedin=true;   
-            this.route.navigate(['uw-engagement/admin',  { loginid: this.orglogin.userid}]);
+            this.userid=id;
+            window.sessionStorage.setItem('admin_key', this.userid);
+            this.route.navigate(['uw-engagement/admin']);
         }
         else
         {

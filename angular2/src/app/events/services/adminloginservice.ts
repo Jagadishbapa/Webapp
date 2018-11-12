@@ -30,8 +30,7 @@ export class AdminLoginService {
 
     public logout()
     {
-        this.userloggedin = false;
-        this.userid = null;
+        window.sessionStorage.removeItem('admin_key');
         this.route.navigateByUrl('uw-engagement/adminlogin') 
     }
 }

@@ -67,24 +67,3 @@ export class Speakers{
     middle_name : string;
     email : string;
 }
-
-/*
-export class EngEvent {
-    
-    event_id: number;
-    organization: string;
-    department: string;
-    event_desc: string;
-    event_type: string;
-    event_name: string;
-
-    constructor (event_id: number, event_name:string, organization:string, department:string, event_desc:string, event_type:string)
-    {
-        this.event_id=event_id;
-        this.event_name = event_name;
-        this.organization=organization;
-        this.department=department;
-        this.event_desc=event_desc;
-        this.event_type=event_type;
-    }
-}*/

@@ -5,12 +5,11 @@ import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 
 @Component({
     selector: 'organizerlogin',
-    templateUrl: './orglogin.component.html',
-    //styleUrls: ['./navbar.component.css']
+    templateUrl: './orglogin.component.html'
 })
 
 export class OrgloginComponent{
-    loginval:any;
+    userid:any;
     error:boolean = false;
     constructor(private route: Router, private orglogin: OrgLoginService)
     {
@@ -27,11 +26,10 @@ export class OrgloginComponent{
     navdec(res:any, id: string)
     {
         if(res==true)
-        { 
-            this.error=false;
-            this.orglogin.userid = id;
-            this.orglogin.userloggedin=true;   
-            this.route.navigate(['uw-engagement/organizer',  { loginid: this.orglogin.userid}]);
+        {
+            this.userid=id;
+            window.sessionStorage.setItem('org_key', this.userid);
+            this.route.navigate(['uw-engagement/organizer']);
         }
         else
         {
