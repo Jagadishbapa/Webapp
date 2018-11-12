@@ -1,9 +1,6 @@
-import { Component, Input, ChangeDetectorRef} from '@angular/core'
+import { Component, ChangeDetectorRef} from '@angular/core'
 import {AdminLoginService} from '../../services/adminloginservice'
 import {Router} from '@angular/router'
-import {AdminIfRameComponent} from '../org-iframe/i-frame.component'
-import {AdminSubmitComponent} from '../eventsubmit/eventsubmit.component'
-import {AdminCreateEvent} from '../createevent/createevent.component'
 
 @Component({
     selector: 'admin-nav-bar',
@@ -35,11 +32,14 @@ export class AdminNavBarComponent{
     }
 
     home(){
-        this.loadevents = true;
+        this.loadevents = false;
         this.loadregister=false;
         this.loadsubmit=false;
         this.register=false;
         this.cdRef.detectChanges();
+        this.loadevents = true;
+        this.cdRef.detectChanges();
+
     }
 
 }

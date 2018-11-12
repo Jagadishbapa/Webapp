@@ -1,15 +1,9 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import {  FormArray,  FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Component, Input,  ChangeDetectorRef } from '@angular/core';
+import {  FormArray,  FormBuilder, Validators,  ValidationErrors } from '@angular/forms';
 import {EngEvent} from '../../services/engevent.model'
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'
-import { NG_MODEL_WITH_FORM_CONTROL_WARNING } from '@angular/forms/src/directives';
 import {EngagementService} from '../../services/engagement.service';
-import {DatePipe,formatDate} from '@angular/common';
-
+import {DatePipe} from '@angular/common';
 
 
 @Component({
@@ -19,7 +13,6 @@ import {DatePipe,formatDate} from '@angular/common';
 })
 
 export class UpdateEventComponent{
-    //@ViewChild('submitted') eventsubmitcomponent: TemplateRef<any>;
     @Input() eventd:any;
     register : boolean;
     events:any;
@@ -815,8 +808,10 @@ export class UpdateEventComponent{
 
             if(!cv && !dv)
             {
-                return null;
-                
+                if(control.get('fee').value>999999999 || control.get('phone_number').value>99999999999 || control.get('zip').value>999999999 || control.get('anticipated_num_attendees').value>999999999 || control.get('event_cost').value>999999999 || control.get('attendees_count').value>999999999 || control.get('cost_funding1').value>999999999 || control.get('cost_funding2').value>999999999 || control.get('cost_funding_other').value>999999999)
+                    return {'cityvalid':true};
+                else
+                    return null;  
             }
             else
                 return {'cityvalid':true};
@@ -876,6 +871,7 @@ export class UpdateEventComponent{
                 this.events=eventss;
                 this.register=false;
                 this.cdRef.detectChanges();
-             });
+             },
+             (err)=>{console.log('org update event error')});
     }
 }

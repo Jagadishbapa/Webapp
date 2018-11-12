@@ -1,7 +1,6 @@
 import { Component} from '@angular/core'
 import {OrgLoginService} from '../../services/orgloginservice'
 import { Router} from '@angular/router';
-import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 
 @Component({
     selector: 'organizerlogin',

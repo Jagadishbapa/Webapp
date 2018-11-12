@@ -3,9 +3,6 @@ import {HttpClient, HttpParams} from '@angular/common/http'
 import {
     Router
 } from '@angular/router';
-import {Observable, of } from 'rxjs'
-import {EngEvent} from './engevent.model'
-import {RequestOptions} from '@angular/http'
 import 'rxjs/add/operator/map'
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map'

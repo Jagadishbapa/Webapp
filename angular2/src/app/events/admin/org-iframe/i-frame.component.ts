@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef} from '@angular/core'
+import { Component, ChangeDetectorRef} from '@angular/core'
 import {EngagementService} from '../../services/engagement.service'
 import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 import {ActivatedRoute} from '@angular/router'
@@ -61,7 +61,8 @@ export class AdminIfRameComponent{
         this.engService.getOrgEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
             this.events = eventss['content'];
             this.pages = eventss['totalElements'];        
-        });
+        },
+        (err)=>{console.log('admin iframe default error')});
         }
         else if(this.eventscase==="filter")
         {
@@ -96,7 +97,7 @@ export class AdminIfRameComponent{
             this.engService.getOrgEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
-            });
+            }, (err)=>{console.log('admin iframe filter error')});
         }
 
         else if(this.eventscase==="keysearch")
@@ -104,7 +105,7 @@ export class AdminIfRameComponent{
             this.engService.getOrgEvents(this.p, this.eventscase, this.keyword).subscribe(eventss => {
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
-            });
+            }, (err)=>{console.log('admin iframe keysearch error')});
         }
     } 
 

@@ -2,11 +2,6 @@ import { Component, OnInit} from '@angular/core'
 import {EngagementService} from '../../services/engagement.service'
 import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 import {ActivatedRoute} from '@angular/router'
-import { map } from 'rxjs/operators';
-import {Observable, of } from 'rxjs'
-import { Response } from "@angular/http"
-import {HttpClient,HttpParams} from '@angular/common/http'
-import { Http } from '@angular/http';
 
 @Component({
     selector: 'aud-iframe',
@@ -61,7 +56,7 @@ export class IfRameComponent implements OnInit{
         if(this.eventscase==="default")
         {
             
-        this.engService.getAudienceEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
+        this.engService.getAudienceEvents(this.p, this.eventscase, this.formfilter).subscribe((eventss) => {
             this.events = eventss['content'];
             this.pages = eventss['totalElements'];
 
@@ -88,7 +83,8 @@ export class IfRameComponent implements OnInit{
                     this.events[i].other_city=this.events[i].other_city+",";   
             }
         
-        });
+        },
+        (err)=>{console.log('audience iframe default error')});
         }
         else if(this.eventscase==="filter")
         {
@@ -148,7 +144,8 @@ export class IfRameComponent implements OnInit{
                         this.events[i].other_city=this.events[i].other_city+",";   
         
                 }
-            });
+            },
+            (err)=>{console.log('audience iframe filter error')});
         }
 
         else if(this.eventscase==="keysearch")
@@ -179,7 +176,8 @@ export class IfRameComponent implements OnInit{
                         this.events[i].other_city=this.events[i].other_city+",";   
     
                 }
-            });
+            },
+            (err)=>{console.log('audience iframe keysearch error')});
         }
     } 
 }  

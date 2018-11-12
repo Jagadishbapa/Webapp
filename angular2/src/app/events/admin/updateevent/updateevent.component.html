@@ -362,7 +362,16 @@
                             <button type="button" (click)="addNewcosponsor()" class="btn btn-primary">Add Co-sponsor</button>
                           </div>
                         </div>
-                    </div>      
+                    </div>
+                
+                    <div class="form-group">
+                            <div class = "custom">Hide the event? </div> 
+                            <select id="flag" class="form-control" formControlName = "flag">
+                                <option value = "Y">Yes</option>
+                                <option value = "N">No</option>
+                            </select>
+                    </div>
+                    
                 <button type="submit" [disabled]="!registerform.valid">Submit</button>
             </form>
         </font>

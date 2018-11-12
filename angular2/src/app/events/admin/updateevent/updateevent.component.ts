@@ -804,7 +804,11 @@ export class AdminUpdateEventComponent{
 
             if(!cv && !dv)
             {
-                return null;
+                //const fee = control.get('fee');
+                if(control.get('fee').value>999999999 || control.get('phone_number').value>99999999999 || control.get('zip').value>999999999 || control.get('anticipated_num_attendees').value>999999999 || control.get('event_cost').value>999999999 || control.get('attendees_count').value>999999999 || control.get('cost_funding1').value>999999999 || control.get('cost_funding2').value>999999999 || control.get('cost_funding_other').value>999999999)
+                    return {'cityvalid':true};
+                else
+                    return null;
                 
             }
             else
