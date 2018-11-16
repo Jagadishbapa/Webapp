@@ -1,21 +1,17 @@
 package org.uw.engagement.events.model;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+import java.sql.Blob;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Set;
+
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
@@ -23,13 +19,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import oracle.jdbc.OracleBfile;
-import oracle.sql.BLOB;
-
-import java.util.*;
-import java.sql.*;
-import java.sql.Date;
 
 @Entity
 @Table(name="UW_ENGAGEMENT")

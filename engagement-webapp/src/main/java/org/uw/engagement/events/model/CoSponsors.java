@@ -1,12 +1,10 @@
 package org.uw.engagement.events.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class CoSponsors implements Serializable{
+public class CoSponsors{
 	
 	//@Column(name="event_id")
 	//private Integer event_id;

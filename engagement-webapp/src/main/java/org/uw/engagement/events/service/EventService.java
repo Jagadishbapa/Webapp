@@ -1,23 +1,21 @@
 //service - BO
 package org.uw.engagement.events.service;
 
-import org.uw.engagement.events.dao.*;
-//import org.uw.engagement.events.model.UwEngModel;
-import org.uw.engagement.events.model.EngEventsView;
-import org.uw.engagement.events.model.EventsDbModel;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.uw.engagement.events.dao.EngEventsViewRepository;
+import org.uw.engagement.events.dao.OrgEventsDao;
+import org.uw.engagement.events.dao.UWEngAdminsDao;
+import org.uw.engagement.events.dao.UwUsersDao;
+//import org.uw.engagement.events.model.UwEngModel;
+import org.uw.engagement.events.model.EngEventsView;
+import org.uw.engagement.events.model.EventsDbModel;
 
 @Service
 public class EventService {

@@ -6,7 +6,7 @@
 	<groupId>org.uw.engagement</groupId>
 	<artifactId>engagement-webapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>eventsapp</name>
 	<description>web application for uwyo engagement events</description>
@@ -44,27 +44,80 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-				
+						
 		<dependency>
     		<groupId>com.oracle</groupId>
     		<artifactId>ojdbc8</artifactId>
-    		<version>12.2.0.1</version>
+    		<version>12.2.0.2</version>
     	</dependency>
+    	
+		    	
+		    	
+		    	
+		    	
+		<dependency>
+		    <groupId>javax.xml.bind</groupId>
+		    <artifactId>jaxb-api</artifactId>
+		    <version>2.2.11</version>
+		</dependency>
+<!-- 
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-core</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-impl</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>activation</artifactId>
+    <version>1.1.1</version>
+</dependency>-->
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
 	</dependencies>
-
-	<build>
+ 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+			<artifactId>maven-resources-plugin</artifactId>
+			<executions>
+			      <execution>
+			          <id>copy-resources</id>
+			          <phase>validate</phase>
+			          <goals><goal>copy-resources</goal></goals>
+			          <configuration>
+			              <outputDirectory>${basedir}/target/classes/static/</outputDirectory >
+			              <resources>
+			                  <resource>
+			                      <directory>C:/Users/jbapanap/ng-fundamentals/dist/ng-fundamentals</directory >
+			                  </resource>
+			              </resources>
+			          </configuration>
+			      </execution>
+			</executions>
+			</plugin>
 		</plugins>
 	</build>
-
+	
 
 </project>
