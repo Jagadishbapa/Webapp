@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router'
 
 export class AdminIfRameComponent{
     event : any;
-    private levent : boolean= false;
+    levent : boolean= false;
     private p: number = 0;
     private cpage;
     private events: any;

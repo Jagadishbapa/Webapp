@@ -1,6 +1,6 @@
 
 
-<div  *ngIf="register; else submitted" class = "container-fluid" style="    border-style: solid; background-color: white;"><font color="black">
+<div  *ngIf="register" class = "container-fluid" style="    border-style: solid; background-color: white;"><font color="black">
     <h1 align="center">Register Event</h1>
     <form [formGroup]="registerform" (ngSubmit)="save(registerform.value, registerform.valid)" class ="form-group">
 

@@ -10,9 +10,9 @@ import {ActivatedRoute} from '@angular/router'
 
 export class IfRameComponent implements OnInit{
     private p: number = 0;
-    private cpage;
-    private events: any;
-    private pages: number;
+    cpage;
+    events: any;
+    pages: number;
     private formfilter: any;
     private keyword: any;
     eventlist: any
