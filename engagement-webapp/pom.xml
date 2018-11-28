@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.uw.engagement</groupId>
-	<artifactId>engagement-webapp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>engagement</artifactId>
+	<version>webapp</version>
 	<packaging>war</packaging>
 
 	<name>eventsapp</name>
@@ -25,6 +25,12 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-tomcat</artifactId>
+		   <scope>provided</scope>
+		</dependency>
+			
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
