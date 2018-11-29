@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
-@Table(name="eng_events_view")
+@Table(name="eng_events_view" , schema = "ooeadmin")
 
 @NamedStoredProcedureQueries({
    @NamedStoredProcedureQuery(name = "audviewproc", 

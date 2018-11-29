@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="UW_USERS")
+@Table(name="UW_USERS", schema = "ooeadmin")
 public class UWUsers {
 	@Id
 	@Column(name="uwyo_email")
