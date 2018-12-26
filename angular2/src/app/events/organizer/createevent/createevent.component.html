@@ -4,7 +4,9 @@
     <h1 align="center">Register Event</h1>
     <form [formGroup]="registerform" (ngSubmit)="save(registerform.value, registerform.valid)" class ="form-group">
 
-
+        <br>
+    <div class = "custom1">=required fields</div>
+    <br>
     <legend><font color="black">Sponsor Info</font></legend>
     <div class="form-group" >
         <div class = "custom">Organization</div>
@@ -23,7 +25,7 @@
     
     <div class="form-group">
             <div class = "custom">Department</div>
-            <select id="department" class="form-control" formControlName = "department">
+            <select id="department" class="form-control" formControlName = "department" >
                 <option *ngFor="let dept of deptoptions" [value]="dept">
                     {{dept}}
                   </option>
@@ -364,7 +366,8 @@
                     </div>
                 </div>
     
-            <button type="submit" [disabled]="!registerform.valid">Submit</button>
+           <!-- <button type="submit" [disabled]="!registerform.valid">Submit</button>-->
+           <button type="submit">Submit</button>
         </form>
     </font>
  </div> 

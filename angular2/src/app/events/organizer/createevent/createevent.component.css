@@ -6,3 +6,12 @@
     content:"*" ;
     color:red   
     }
+
+.custom1::before{
+    content:"*" ;
+    color:red   
+    }
+
+    .ng-invalid.ng-touched {
+        border-color: red;
+    }

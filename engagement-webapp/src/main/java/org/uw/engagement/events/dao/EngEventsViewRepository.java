@@ -1,4 +1,4 @@
-package org.uw.engagement.events.dao;
+	/*package org.uw.engagement.events.dao;
 
 
 import java.util.Date;
@@ -14,9 +14,9 @@ import org.uw.engagement.events.model.EngEventsView;
 
 @Repository
 public interface EngEventsViewRepository extends CrudRepository<EngEventsView, Integer>, JpaRepository<EngEventsView, Integer>{
-   /* @Query( value="SELECT * FROM eng_events_view eev where eev.organization= :org ORDER BY ?#{#pageable}",
-    		countQuery = "SELECT count(*) FROM eng_events_view eev where eev.organization= :org ORDER BY ?#{#pageable}"
-    		,nativeQuery=true)*/
+   // @Query( value="SELECT * FROM eng_events_view eev where eev.organization= :org ORDER BY ?#{#pageable}",
+    //		countQuery = "SELECT count(*) FROM eng_events_view eev where eev.organization= :org ORDER BY ?#{#pageable}"
+    //		,nativeQuery=true)
 	
     @Query( value="SELECT * from ooeadmin.eng_events_view WHERE TRUNC(CAST(event_start_date_time as DATE))>= current_date ORDER BY ?#{#pageable}",
     		countQuery="SELECT count(*) from ooeadmin.eng_events_view WHERE TRUNC(CAST(event_start_date_time as DATE))>= current_date ORDER BY ?#{#pageable}",
@@ -113,7 +113,7 @@ public interface EngEventsViewRepository extends CrudRepository<EngEventsView, I
     
     
 
-	/*
+
     @PersistenceContext
     private EntityManager em;
     
@@ -209,5 +209,128 @@ public interface EngEventsViewRepository extends CrudRepository<EngEventsView, I
 	    }
 		return null;
     }*/
+//}
+
+
+
+package org.uw.engagement.events.dao;
+
+
+import java.util.Date;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.uw.engagement.events.model.EngEventsView;
+
+@Repository
+public interface EngEventsViewRepository extends CrudRepository<EngEventsView, Integer>, JpaRepository<EngEventsView, Integer>{
+   /* @Query( value="SELECT * FROM eng_events_view eev where eev.organization= :org ORDER BY ?#{#pageable}",
+    		countQuery = "SELECT count(*) FROM eng_events_view eev where eev.organization= :org ORDER BY ?#{#pageable}"
+    		,nativeQuery=true)*/
+	
+    @Query( value="SELECT * from eng_events_view WHERE TRUNC(CAST(event_start_date_time as DATE))>= current_date ORDER BY ?#{#pageable}",
+    		countQuery="SELECT count(*) from eng_events_view WHERE TRUNC(CAST(event_start_date_time as DATE))>= current_date ORDER BY ?#{#pageable}",
+    		nativeQuery=true)
+    public Page<EngEventsView> findByDefault(Pageable pageable);
+	
+    @Query( value="SELECT * from eng_events_view\r\n" + 
+    		"                WHERE (TRUNC(CAST(event_start_date_time as DATE)) between :v_datefrom AND \r\n" + 
+    		"                      :v_dateto) AND\r\n" + 
+    		"                      county like :v_county AND\r\n" + 
+    		"                      city like :v_city AND\r\n" + 
+    		"                      organization like :v_org AND\r\n" + 
+    		"                      department like :v_dept AND\r\n" + 
+    		"                      event_type like :v_eventtype ORDER BY ?#{#pageable}",
+    		countQuery="SELECT count(*) from eng_events_view\r\n" + 
+    	    		"                WHERE (TRUNC(CAST(event_start_date_time as DATE)) between :v_datefrom AND \r\n" + 
+    	    		"                      :v_dateto) AND\r\n" + 
+    	    		"                      county like :v_county AND\r\n" + 
+    	    		"                      city like :v_city AND\r\n" + 
+    	    		"                      organization like :v_org AND\r\n" + 
+    	    		"                      department like :v_dept AND\r\n" + 
+    	    		"                      event_type like :v_eventtype ORDER BY ?#{#pageable}",
+    		nativeQuery=true)
+    public Page<EngEventsView> findByAllFilters(@Param("v_datefrom") Date v_datefrom, @Param("v_dateto") Date v_dateto, @Param("v_county") String v_county,
+    		@Param("v_city") String v_city, @Param("v_org") String v_org, @Param("v_dept") String v_dept, @Param("v_eventtype") String v_eventtype,
+    										Pageable pageable);
+    
+    
+    
+    @Query( value="SELECT * from eng_events_view\r\n" + 
+    		"                WHERE (TRUNC(CAST(event_start_date_time as DATE)) <= :v_dateto) AND\r\n" + 
+    		"                      county like :v_county AND\r\n" + 
+    		"                      city like :v_city AND\r\n" + 
+    		"                      organization like :v_org AND\r\n" + 
+    		"                      department like :v_dept AND\r\n" + 
+    		"                      event_type like :v_eventtype ORDER BY ?#{#pageable}",
+    		countQuery="SELECT count(*) from eng_events_view\r\n" + 
+    	    		"                WHERE (TRUNC(CAST(event_start_date_time as DATE)) <= :v_dateto) AND\r\n" + 
+    	    		"                      county like :v_county AND\r\n" + 
+    	    		"                      city like :v_city AND\r\n" + 
+    	    		"                      organization like :v_org AND\r\n" + 
+    	    		"                      department like :v_dept AND\r\n" + 
+    	    		"                      event_type like :v_eventtype ORDER BY ?#{#pageable}",
+    		nativeQuery=true)
+    public Page<EngEventsView> findByDateto(@Param("v_dateto") Date v_dateto, @Param("v_county") String v_county,
+    		@Param("v_city") String v_city, @Param("v_org") String v_org, @Param("v_dept") String v_dept, @Param("v_eventtype") String v_eventtype,
+    										Pageable pageable);
+    
+    
+    @Query( value="SELECT * from eng_events_view\r\n" + 
+    		"                WHERE (TRUNC(CAST(event_start_date_time as DATE)) >= :v_datefrom) AND\r\n" + 
+    		"                      county like :v_county AND\r\n" + 
+    		"                      city like :v_city AND\r\n" + 
+    		"                      organization like :v_org AND\r\n" + 
+    		"                      department like :v_dept AND\r\n" + 
+    		"                      event_type like :v_eventtype ORDER BY ?#{#pageable}",
+    		countQuery="SELECT count(*) from eng_events_view\r\n" + 
+    	    		"                WHERE (TRUNC(CAST(event_start_date_time as DATE)) >= :v_datefrom) AND\r\n" + 
+    	    		"                      county like :v_county AND\r\n" + 
+    	    		"                      city like :v_city AND\r\n" + 
+    	    		"                      organization like :v_org AND\r\n" + 
+    	    		"                      department like :v_dept AND\r\n" + 
+    	    		"                      event_type like :v_eventtype ORDER BY ?#{#pageable}",
+    		nativeQuery=true)
+    public Page<EngEventsView> findByDatefrom(@Param("v_datefrom") Date v_datefrom, @Param("v_county") String v_county,
+    		@Param("v_city") String v_city, @Param("v_org") String v_org, @Param("v_dept") String v_dept, @Param("v_eventtype") String v_eventtype,
+    										Pageable pageable);
+    
+    
+    @Query( value="SELECT * from eng_events_view\r\n" + 
+    		"                WHERE county like :v_county AND\r\n" + 
+    		"                      city like :v_city AND\r\n" + 
+    		"                      organization like :v_org AND\r\n" + 
+    		"                      department like :v_dept AND\r\n" + 
+    		"                      event_type like :v_eventtype ORDER BY ?#{#pageable}",
+    		countQuery="SELECT count(*) from eng_events_view\r\n" + 
+    	    		"                WHERE county like :v_county AND\r\n" + 
+    	    		"                      city like :v_city AND\r\n" + 
+    	    		"                      organization like :v_org AND\r\n" + 
+    	    		"                      department like :v_dept AND\r\n" + 
+    	    		"                      event_type like :v_eventtype ORDER BY ?#{#pageable}",
+    		nativeQuery=true)
+    public Page<EngEventsView> findByOtherFilters(@Param("v_county") String v_county,
+    		@Param("v_city") String v_city, @Param("v_org") String v_org, @Param("v_dept") String v_dept, @Param("v_eventtype") String v_eventtype,
+    										Pageable pageable);
+    
+    @Query( value="SELECT * from eng_events_view where Lower(event_name) like LOWER('%'||:v_keyword||'%') OR LOWER(organization) like LOWER('%'||:v_keyword||'%') OR LOWER(department) like LOWER('%'||:v_keyword||'%') OR "
+    		+ "LOWER(event_desc) like LOWER('%'||:v_keyword||'%') OR LOWER(event_type) like LOWER('%'||:v_keyword||'%') ORDER BY ?#{#pageable}",
+    		countQuery="SELECT count(*) from eng_events_view where Lower(event_name) like LOWER('%'||:v_keyword||'%') OR LOWER(organization) like LOWER('%'||:v_keyword||'%') OR LOWER(department) like LOWER('%'||:v_keyword||'%') OR " + 
+    				"LOWER(event_desc) like LOWER('%'||:v_keyword||'%') OR LOWER(event_type) like LOWER('%'||:v_keyword||'%') ORDER BY ?#{#pageable}",
+    		nativeQuery=true)
+    public Page<EngEventsView> findByKeyword(@Param("v_keyword") String v_keyword, Pageable pageable);
+    
+    
 }
+
+
+
+
+
+
 

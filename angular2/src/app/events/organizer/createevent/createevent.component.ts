@@ -756,56 +756,87 @@ export class OrgCreateEvent{
 
       save(model:EngEvent, formvalid:any)
       {
-        if(model.other_city==="")
+          /*
+        var cansubmit=false;
+        console.log(model.organization)
+        this.registerform.controls['event_name'].markAsTouched();
+        this.registerform.controls['event_name'].setErrors({'incorrect': true});
+        var regexp = new RegExp('[A-Za-z0-9._%+-]+@uwyo.edu')
+        console.log(regexp.test(model.email_1));
+
+        var reqpattern = '[]+'
+        if(model.organization==='')
         {
+            console.log('enter org')
+        }*/
+ 
+        var cansubmit=false;
+        if(this.registerform.controls['email_1'].invalid)
+        {
+            this.registerform.controls['email_1'].markAsTouched();
+            this.registerform.controls['email_1'].setErrors({'incorrect': true});
         }
-        var datePipe = new DatePipe('en-US');
-        model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
-        model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
-        model.created_by = sessionStorage.getItem('org_key');
-          var j=0;
-          for(var i =0;i<model['speakers'].length ;i++)
-          {
-              if(model['speakers'][i]['first_name']==='' && model['speakers'][i]['last_name']==='' && model['speakers'][i]['middle_name']==='' && model['speakers'][i]['email']==='')
-              {
-                  model['speakers'].splice(i,1);
-                  i=i-1;
-              }
-              else
-                  j=1;
-          }
 
-          if(j===0)
-          {
-            delete model['speakers'];
-          }
+        if(this.registerform.controls['fee'].invalid)
+        {
+            this.registerform.controls['fee'].markAsTouched();
+            this.registerform.controls['fee'].setErrors({'incorrect': true});
+        }
 
 
-          var k=0;
-          for(var i =0;i<model['co_sponsors'].length ;i++)
-          {
+        if(cansubmit)
+        {
+            if(model.other_city==="")
+            {
+            }
+            var datePipe = new DatePipe('en-US');
+            model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
+            model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
+            model.created_by = sessionStorage.getItem('org_key');
+            var j=0;
+            for(var i =0;i<model['speakers'].length ;i++)
+            {
+                if(model['speakers'][i]['first_name']==='' && model['speakers'][i]['last_name']==='' && model['speakers'][i]['middle_name']==='' && model['speakers'][i]['email']==='')
+                {
+                    model['speakers'].splice(i,1);
+                    i=i-1;
+                }
+                else
+                    j=1;
+            }
 
-              if(model['co_sponsors'][i]['co_sponsor_name']==='' && model['co_sponsors'][i]['co_sponsor_email']==='' && model['co_sponsors'][i]['co_sponsor_phone_number']===null && model['co_sponsors'][i]['co_sponsor_website']==='')
-              {
-                  model['co_sponsors'].splice(i,1);
-                  i=i-1;
-              }
-              else
-                  k=1;
-          }
+            if(j===0)
+            {
+                delete model['speakers'];
+            }
 
-          if(k===0)
-          {
-            delete model['co_sponsors'];
-          }
 
-        this.engservice.saveEvent(model)
-        .subscribe(
-            eventss=>{ 
-                this.events=eventss;
-                this.register=false;
-                this.cdRef.detectChanges();
-             },
-             (err)=>{console.log('organizer create error')});
+            var k=0;
+            for(var i =0;i<model['co_sponsors'].length ;i++)
+            {
+
+                if(model['co_sponsors'][i]['co_sponsor_name']==='' && model['co_sponsors'][i]['co_sponsor_email']==='' && model['co_sponsors'][i]['co_sponsor_phone_number']===null && model['co_sponsors'][i]['co_sponsor_website']==='')
+                {
+                    model['co_sponsors'].splice(i,1);
+                    i=i-1;
+                }
+                else
+                    k=1;
+            }
+
+            if(k===0)
+            {
+                delete model['co_sponsors'];
+            }
+
+            this.engservice.saveEvent(model)
+            .subscribe(
+                eventss=>{ 
+                    this.events=eventss;
+                    this.register=false;
+                    this.cdRef.detectChanges();
+                },
+                (err)=>{console.log('organizer create error')});
+        }
     }
 }
