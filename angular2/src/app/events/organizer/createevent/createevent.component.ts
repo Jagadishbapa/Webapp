@@ -18,6 +18,7 @@ export class OrgCreateEvent{
     register:boolean;
     events:any;
     public registerform: FormGroup;
+    public speakers : FormArray;
     orgoptions = [
                 'American Heritage Center and Art Museum',
                 'Athletics',
@@ -768,7 +769,7 @@ export class OrgCreateEvent{
         if(model.organization==='')
         {
             console.log('enter org')
-        }*/
+        }
  
         var cansubmit=false;
         if(this.registerform.controls['email_1'].invalid)
@@ -783,6 +784,72 @@ export class OrgCreateEvent{
             this.registerform.controls['fee'].setErrors({'incorrect': true});
         }
 
+        const sp = <FormArray>this.registerform.controls['speakers'];
+
+        console.log(sp['controls'][0].get('first_name').value)
+        for(var i=0;i<sp['controls'].length;i++)
+        {
+            const sprow = sp['controls'][i];
+            if(sprow.get('email').invalid)
+            {
+
+                //this.registerform.controls.speakers.at(0).controls.first_name.markAsTouched();
+                //this.registerform.controls.speakers.at(0).controls.first_name.updateValueAndValidity();
+
+                for (let inner in this.registerform.controls) {
+                    this.registerform.get(inner).markAsTouched();
+                    this.registerform.get(inner).updateValueAndValidity();
+                }
+
+                console.log(this.registerform.controls.speakers[0]);
+
+                console.log(this.registerform.controls.speakers.at(0));
+                for(let speaker of   this.registerform.controls.speakers.controls)
+                {
+                    speaker.first_name.markAsTouched();
+                    speaker.first_name.updateValueAndValidity();
+                    console.log(speaker);
+                  // this.registerform.controls.speakers.at(0).get(inner1).markAsTouched();
+                  //this.registerform.controls.speakers.at(0).controls.first_name.updateValueAndValidity();
+                    //this.registerform.controls.speakers.updateValueAndValidity();
+                    //.controls.first_name.setErrors({'incorrect': true});
+                    //this.registerform.controls.speakers.at(0).get(inner1).setErrors({'incorrect': true});
+                    //console.log(this.speakers.at(0).get(inner1));
+                   // this.speakers.at(0).get(inner1).markAsTouched();
+                    //this.speakers.at(0).get(inner1).updateValueAndValidity();
+                    //this.speakers.at(0).get(inner1).setErrors({'incorrect': true});
+                   break;
+
+                }
+                //console.log(this.speakers.at(0).get('first_name'));
+                //console.log(this.speakers.at(0).get('first_name'));
+                //this.speakers.at(0).get('first_name').updateValueAndValidity();
+               // controls.first_name.markAsTouched();
+                //this.speakers.at(0).controls.first_name.setErrors({'incorrect': true});
+                //console.log('invalid');
+                //console.log(this.registerform.controls['speakers'][0])
+                //this.registerform.controls['speakers'].markAsTouched();
+                //this.registerform.controls['speakers'].setErrors({'incorrect': true});
+               // this.registerform.controls['speakers']['controls'][i].controls['first_name'].markAsTouched();
+                //this.registerform.controls['speakers']['controls'][i].controls['first_name'].setErrors({'incorrect': true});
+                //console.log(this.registerform.controls['speakers']['controls'][i].get('first_name').markAsTouched());
+                //console.log(this.registerform.controls['speakers']['controls'][i].get('first_name').setErrors({'incorrect': true}));
+                //this.registerform.controls['speakers'].get('first_name').markAsTouched();
+                //this.registerform.controls['speakers'].get('first_name').setErrors({'incorrect': true});
+            }
+        }
+
+
+        */
+       var cansubmit=true;
+       for (let inner in this.registerform.controls) {
+        this.registerform.get(inner).markAsTouched();
+        this.registerform.get(inner).updateValueAndValidity();
+        if(this.registerform.get(inner).invalid)
+            cansubmit=false;
+        }
+        if(this.registerform.get('speakers').invalid)
+            console.log('speakers invalid');
 
         if(cansubmit)
         {
