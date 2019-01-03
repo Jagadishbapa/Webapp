@@ -9,9 +9,17 @@
 
 .custom1::before{
     content:"*" ;
-    color:red   
+    color:red ;  
     }
 
     .ng-invalid.ng-touched {
         border-color: red;
     }
+
+.spinvalid
+{
+    color:red ;
+}
+
+
+

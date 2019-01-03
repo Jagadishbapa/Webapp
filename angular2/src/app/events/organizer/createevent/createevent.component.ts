@@ -1,5 +1,5 @@
 import { Component, ViewChild, TemplateRef, ChangeDetectorRef, Input } from '@angular/core';
-import {  FormArray,  FormBuilder, Validators, ValidationErrors } from '@angular/forms';
+import {  FormArray,  FormBuilder, Validators, ValidationErrors, NG_VALIDATORS } from '@angular/forms';
 import {EngEvent} from '../../services/engevent.model'
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import {EngagementService} from '../../services/engagement.service';
@@ -682,10 +682,11 @@ export class OrgCreateEvent{
             attendees_count : new FormControl(),
             event_cost : new FormControl(),
             co_sponsors: this._fb.array([this.inItcosponsors()])
-        },
-         { validator:  this.allvalidator
-              }
-            );
+        }
+        //,
+         //{ validator:  this.allvalidator
+         //     }
+           );
       }
     
     inItSpeakers() {
@@ -728,6 +729,18 @@ export class OrgCreateEvent{
             control.removeAt(index);
         }
 
+        _keyDown(event: any) {      
+            if (event.target.value>99999999) {
+              event.preventDefault();
+            }
+        }
+
+        _keyDown1(event: any) {      
+            if (event.target.value>9999999999) {
+              event.preventDefault();
+            }
+        }
+
         allvalidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
             const c = control.get('city');
             const oc = control.get('other_city');
@@ -759,6 +772,76 @@ export class OrgCreateEvent{
 
       save(model:EngEvent, formvalid:any)
       {
+
+        const c = this.registerform.get('city');
+        const oc = this.registerform.get('other_city');
+        const stdate = new Date(this.registerform.get('event_start_date_time').value);
+        const endate = new Date(this.registerform.get('event_end_date_time').value);
+
+        let cv = false;
+        let dv = false;
+        if(((c.value==="" || c.value==="Other") && (oc.value === ""))) 
+        {
+            this.registerform.controls['city'].markAsTouched();
+            this.registerform.controls['city'].setErrors({'incorrect': true});
+
+            this.registerform.controls['other_city'].markAsTouched();
+            this.registerform.controls['other_city'].setErrors({'incorrect': true});
+        }
+
+        if(stdate>=endate)
+        {
+            this.registerform.controls['event_start_date_time'].setErrors({'greater': true});
+            this.registerform.controls['event_end_date_time'].setErrors({'lesser': true});
+
+        }
+        if(this.registerform.get('fee').value>999999999)
+        {
+            this.registerform.controls['fee'].setErrors({'incorrect': true});
+        }
+
+        if(this.registerform.get('phone_number').value>99999999999)
+        {
+            this.registerform.controls['phone_number'].setErrors({'incorrect': true});
+        }
+        if(this.registerform.get('zip').value>999999999)
+        {
+            this.registerform.controls['zip'].setErrors({'incorrect': true});
+        }
+        if(this.registerform.get('anticipated_num_attendees').value>999999999)
+        {
+            this.registerform.controls['anticipated_num_attendees'].setErrors({'incorrect': true});
+        }
+        if(this.registerform.get('event_cost').value>999999999)
+        {
+            this.registerform.controls['event_cost'].setErrors({'incorrect': true});
+        }
+        if(this.registerform.get('attendees_count').value>999999999)
+        {
+            this.registerform.controls['attendees_count'].setErrors({'incorrect': true});
+        }
+        if(this.registerform.get('cost_funding1').value>999999999)
+        {
+            this.registerform.controls['cost_funding1'].setErrors({'incorrect': true});
+        }
+        if(this.registerform.get('cost_funding2').value>999999999)
+        {
+            this.registerform.controls['cost_funding2'].setErrors({'incorrect': true});
+        }
+        if(this.registerform.get('cost_funding_other').value>999999999)
+        {
+            this.registerform.controls['cost_funding_other'].setErrors({'incorrect': true});
+        }
+
+
+
+            /*
+            if(this.registerform.get('fee').value>999999999 || this.registerform.get('phone_number').value>99999999999 || control.get('zip').value>999999999 || control.get('anticipated_num_attendees').value>999999999 || control.get('event_cost').value>999999999 || control.get('attendees_count').value>999999999 || control.get('cost_funding1').value>999999999 || control.get('cost_funding2').value>999999999 || control.get('cost_funding_other').value>999999999)
+            {}
+            */
+
+
+
           /*
         var cansubmit=false;
         console.log(model.organization)
@@ -844,14 +927,14 @@ export class OrgCreateEvent{
 
         */
        this.cansubmit=true;
+
+
        for (let inner in this.registerform.controls) {
         this.registerform.get(inner).markAsTouched();
-        this.registerform.get(inner).updateValueAndValidity();
+        //this.registerform.get(inner).updateValueAndValidity();
         if(this.registerform.get(inner).invalid)
             this.cansubmit=false;
         }
-        if(this.registerform.get('speakers').invalid)
-            console.log('speakers invalid');
 
         if(this.cansubmit)
         {

@@ -73,7 +73,7 @@
                 <div class="col-xs-4">
                         <div class="form-group">
                     <div class = "custom">Fee to attend the event </div> 
-                        <input type="number" min = "0" max = "99" class="form-control" id="fee" formControlName = "fee">
+                        <input (keydown)="_keyDown($event)" type="number" min = "0" class="form-control" id="fee" formControlName = "fee">
                     </div>
                     </div>
 
@@ -116,10 +116,22 @@
                             <td> Email</td>
                     </tr>
                 <tr *ngFor="let speaker of registerform.controls.speakers.controls; let i=index"  [formGroupName]="i">
-                  <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="first_name" placeholder="First name" formControlName = "first_name">{{speaker.first_name}}  </td>
-                  <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="last_name" placeholder="Last name" formControlName = "last_name"> {{speaker.last_name}}  </td>
-                  <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="middle_name" placeholder="Middle name" formControlName = "middle_name"> {{speaker.middle_name}}</td>
-                  <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="email" placeholder="Email" formControlName = "email"> {{speaker.email}}</td>
+                  <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="first_name" placeholder="First name" formControlName = "first_name">{{speaker.first_name}} 
+                    <div class ="spinvalid" [hidden] *ngIf = "speaker.controls.first_name.invalid">
+                        invalid first name
+                    </div> </td>
+                  <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="last_name" placeholder="Last name" formControlName = "last_name"> {{speaker.last_name}}
+                    <div class ="spinvalid" [hidden] *ngIf = "speaker.controls.last_name.invalid">
+                        invalid last name
+                    </div></td>
+                  <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="middle_name" placeholder="Middle name" formControlName = "middle_name"> {{speaker.middle_name}}
+                    <div class ="spinvalid" [hidden] *ngIf = "speaker.controls.middle_name.invalid">
+                        invalid middle name
+                    </div></td>
+                  <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="email" placeholder="Email" formControlName = "email"> {{speaker.email}}
+                    <div class ="spinvalid" [hidden] *ngIf = "speaker.controls.email.invalid">
+                        invalid email
+                    </div></td>
                   <td> <button *ngIf="registerform.controls.speakers.controls.length > 1" (click)="deleteSpeaker(i)" class="btn btn-danger">Delete Button</button>  </td>
                 </tr>
               </tbody>
@@ -188,7 +200,7 @@
                 <div class="col-xs-6">
                         <div class="form-group">
                             <div class = "custom">zip </div>
-                            <input type="number" min = "1" maxlength="10" class="form-control" id="zip" formControlName = "zip">
+                            <input (keydown)="_keyDown($event)" type="number" min = "1" class="form-control" id="zip" formControlName = "zip">
                         </div>
                 </div>
                 <div class="col-xs-6">
@@ -247,7 +259,7 @@
             <div class="col-xs-3">
                 <div class="form-group">
                     Phone Number
-                    <input type="number" class="form-control" maxlength="20" id="phone_number" formControlName = "phone_number" placeholder="Phone number">
+                    <input (keydown)="_keyDown1($event)" type="number" class="form-control" id="phone_number" formControlName = "phone_number" placeholder="Phone number">
                 </div>
             </div>
 
@@ -273,20 +285,20 @@
             <div class="col-xs-3">
                     <div class="form-group">
                         Anticipated Number of attendees
-                        <input type="number" class="form-control" maxlength="20" id="anticipated_num_attendees" formControlName = "anticipated_num_attendees" placeholder="Anticipated Number of attendees">
+                        <input (keydown)="_keyDown($event)" type="number" class="form-control" id="anticipated_num_attendees" formControlName = "anticipated_num_attendees" placeholder="Anticipated Number of attendees">
                     </div>
             </div>
             <div class="col-xs-3">
                 <div class="form-group">
                     Event cost
-                    <input type="number" class="form-control" maxlength="20" id="event_cost" formControlName = "event_cost" placeholder="Event cost">
+                    <input (keydown)="_keyDown($event)" type="number" class="form-control" maxlength="20" id="event_cost" formControlName = "event_cost" placeholder="Event cost">
                 </div>
             </div>
 
             <div class="col-xs-3">
                 <div class="form-group">
                     Attendees Count
-                    <input type="number" class="form-control" maxlength="20" id="attendees_count" formControlName = "attendees_count" placeholder="Attendees count">
+                    <input (keydown)="_keyDown($event)" type="number" class="form-control" maxlength="20" id="attendees_count" formControlName = "attendees_count" placeholder="Attendees count">
                 </div>
             </div>
         </div>
@@ -327,21 +339,21 @@
                 <div class="col-xs-4">
                         <div class="form-group">
                             Funding received from source-1
-                            <input type="number" class="form-control" maxlength="20" id="cost_funding1" formControlName = "cost_funding1" placeholder="Funding received">
+                            <input (keydown)="_keyDown($event)" type="number" class="form-control" maxlength="20" id="cost_funding1" formControlName = "cost_funding1" placeholder="Funding received">
                             </div>
                 </div>
         
                 <div class="col-xs-4">
                     <div class="form-group">
                             Funding received from source-2
-                            <input type="number" class="form-control" maxlength="20" id="cost_funding2" formControlName = "cost_funding2" placeholder="Funding received">
+                            <input (keydown)="_keyDown($event)" type="number" class="form-control" maxlength="20" id="cost_funding2" formControlName = "cost_funding2" placeholder="Funding received">
                     </div>
                 </div>
     
                 <div class="col-xs-4">
                     <div class="form-group">
                         Funding from other Sources
-                        <input type="number" class="form-control" maxlength="20" id="cost" formControlName = "cost_funding_other" placeholder="funding from other sources">
+                        <input (keydown)="_keyDown($event)" type="number" class="form-control" maxlength="20" id="cost" formControlName = "cost_funding_other" placeholder="funding from other sources">
                     </div>
                 </div>
                 </div>
@@ -354,7 +366,7 @@
                         <tr *ngFor="let co_sponsor of registerform.controls.co_sponsors.controls; let i=index"  [formGroupName]="i">
                           <td> <input style="border:none" type="text" maxlength="100" pattern="[a-zA-z]+" class="form-control" id="co_sponsor_name" placeholder="co-sponsor name" formControlName = "co_sponsor_name">{{co_sponsor.co_sponsor_name}}  </td>
                           <td> <input style="border:none" type="email" maxlength="100" class="form-control" id="co_sponsor_email" placeholder="co-sponsor email" formControlName = "co_sponsor_email"> {{co_sponsor.co_sponsor_email}}  </td>
-                          <td> <input style="border:none" type="number" maxlength="20"  class="form-control" id="co_sponsor_phone_number" placeholder="co-sponsor phone number" formControlName = "co_sponsor_phone_number"> {{co_sponsor.co_sponsor_phone_number}}</td>
+                          <td> <input (keydown)="_keyDown1($event)" style="border:none" type="number" class="form-control" id="co_sponsor_phone_number" placeholder="co-sponsor phone number" formControlName = "co_sponsor_phone_number"> {{co_sponsor.co_sponsor_phone_number}}</td>
                           <td> <input style="border:none" type="text" maxlength="100" class="form-control" id="co_sponsor_website" placeholder="co-sponsor website" formControlName = "co_sponsor_website"> {{co_sponsor.co_sponsor_website}}</td>
                           <td> <button *ngIf="registerform.controls.co_sponsors.controls.length > 1" (click)="deletecosponsor(i)" class="btn btn-danger">Delete Button</button>  </td>
                         </tr>
