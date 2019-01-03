@@ -1,4 +1,4 @@
-import { Component, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, TemplateRef, ChangeDetectorRef, Input } from '@angular/core';
 import {  FormArray,  FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import {EngEvent} from '../../services/engevent.model'
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
@@ -19,6 +19,7 @@ export class OrgCreateEvent{
     events:any;
     public registerform: FormGroup;
     public speakers : FormArray;
+    public cansubmit: boolean;
     orgoptions = [
                 'American Heritage Center and Art Museum',
                 'Athletics',
@@ -640,6 +641,7 @@ export class OrgCreateEvent{
      }
 
     ngOnInit() {
+            this.cansubmit=true;
             this.register=true;
             this.registerform = this._fb.group({
             speakers: this._fb.array([this.inItSpeakers()]),
@@ -841,21 +843,18 @@ export class OrgCreateEvent{
 
 
         */
-       var cansubmit=true;
+       this.cansubmit=true;
        for (let inner in this.registerform.controls) {
         this.registerform.get(inner).markAsTouched();
         this.registerform.get(inner).updateValueAndValidity();
         if(this.registerform.get(inner).invalid)
-            cansubmit=false;
+            this.cansubmit=false;
         }
         if(this.registerform.get('speakers').invalid)
             console.log('speakers invalid');
 
-        if(cansubmit)
+        if(this.cansubmit)
         {
-            if(model.other_city==="")
-            {
-            }
             var datePipe = new DatePipe('en-US');
             model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
             model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
