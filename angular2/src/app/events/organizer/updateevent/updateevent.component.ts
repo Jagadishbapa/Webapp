@@ -13,6 +13,7 @@ import {DatePipe} from '@angular/common';
 })
 
 export class UpdateEventComponent{
+    public cansubmit: boolean;
     @Input() eventd:any;
     register : boolean;
     events:any;
@@ -638,7 +639,8 @@ export class UpdateEventComponent{
      }
 
     ngOnInit() {
-        this.register=true;
+            this.cansubmit=true;
+            this.register=true;
             this.registerform = this._fb.group({
             event_id : new FormControl(),
             created_by : new FormControl(),
@@ -787,6 +789,19 @@ export class UpdateEventComponent{
             control.removeAt(index);
         }
 
+        _keyDown(event: any) {    
+            if (event.target.value>99999999) {
+              event.preventDefault();
+            }
+        }
+
+        _keyDown1(event: any) {     
+            if (event.target.value>9999999999) {
+            event.preventDefault();
+            }
+
+        }
+
         allvalidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
             const c = control.get('city');
             const oc = control.get('other_city');
@@ -818,60 +833,235 @@ export class UpdateEventComponent{
         
           };
 
-      save(model:EngEvent, formvalid:any)
-      {
-        if(model.other_city==="")
-        {
+          save(model:any, formvalid:any)
+          {
+    
+            const c = this.registerform.get('city');
+            const oc = this.registerform.get('other_city');
+            const stdate = new Date(this.registerform.get('event_start_date_time').value);
+            const endate = new Date(this.registerform.get('event_end_date_time').value);
+    
+            let cv = false;
+            let dv = false;
+            if(((c.value==="" || c.value==="Other") && (oc.value === ""))) 
+            {
+                this.registerform.controls['city'].markAsTouched();
+                this.registerform.controls['city'].setErrors({'incorrect': true});
+    
+                this.registerform.controls['other_city'].markAsTouched();
+                this.registerform.controls['other_city'].setErrors({'incorrect': true});
+            }
+            else
+            {
+                this.registerform.controls['city'].setErrors(null);
+                this.registerform.controls['other_city'].setErrors(null);
+            }
+    
+            if(stdate>=endate)
+            {
+                this.registerform.controls['event_start_date_time'].setErrors({'greater': true});
+                this.registerform.controls['event_end_date_time'].setErrors({'lesser': true});
+    
+            }
+            else{
+                this.registerform.controls['event_start_date_time'].setErrors(null);
+                this.registerform.controls['event_end_date_time'].setErrors(null);
+            }
+    
+            if(this.registerform.get('fee').value>999999999)
+            {
+                this.registerform.controls['fee'].setErrors({'incorrect': true});
+            }
+    
+            if(this.registerform.get('phone_number').value>99999999999)
+            {
+                this.registerform.controls['phone_number'].setErrors({'incorrect': true});
+            }
+            if(this.registerform.get('zip').value>999999999)
+            {
+                this.registerform.controls['zip'].setErrors({'incorrect': true});
+            }
+            if(this.registerform.get('anticipated_num_attendees').value>999999999)
+            {
+                this.registerform.controls['anticipated_num_attendees'].setErrors({'incorrect': true});
+            }
+            if(this.registerform.get('event_cost').value>999999999)
+            {
+                this.registerform.controls['event_cost'].setErrors({'incorrect': true});
+            }
+            if(this.registerform.get('attendees_count').value>999999999)
+            {
+                this.registerform.controls['attendees_count'].setErrors({'incorrect': true});
+            }
+            if(this.registerform.get('cost_funding1').value>999999999)
+            {
+                this.registerform.controls['cost_funding1'].setErrors({'incorrect': true});
+            }
+            if(this.registerform.get('cost_funding2').value>999999999)
+            {
+                this.registerform.controls['cost_funding2'].setErrors({'incorrect': true});
+            }
+            if(this.registerform.get('cost_funding_other').value>999999999)
+            {
+                this.registerform.controls['cost_funding_other'].setErrors({'incorrect': true});
+            }
+    
+    
+    
+                /*
+                if(this.registerform.get('fee').value>999999999 || this.registerform.get('phone_number').value>99999999999 || control.get('zip').value>999999999 || control.get('anticipated_num_attendees').value>999999999 || control.get('event_cost').value>999999999 || control.get('attendees_count').value>999999999 || control.get('cost_funding1').value>999999999 || control.get('cost_funding2').value>999999999 || control.get('cost_funding_other').value>999999999)
+                {}
+                */
+    
+    
+    
+              /*
+            var cansubmit=false;
+            console.log(model.organization)
+            this.registerform.controls['event_name'].markAsTouched();
+            this.registerform.controls['event_name'].setErrors({'incorrect': true});
+            var regexp = new RegExp('[A-Za-z0-9._%+-]+@uwyo.edu')
+            console.log(regexp.test(model.email_1));
+    
+            var reqpattern = '[]+'
+            if(model.organization==='')
+            {
+                console.log('enter org')
+            }
+     
+            var cansubmit=false;
+            if(this.registerform.controls['email_1'].invalid)
+            {
+                this.registerform.controls['email_1'].markAsTouched();
+                this.registerform.controls['email_1'].setErrors({'incorrect': true});
+            }
+    
+            if(this.registerform.controls['fee'].invalid)
+            {
+                this.registerform.controls['fee'].markAsTouched();
+                this.registerform.controls['fee'].setErrors({'incorrect': true});
+            }
+    
+            const sp = <FormArray>this.registerform.controls['speakers'];
+    
+            console.log(sp['controls'][0].get('first_name').value)
+            for(var i=0;i<sp['controls'].length;i++)
+            {
+                const sprow = sp['controls'][i];
+                if(sprow.get('email').invalid)
+                {
+    
+                    //this.registerform.controls.speakers.at(0).controls.first_name.markAsTouched();
+                    //this.registerform.controls.speakers.at(0).controls.first_name.updateValueAndValidity();
+    
+                    for (let inner in this.registerform.controls) {
+                        this.registerform.get(inner).markAsTouched();
+                        this.registerform.get(inner).updateValueAndValidity();
+                    }
+    
+                    console.log(this.registerform.controls.speakers[0]);
+    
+                    console.log(this.registerform.controls.speakers.at(0));
+                    for(let speaker of   this.registerform.controls.speakers.controls)
+                    {
+                        speaker.first_name.markAsTouched();
+                        speaker.first_name.updateValueAndValidity();
+                        console.log(speaker);
+                      // this.registerform.controls.speakers.at(0).get(inner1).markAsTouched();
+                      //this.registerform.controls.speakers.at(0).controls.first_name.updateValueAndValidity();
+                        //this.registerform.controls.speakers.updateValueAndValidity();
+                        //.controls.first_name.setErrors({'incorrect': true});
+                        //this.registerform.controls.speakers.at(0).get(inner1).setErrors({'incorrect': true});
+                        //console.log(this.speakers.at(0).get(inner1));
+                       // this.speakers.at(0).get(inner1).markAsTouched();
+                        //this.speakers.at(0).get(inner1).updateValueAndValidity();
+                        //this.speakers.at(0).get(inner1).setErrors({'incorrect': true});
+                       break;
+    
+                    }
+                    //console.log(this.speakers.at(0).get('first_name'));
+                    //console.log(this.speakers.at(0).get('first_name'));
+                    //this.speakers.at(0).get('first_name').updateValueAndValidity();
+                   // controls.first_name.markAsTouched();
+                    //this.speakers.at(0).controls.first_name.setErrors({'incorrect': true});
+                    //console.log('invalid');
+                    //console.log(this.registerform.controls['speakers'][0])
+                    //this.registerform.controls['speakers'].markAsTouched();
+                    //this.registerform.controls['speakers'].setErrors({'incorrect': true});
+                   // this.registerform.controls['speakers']['controls'][i].controls['first_name'].markAsTouched();
+                    //this.registerform.controls['speakers']['controls'][i].controls['first_name'].setErrors({'incorrect': true});
+                    //console.log(this.registerform.controls['speakers']['controls'][i].get('first_name').markAsTouched());
+                    //console.log(this.registerform.controls['speakers']['controls'][i].get('first_name').setErrors({'incorrect': true}));
+                    //this.registerform.controls['speakers'].get('first_name').markAsTouched();
+                    //this.registerform.controls['speakers'].get('first_name').setErrors({'incorrect': true});
+                }
+            }
+    
+    
+            */
+           this.cansubmit=true;
+    
+    
+           for (let inner in this.registerform.controls) {
+            this.registerform.get(inner).markAsTouched();
+            //this.registerform.get(inner).updateValueAndValidity();
+            if(this.registerform.get(inner).invalid)
+                this.cansubmit=false;
+            else{
+                this.registerform.controls[inner].setErrors(null);
+            }
+            }
+    
+            if(this.cansubmit)
+            {
+                var datePipe = new DatePipe('en-US');
+                model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
+                model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
+                model.created_by = sessionStorage.getItem('org_key');
+                var j=0;
+                for(var i =0;i<model['speakers'].length ;i++)
+                {
+                    if(model['speakers'][i]['first_name']==='' && model['speakers'][i]['last_name']==='' && model['speakers'][i]['middle_name']==='' && model['speakers'][i]['email']==='')
+                    {
+                        model['speakers'].splice(i,1);
+                        i=i-1;
+                    }
+                    else
+                        j=1;
+                }
+    
+                if(j===0)
+                {
+                    delete model['speakers'];
+                }
+    
+    
+                var k=0;
+                for(var i =0;i<model['co_sponsors'].length ;i++)
+                {
+    
+                    if(model['co_sponsors'][i]['co_sponsor_name']==='' && model['co_sponsors'][i]['co_sponsor_email']==='' && model['co_sponsors'][i]['co_sponsor_phone_number']===null && model['co_sponsors'][i]['co_sponsor_website']==='')
+                    {
+                        model['co_sponsors'].splice(i,1);
+                        i=i-1;
+                    }
+                    else
+                        k=1;
+                }
+    
+                if(k===0)
+                {
+                    delete model['co_sponsors'];
+                }
+    
+                this.engservice.saveEvent(model)
+                .subscribe(
+                    eventss=>{ 
+                        this.events=eventss;
+                        this.register=false;
+                        this.cdRef.detectChanges();
+                    },
+                    (err)=>{console.log('organizer create error')});
+            }
         }
-  
-        var datePipe = new DatePipe('en-US');
-        model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
-        model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
-        model.created_by = sessionStorage.getItem('org_key');
-          var j=0;
-          for(var i =0;i<model['speakers'].length ;i++)
-          {
-              if(model['speakers'][i]['first_name']==='' && model['speakers'][i]['last_name']==='' && model['speakers'][i]['middle_name']==='' && model['speakers'][i]['email']==='')
-              {
-                  model['speakers'].splice(i,1);
-                  i=i-1;
-              }
-              else
-                  j=1;
-          }
-
-          if(j===0)
-          {
-            delete model['speakers'];
-          }
-
-
-          var k=0;
-          for(var i =0;i<model['co_sponsors'].length ;i++)
-          {
-
-              if(model['co_sponsors'][i]['co_sponsor_name']==='' && model['co_sponsors'][i]['co_sponsor_email']==='' && model['co_sponsors'][i]['co_sponsor_phone_number']===null && model['co_sponsors'][i]['co_sponsor_website']==='')
-              {
-                  model['co_sponsors'].splice(i,1);
-                  i=i-1;
-              }
-              else
-                  k=1;
-          }
-
-          if(k===0)
-          {
-            delete model['co_sponsors'];
-          }
-
-          delete model['creation_date'];
-        this.engservice.saveEvent(model)
-        .subscribe(
-            eventss=>{ 
-                this.events=eventss;
-                this.register=false;
-                this.cdRef.detectChanges();
-             },
-             (err)=>{console.log('org update event error')});
     }
-}

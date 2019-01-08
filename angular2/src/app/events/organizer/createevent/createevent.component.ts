@@ -661,7 +661,7 @@ export class OrgCreateEvent{
             county : ['', [Validators.required, Validators.maxLength(100)]],
             city : ['', [Validators.maxLength(100)]],
             state : ['WY', [Validators.required, Validators.maxLength(100)]],
-            country : ['', [Validators.required, Validators.maxLength(3)]],
+            country : ['USA', [Validators.required, Validators.maxLength(3)]],
             other_city : ['', [Validators.maxLength(100)]],
             zip : ['', [Validators.required]],
             first_name : ['', Validators.maxLength(100)],
@@ -729,16 +729,17 @@ export class OrgCreateEvent{
             control.removeAt(index);
         }
 
-        _keyDown(event: any) {      
+        _keyDown(event: any) {    
             if (event.target.value>99999999) {
               event.preventDefault();
             }
         }
 
-        _keyDown1(event: any) {      
+        _keyDown1(event: any) {     
             if (event.target.value>9999999999) {
-              event.preventDefault();
+            event.preventDefault();
             }
+
         }
 
         allvalidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
@@ -770,8 +771,9 @@ export class OrgCreateEvent{
                 return {'cityvalid':true};
           };
 
-      save(model:EngEvent, formvalid:any)
+      save(model:any, formvalid:any)
       {
+          console.log(model);
 
         const c = this.registerform.get('city');
         const oc = this.registerform.get('other_city');
@@ -788,6 +790,11 @@ export class OrgCreateEvent{
             this.registerform.controls['other_city'].markAsTouched();
             this.registerform.controls['other_city'].setErrors({'incorrect': true});
         }
+        else
+        {
+            this.registerform.controls['city'].setErrors(null);
+            this.registerform.controls['other_city'].setErrors(null);
+        }
 
         if(stdate>=endate)
         {
@@ -795,6 +802,11 @@ export class OrgCreateEvent{
             this.registerform.controls['event_end_date_time'].setErrors({'lesser': true});
 
         }
+        else{
+            this.registerform.controls['event_start_date_time'].setErrors(null);
+            this.registerform.controls['event_end_date_time'].setErrors(null);
+        }
+
         if(this.registerform.get('fee').value>999999999)
         {
             this.registerform.controls['fee'].setErrors({'incorrect': true});
@@ -934,6 +946,9 @@ export class OrgCreateEvent{
         //this.registerform.get(inner).updateValueAndValidity();
         if(this.registerform.get(inner).invalid)
             this.cansubmit=false;
+        else{
+            this.registerform.controls[inner].setErrors(null);
+        }
         }
 
         if(this.cansubmit)
