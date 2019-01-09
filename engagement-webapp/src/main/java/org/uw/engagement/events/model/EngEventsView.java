@@ -85,7 +85,7 @@ public class EngEventsView {
 	private	String	country;
 	
 	@Column(name="zip")
-	private	Integer	zip;
+	private	String	zip;
 	
 	@Column(name="first_name")
 	private	String	first_name;
@@ -113,7 +113,7 @@ public class EngEventsView {
 	public EngEventsView(Integer event_id, String event_name, String organization, String department, String event_desc,
 			String event_type, String priv, Integer fee, Timestamp event_start_date_time, Timestamp event_end_date_time,
 			String building_room, String address_line1, String address_line2, String county, String city,
-			String other_city, String state, String country, Integer zip, String first_name, String last_name,
+			String other_city, String state, String country, String zip, String first_name, String last_name,
 			String email_1, String email_2, String phone_number, String sponsoring_department, String cancelled) {
 		super();
 		this.event_id = event_id;
@@ -288,11 +288,11 @@ public class EngEventsView {
 		this.country = country;
 	}
 
-	public Integer getZip() {
+	public String getZip() {
 		return zip;
 	}
 
-	public void setZip(Integer zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
