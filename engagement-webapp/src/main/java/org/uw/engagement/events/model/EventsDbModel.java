@@ -21,23 +21,23 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-//@Table(name="UW_ENGAGEMENT", schema = "ooeadmin")
-@Table(name="UW_ENGAGEMENT")
-//@SecondaryTables({
-//    @SecondaryTable(name="LOCATION", schema = "ooeadmin", pkJoinColumns={
-//        @PrimaryKeyJoinColumn(name="event_id", referencedColumnName="event_id") }),
-//
-//    @SecondaryTable(name="CONTACT_INFO", schema = "ooeadmin", pkJoinColumns={
-//        @PrimaryKeyJoinColumn(name="event_id", referencedColumnName="event_id") })
-//})
-
+@Table(name="UW_ENGAGEMENT", schema = "ooeadmin")
+//@Table(name="UW_ENGAGEMENT")
 @SecondaryTables({
-    @SecondaryTable(name="LOCATION", pkJoinColumns={
+    @SecondaryTable(name="LOCATION", schema = "ooeadmin", pkJoinColumns={
         @PrimaryKeyJoinColumn(name="event_id", referencedColumnName="event_id") }),
 
-    @SecondaryTable(name="CONTACT_INFO", pkJoinColumns={
+    @SecondaryTable(name="CONTACT_INFO", schema = "ooeadmin", pkJoinColumns={
         @PrimaryKeyJoinColumn(name="event_id", referencedColumnName="event_id") })
 })
+
+//@SecondaryTables({
+  //  @SecondaryTable(name="LOCATION", pkJoinColumns={
+    //    @PrimaryKeyJoinColumn(name="event_id", referencedColumnName="event_id") }),
+
+    //@SecondaryTable(name="CONTACT_INFO", pkJoinColumns={
+      //  @PrimaryKeyJoinColumn(name="event_id", referencedColumnName="event_id") })
+//})
 public class EventsDbModel {
 
 	@Id
