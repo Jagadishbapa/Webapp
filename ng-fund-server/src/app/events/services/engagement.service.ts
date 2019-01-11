@@ -37,7 +37,7 @@ export class EngagementService {
             set('organization', '').set('department', '').
             set('eventtype', '').set('keyword',formfilter).set('page', String(page)); 
         }
-        return this.http.get('/events/listfilter', {params: this.params});
+        return this.http.get('/engagement-webapp/events/listfilter', {params: this.params});
     }
 
     getOrgEvents(page: number, filterquery: any, formfilter:any)
@@ -64,7 +64,7 @@ export class EngagementService {
             set('organization', '').set('department', '').
             set('eventtype', '').set('keyword',formfilter).set('page', String(page)); 
         }
-        return this.http.get('/events/listorgfilter', {params: this.params});
+        return this.http.get('/engagement-webapp/events/listorgfilter', {params: this.params});
     }
 
 
@@ -77,7 +77,7 @@ export class EngagementService {
             })
           };
           
-       return this.http.post<EngEvent>('/events/save', JSON.stringify(model), httpOptions);
+       return this.http.post<EngEvent>('/engagement-webapp/events/save', JSON.stringify(model), httpOptions);
     }
     
 }

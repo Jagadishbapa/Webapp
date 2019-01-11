@@ -24,7 +24,7 @@ export class AdminLoginService {
         console.log("admin userid"+id);
         this.params = new HttpParams().set('userid', id).set('password', password);
         console.log('admin');
-        return this.http.get('/events/adminlogin', {params : this.params } );
+        return this.http.get('/engagement-webapp/events/adminlogin', {params : this.params } );
  
     }
 

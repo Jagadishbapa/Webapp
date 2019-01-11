@@ -18,7 +18,7 @@ export class OrgLoginService {
 
     public isLoggedIn(id:string, password:string){
         this.params = new HttpParams().set('userid', id).set('password', password);
-        return this.http.get('/events/organizerlogin', {params : this.params});
+        return this.http.get('/engagement-webapp/events/organizerlogin', {params : this.params});
     }
 
     public logout(){
