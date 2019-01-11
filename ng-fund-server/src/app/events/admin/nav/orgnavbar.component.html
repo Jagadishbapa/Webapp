@@ -1,0 +1,38 @@
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" >UW Engagement</a>
+      </div>
+        <div class="collapse navbar-collapse">
+
+
+            <div class="navbar-header navbar-right">
+                <ul class="nav navbar-nav">
+                <li>
+                    <button type="button" (click)='logout()' class="btn btn-primary">Logout</button>
+                </li>
+                </ul>
+            </div>
+
+            <div class="navbar-header navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <button type="button" (click)='opencreateform()' class="btn btn-primary">Register Event</button>
+                        </li>
+                    </ul>
+            </div>
+
+            <div class="navbar-header navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <button type="button" (click)='home()' class="btn btn-primary">Home</button>
+                        </li>
+                    </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<adminiframe *ngIf="loadevents"></adminiframe>
+<admincreateevent *ngIf="loadregister"></admincreateevent>
