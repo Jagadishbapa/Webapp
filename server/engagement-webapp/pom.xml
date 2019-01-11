@@ -54,7 +54,7 @@
 		<dependency>
     		<groupId>com.oracle</groupId>
     		<artifactId>ojdbc8</artifactId>
-    		<version>12.2.0.2</version>
+    		<version>12.2.0.1</version>
     	</dependency>
     	
 		    	
@@ -99,7 +99,7 @@
     	
 	</dependencies>
 
-	
+	<!-- 
 		<build>
 	<plugins>
 	<plugin>
@@ -108,6 +108,10 @@
 		    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 		  </configuration>
 	</plugin>
+	</plugins>
+	</build>
+ 	<build>
+		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -123,7 +127,7 @@
 			              <outputDirectory>${basedir}/target/classes/static/</outputDirectory >
 			              <resources>
 			                  <resource>
-			                      <directory>C:/Users/jbapanap/ng-fund-server/dist/ng-fundamentals</directory >
+			                      <directory>C:/Users/jbapanap/ng-fundamentals/dist/ng-fundamentals</directory >
 			                  </resource>
 			              </resources>
 			          </configuration>
@@ -132,5 +136,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+	-->	
+
 </project>
