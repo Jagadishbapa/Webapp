@@ -773,7 +773,6 @@ export class OrgCreateEvent{
 
       save(model:any, formvalid:any)
       {
-
         const c = this.registerform.get('city');
         const oc = this.registerform.get('other_city');
         const stdate = new Date(this.registerform.get('event_start_date_time').value);
