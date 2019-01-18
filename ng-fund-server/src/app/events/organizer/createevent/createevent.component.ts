@@ -659,10 +659,10 @@ export class OrgCreateEvent{
             address_line1 : ['', [Validators.required, Validators.maxLength(200)]],
             address_line2 : new FormControl(),
             county : ['', [Validators.required, Validators.maxLength(100)]],
-            city : ['', [Validators.maxLength(100)]],
+            city : ['', [Validators.maxLength(100), this.cityvalidator]],
             state : ['WY', [Validators.required, Validators.maxLength(100)]],
             country : ['USA', [Validators.required, Validators.maxLength(3)]],
-            other_city : ['', [Validators.maxLength(100)]],
+            other_city : ['', [Validators.maxLength(100), this.cityvalidator]],
             zip : ['', [Validators.required]],
             first_name : ['', Validators.maxLength(100)],
             last_name : ['', Validators.maxLength(100)],
@@ -681,11 +681,10 @@ export class OrgCreateEvent{
             cost_funding_other : new FormControl(),
             attendees_count : new FormControl(),
             event_cost : new FormControl(),
-            co_sponsors: this._fb.array([this.inItcosponsors()])
+            co_sponsors: this._fb.array([this.inItcosponsors()]),
+            event_start_time : ['', [Validators.required]],
+            event_end_time : ['', [Validators.required]],
         }
-        //,
-         //{ validator:  this.allvalidator
-         //     }
            );
       }
     
@@ -728,6 +727,37 @@ export class OrgCreateEvent{
             const control = <FormArray>this.registerform.controls['co_sponsors'];
             control.removeAt(index);
         }
+        /*
+
+        datevalidator:ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+            
+            var stdate = control.get('event_start_date_time');
+            var sttime = control.get('event_start_time');
+            var endate = control.get('event_end_date_time');
+            var entime = control.get('event_end_time');
+            console.log(stdate);
+            console.log(endate);
+            console.log(sttime);
+            console.log(entime);
+
+            if(stdate===null || sttime === null || endate === null || entime===null )
+            {
+                return {'invalid' : true};
+            }
+            else{
+                var stdatetime = new Date(stdate.value.toString()+'T'+sttime.value.toString());
+               // sttime = sttime.value;
+               // endate = endate.value;
+                //entime = entime.value;
+                console.log(stdatetime);
+                return null;
+            }            
+        }
+        */
+
+        cityvalidator:ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+            return null;
+        }
 
         _keyDown(event: any) {    
             if (event.target.value>99999999) {
@@ -742,6 +772,7 @@ export class OrgCreateEvent{
 
         }
 
+        /*
         allvalidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
             const c = control.get('city');
             const oc = control.get('other_city');
@@ -771,8 +802,26 @@ export class OrgCreateEvent{
                 return {'cityvalid':true};
           };
 
+    convertTime24to12(time24){
+            var tmpArr = time24.split(':'), time12;
+            if(+tmpArr[0] == 12) {
+            time12 = tmpArr[0] + ':' + tmpArr[1] + ' pm';
+            } else {
+            if(+tmpArr[0] == 0) {
+            time12 = '12:' + tmpArr[1] + ' am';
+            } else {
+            if(+tmpArr[0] > 12) {
+            time12 = (+tmpArr[0]-12) + ':' + tmpArr[1] + ' pm';
+            } else {
+            time12 = (+tmpArr[0]) + ':' + tmpArr[1] + ' am';
+            }
+            }
+            }
+            return time12;
+            }*/
+
       save(model:any, formvalid:any)
-      {
+      {/*
 
         const c = this.registerform.get('city');
         const oc = this.registerform.get('other_city');
@@ -794,12 +843,20 @@ export class OrgCreateEvent{
             this.registerform.controls['city'].setErrors(null);
             this.registerform.controls['other_city'].setErrors(null);
         }
-
-        if(stdate>=endate)
+        
+        if(stdate>endate)
         {
             this.registerform.controls['event_start_date_time'].setErrors({'greater': true});
             this.registerform.controls['event_end_date_time'].setErrors({'lesser': true});
 
+        }
+        else if(stdate==null)
+        {
+            this.registerform.controls['event_start_date_time'].setErrors({'incorrect': true});
+        }
+        else if(endate==null)
+        {
+            this.registerform.controls['event_end_date_time'].setErrors({'incorrect': true});
         }
         else{
             this.registerform.controls['event_start_date_time'].setErrors(null);
@@ -843,6 +900,8 @@ export class OrgCreateEvent{
         {
             this.registerform.controls['cost_funding_other'].setErrors({'incorrect': true});
         }
+
+        */
 
 
 
@@ -937,6 +996,49 @@ export class OrgCreateEvent{
 
 
         */
+
+       var stdate = model.event_start_date_time;
+       var sttime = model.event_start_time;
+       var endate = model.event_end_date_time;
+       var entime = model.event_end_time;
+       if(stdate==='' || sttime === '' || endate === '' || entime==='' )
+       {
+        this.registerform.controls['event_start_date_time'].setErrors({'incorrect': true});
+        this.registerform.controls['event_end_date_time'].setErrors({'incorrect': true});
+        this.registerform.controls['event_end_time'].setErrors({'incorrect': true});
+        this.registerform.controls['event_start_time'].setErrors({'incorrect': true});
+       }
+       else{
+           stdate = new Date(stdate.toString()+'T'+sttime.toString());
+           endate = new Date(endate.toString()+'T'+entime.toString());
+           if(stdate>= endate)
+           {
+            this.registerform.controls['event_start_date_time'].setErrors({'incorrect': true});
+            this.registerform.controls['event_end_date_time'].setErrors({'incorrect': true});
+            this.registerform.controls['event_end_time'].setErrors({'incorrect': true});
+            this.registerform.controls['event_start_time'].setErrors({'incorrect': true}); 
+           }
+           else{
+            this.registerform.controls['event_start_date_time'].setErrors(null);
+            this.registerform.controls['event_end_date_time'].setErrors(null);
+            this.registerform.controls['event_end_time'].setErrors(null);
+            this.registerform.controls['event_start_time'].setErrors(null); 
+
+           }
+       }  
+
+       var city = model.city;
+       var othercity = model.other_city;
+       if(((city==="" || othercity==="Other") && (othercity === ""))) 
+       {
+        this.registerform.controls['city'].setErrors({'incorrect': true});
+        this.registerform.controls['other_city'].setErrors({'incorrect': true});
+       }
+       else{
+        this.registerform.controls['city'].setErrors(null);
+        this.registerform.controls['other_city'].setErrors(null);
+       }
+
        this.cansubmit=true;
 
 
@@ -944,7 +1046,9 @@ export class OrgCreateEvent{
         this.registerform.get(inner).markAsTouched();
         //this.registerform.get(inner).updateValueAndValidity();
         if(this.registerform.get(inner).invalid)
+        {
             this.cansubmit=false;
+        }
         else{
             this.registerform.controls[inner].setErrors(null);
         }
@@ -953,8 +1057,8 @@ export class OrgCreateEvent{
         if(this.cansubmit)
         {
             var datePipe = new DatePipe('en-US');
-            model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
-            model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
+            model.event_start_date_time = datePipe.transform(stdate, 'yyyy-MM-dd h:mm a').toString();
+            model.event_end_date_time = datePipe.transform(endate, 'yyyy-MM-dd h:mm a').toString();
             model.created_by = sessionStorage.getItem('org_key');
             var j=0;
             for(var i =0;i<model['speakers'].length ;i++)
