@@ -140,12 +140,17 @@ export class OrgIfRameComponent{
   
     }
 
-    cancelevent(event: any){
+    cancelevent(event1: any){
+        var event=event1;
         event.cancelled='YES';
+        var datePipe = new DatePipe('en-US');
+        event.event_start_date_time = datePipe.transform(event.event_start_date_time, 'yyyy-MM-dd hh:mm aa');
+        event.event_end_date_time = datePipe.transform(event.event_end_date_time, 'yyyy-MM-dd hh:mm aa');
         event.created_by=sessionStorage.getItem('org_key');
         this.engService.saveEvent(event)
         .subscribe(
             (eventss)=>{
+
                 for(var i=0;i<this.events.length;i++)
                 {
                     if(this.events[i].event_id === event.event_id)
@@ -154,14 +159,19 @@ export class OrgIfRameComponent{
                             break;
                         }
                 }
+                event1.cancelled='YES';
                 this.levent=false;
-                this.cdRef.detectChanges();
              },
             (err)=>{console.log('cancel event org error')});
     }
 
-    uncancelevent(event: any){
+    uncancelevent(event1: any){
+        var event=event1;
         event.cancelled='NO';
+        var datePipe = new DatePipe('en-US');
+
+        event.event_start_date_time = datePipe.transform(event.event_start_date_time, 'yyyy-MM-dd hh:mm aa');
+        event.event_end_date_time = datePipe.transform(event.event_end_date_time, 'yyyy-MM-dd hh:mm aa');
         event.created_by=sessionStorage.getItem('org_key');
         this.engService.saveEvent(event)
         .subscribe(
@@ -174,8 +184,10 @@ export class OrgIfRameComponent{
                             break;
                         }
                 }
+                event1.event_start_date_time = datePipe.transform(event1.event_start_date_time, 'M/dd/yy h:mm a').toString();
+                event1.event_end_date_time = datePipe.transform(event1.event_end_date_time, 'M/dd/yy h:mm a').toString();
+                event1.cancelled='NO';
                 this.levent=false;
-                this.cdRef.detectChanges();
              },
             (err)=>{console.log('uncancel event org error')});
     }
