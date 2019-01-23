@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core'
 import {EngagementService} from '../../services/engagement.service'
 import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 import {ActivatedRoute} from '@angular/router'
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'aud-iframe',
@@ -55,11 +56,12 @@ export class IfRameComponent implements OnInit{
     getEventsList(){
         if(this.eventscase==="default")
         {
+
             
         this.engService.getAudienceEvents(this.p, this.eventscase, this.formfilter).subscribe((eventss) => {
             this.events = eventss['content'];
             this.pages = eventss['totalElements'];
-
+            var datePipe = new DatePipe('en-US');
             for(var i=0; i<this.events.length;i++)
             {
                 if(this.events[i].building_room === null)
@@ -80,7 +82,10 @@ export class IfRameComponent implements OnInit{
                 if(this.events[i].other_city === null)
                     this.events[i].other_city="";
                 else
-                    this.events[i].other_city=this.events[i].other_city+",";   
+                    this.events[i].other_city=this.events[i].other_city+",";
+  
+                this.events[i].event_start_date_time =  datePipe.transform(this.events[i].event_start_date_time, 'M/dd/yy h:mm a').toString();  
+                this.events[i].event_end_date_time =  datePipe.transform(this.events[i].event_end_date_time, 'M/dd/yy h:mm a').toString(); 
             }
         
         },
@@ -121,6 +126,7 @@ export class IfRameComponent implements OnInit{
 
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
+                var datePipe = new DatePipe('en-US');
                 for(var i=0; i<this.events.length;i++)
                 {
                     if(this.events[i].building_room === null)
@@ -141,7 +147,9 @@ export class IfRameComponent implements OnInit{
                     if(this.events[i].other_city === null)
                         this.events[i].other_city="";
                     else
-                        this.events[i].other_city=this.events[i].other_city+",";   
+                        this.events[i].other_city=this.events[i].other_city+","; 
+                    this.events[i].event_start_date_time =  datePipe.transform(this.events[i].event_start_date_time, 'M/dd/yy h:mm a').toString();  
+                    this.events[i].event_end_date_time =  datePipe.transform(this.events[i].event_end_date_time, 'M/dd/yy h:mm a').toString();   
         
                 }
             },
@@ -153,6 +161,7 @@ export class IfRameComponent implements OnInit{
             this.engService.getAudienceEvents(this.p, this.eventscase, this.keyword).subscribe(eventss => {
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
+                var datePipe = new DatePipe('en-US');
                 for(var i=0; i<this.events.length;i++)
                 {
                     if(this.events[i].building_room === null)
@@ -173,7 +182,9 @@ export class IfRameComponent implements OnInit{
                     if(this.events[i].other_city === null)
                         this.events[i].other_city="";
                     else
-                        this.events[i].other_city=this.events[i].other_city+",";   
+                        this.events[i].other_city=this.events[i].other_city+",";  
+                    this.events[i].event_start_date_time =  datePipe.transform(this.events[i].event_start_date_time, 'M/dd/yy h:mm a').toString();  
+                    this.events[i].event_end_date_time =  datePipe.transform(this.events[i].event_end_date_time, 'M/dd/yy h:mm a').toString(); 
     
                 }
             },
