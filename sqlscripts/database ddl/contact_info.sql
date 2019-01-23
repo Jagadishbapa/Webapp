@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  File created - Wednesday-January-09-2019   
+--  File created - Tuesday-January-22-2019   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table CONTACT_INFO
@@ -12,7 +12,7 @@
 	"SPONSORING_DEPARTMENT" VARCHAR2(100 BYTE), 
 	"EMAIL_1" VARCHAR2(100 BYTE), 
 	"EMAIL_2" VARCHAR2(100 BYTE), 
-	"PHONE_NUMBER" VARCHAR2(15 BYTE), 
+	"PHONE_NUMBER" NUMBER, 
 	"WEBSITE" VARCHAR2(100 BYTE)
    ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
  NOCOMPRESS LOGGING
@@ -43,3 +43,5 @@
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "SYSTEM"."CONTACT_INFO" MODIFY ("FIRST_NAME" NOT NULL ENABLE);
+  ALTER TABLE "SYSTEM"."CONTACT_INFO" MODIFY ("LAST_NAME" NOT NULL ENABLE);
