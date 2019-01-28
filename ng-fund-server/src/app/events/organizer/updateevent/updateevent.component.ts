@@ -4,6 +4,7 @@ import {EngEvent} from '../../services/engevent.model'
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import {EngagementService} from '../../services/engagement.service';
 import {DatePipe} from '@angular/common';
+import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
 
 
 @Component({
@@ -16,8 +17,12 @@ export class UpdateEventComponent{
     public cansubmit: boolean;
     @Input() eventd:any;
     register : boolean;
+    filename : string;
+    selectedFiles: FileList;
+    currentFileUpload: File;
     events:any;
     public registerform: FormGroup;
+    progress: { percentage: number } = { percentage: 0 }
     orgoptions = [
                 'American Heritage Center and Art Museum',
                 'Athletics',
@@ -688,6 +693,8 @@ export class UpdateEventComponent{
             event_end_time : ['', [Validators.required]]
         }
             );
+            this.filename = this.eventd.event_file;
+            this.eventd.event_file = "";
             this.registerform.patchValue(this.eventd);
             this.registerform.controls['event_start_date_time'].setValue(this.stdate());
             this.registerform.controls['event_end_date_time'].setValue(this.endate());
@@ -815,6 +822,18 @@ export class UpdateEventComponent{
 
         }
 
+        fileChange(event) {
+            this.selectedFiles = event.target.files;
+            this.currentFileUpload = this.selectedFiles.item(0);
+    
+            if(this.currentFileUpload.size>1048576)
+                this.registerform.controls['event_file'].setErrors({'incorrect': true});
+            else
+            {
+                this.registerform.controls['event_file'].setErrors(null);
+            }
+            }
+
           save(model:any, formvalid:any)
           {
             var stdate = model.event_start_date_time;
@@ -928,10 +947,26 @@ export class UpdateEventComponent{
                 {
                     delete model['co_sponsors'];
                 }
+
+                if(this.currentFileUpload!=null)
+                    model.event_file = this.currentFileUpload.name;
+                else{
+                    model.event_file = this.filename;
+                }
     
                 this.engservice.saveEvent(model)
                 .subscribe(
-                    eventss=>{ 
+                    eventss=>{
+                        
+                        if(this.currentFileUpload!=null)
+                        {
+                        this.engservice.pushFileToStorage(this.currentFileUpload, eventss.event_id).subscribe(eventup => {
+                            if (eventup.type === HttpEventType.UploadProgress) {
+                            this.progress.percentage = Math.round(100 * eventup.loaded / eventup.total);
+                            } else if (eventup instanceof HttpResponse) {
+                            }
+                        });
+                        }
                         this.events=eventss;
                         this.register=false;
                         this.cdRef.detectChanges();

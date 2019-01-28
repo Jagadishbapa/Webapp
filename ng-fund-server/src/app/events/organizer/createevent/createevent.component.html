@@ -100,10 +100,12 @@
             </div>
 
             <div class="form-group" align="center">
-                  <label for="event_file">File: PNG/JPEG/PDF(file size must be less than 2 MB)</label>
+                  <label for="event_file">File: PNG/JPEG/PDF(file size must be less than 1 MB)</label>
                     <input type="file"  id="event_file" (change)="fileChange($event)" name="upload" accept="image/png, image/jpeg, application/pdf" formControlName = "event_file">
                 </div>
-
+            <div class ="spinvalid" [hidden] *ngIf = "registerform.controls.event_file.invalid" align="center">
+                    (file size must be less than 1 MB)
+            </div> 
         
         <div class="form-group">
             <div formArrayName="speakers">
@@ -237,7 +239,7 @@
         <div class="col-xs-4">
             <div class="form-group">
                 <div class = "custom">Department</div>
-                <input type="text" class="form-control" pattern="[a-zA-z\s]+" maxlength="100" id="sponsoring_department" formControlName = "sponsoring_department" placeholder="Sponsoring Department">
+                <input type="text" class="form-control" pattern="[a-zA-z\s]+" maxlength="100" id="sponsoring_department" formControlName = "sponsoring_department" placeholder="Department">
             </div>
         </div>
         </div>

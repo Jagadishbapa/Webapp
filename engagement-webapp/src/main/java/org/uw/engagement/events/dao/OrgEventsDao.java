@@ -22,14 +22,15 @@ public interface OrgEventsDao extends CrudRepository<EventsDbModel, Integer>, Jp
 	@Transactional
 	public EventsDbModel save(EventsDbModel event);
 	
-	@Modifying
+/*	@Modifying
     @Query(nativeQuery = true, value="update uw_engagement set cancelled = :stat where event_id = :eveid")
     public int eventCancel (@Param("stat") String status, @Param("eveid") Integer eventid);
+	
+	@Modifying
+    @Query(nativeQuery = true, value="update uw_engagement set event_file = :eventfile where event_id = :eveid")
+    public int updatEveFile (@Param("eventfile") String filename, @Param("eveid") Integer eventid);
 
-
-
-
-
+*/
     @Query( value="SELECT uw from EventsDbModel uw where TRUNC(uw.event_start_date_time) >= current_date()   ORDER BY uw.event_start_date_time",
     		countQuery="SELECT count(uw) from EventsDbModel uw where TRUNC(uw.event_start_date_time) >= current_date() ORDER BY uw.event_start_date_time")
     public Page<EventsDbModel> findDefault(Pageable pageable);

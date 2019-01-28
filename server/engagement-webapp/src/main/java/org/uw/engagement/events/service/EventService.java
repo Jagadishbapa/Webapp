@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.uw.engagement.events.dao.EngEventsViewRepository;
 import org.uw.engagement.events.dao.OrgEventsDao;
 import org.uw.engagement.events.dao.UWEngAdminsDao;
@@ -16,6 +17,12 @@ import org.uw.engagement.events.dao.UwUsersDao;
 //import org.uw.engagement.events.model.UwEngModel;
 import org.uw.engagement.events.model.EngEventsView;
 import org.uw.engagement.events.model.EventsDbModel;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class EventService {
@@ -105,9 +112,9 @@ public class EventService {
 	
 	/*
 	@Transactional
-	public int cancelEvent(String status, Integer eventid)
+	public int updatEveFile(String eventfile, Integer eventid)
 	{
-		return orgeventsDao.eventCancel(status, eventid);
+		return orgeventsDao.updatEveFile(eventfile, eventid);
 	}*/
 	
 	@Transactional
@@ -157,6 +164,16 @@ public class EventService {
 		}
 		return null;
 		
+	}
+	
+	private final Path rootLocation = Paths.get("C:\\Users\\jbapanap\\ng-fundamentals");
+	 
+	public void store(MultipartFile file) {
+		try {
+			Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+		} catch (Exception e) {
+			throw new RuntimeException("FAIL!");
+		}
 	}
 	
 	

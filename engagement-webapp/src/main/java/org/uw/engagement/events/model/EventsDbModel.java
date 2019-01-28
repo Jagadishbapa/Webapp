@@ -81,7 +81,7 @@ public class EventsDbModel {
 	
 	
 	@Column(name="event_file")
-	private Blob event_file;
+	private String event_file;
 	
 	
 	@Column(name="event_cost")
@@ -200,7 +200,7 @@ public class EventsDbModel {
 	public EventsDbModel() {}
 
 	public EventsDbModel(Integer event_id, String organization, String department, String event_desc, String event_type,
-			String priv, Integer fee, Timestamp event_start_date_time, Timestamp event_end_date_time, Blob event_file,
+			String priv, Integer fee, Timestamp event_start_date_time, Timestamp event_end_date_time, String event_file,
 			Integer event_cost, Integer anticipated_cost, Integer anticipated_num_attendees, String funding_source1,
 			String funding_source2, String funding_other, Integer cost_funding1, Integer cost_funding2,
 			Integer cost_funding_other, Integer attendees_count, String created_by, String cancelled,
@@ -332,11 +332,11 @@ public class EventsDbModel {
 		this.event_end_date_time = event_end_date_time;
 	}
 
-	public Blob getEvent_file() {
+	public String getEvent_file() {
 		return event_file;
 	}
 
-	public void setEvent_file(Blob event_file) {
+	public void setEvent_file(String event_file) {
 		this.event_file = event_file;
 	}
 

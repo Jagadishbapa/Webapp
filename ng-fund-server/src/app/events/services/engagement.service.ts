@@ -1,9 +1,10 @@
-import { Injectable} from '@angular/core'
-import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http'
-import {EngEvent} from './engevent.model'
-import 'rxjs/add/operator/map'
+import { Injectable} from '@angular/core';
+import {HttpClient, HttpParams, HttpHeaders, HttpEvent, HttpRequest} from '@angular/common/http';
+import {EngEvent} from './engevent.model';
+import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
@@ -79,5 +80,19 @@ export class EngagementService {
           
        return this.http.post<EngEvent>('/engagement-webapp/events/save', JSON.stringify(model), httpOptions);
     }
+
+    pushFileToStorage(file: File, eventid): Observable<HttpEvent<{}>> {
+        let formdata: FormData = new FormData();
+     
+        formdata.append('file', file);
+        formdata.append('eventid', eventid);
+     
+        const req = new HttpRequest('POST', '/engagement-webapp/events/post', formdata, {
+          reportProgress: true,
+          responseType: 'text'
+        });
+     
+        return this.http.request(req);
+      }
     
 }
