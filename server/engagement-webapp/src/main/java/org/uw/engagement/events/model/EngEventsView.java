@@ -108,6 +108,17 @@ public class EngEventsView {
 	@Column(name = "cancelled")
 	private String cancelled;
 	
+	public String getEvent_file() {
+		return event_file;
+	}
+
+	public void setEvent_file(String event_file) {
+		this.event_file = event_file;
+	}
+
+	@Column(name = "event_file")
+	private String event_file;
+	
 	public EngEventsView() {}
 
 	public EngEventsView(Integer event_id, String event_name, String organization, String department, String event_desc,

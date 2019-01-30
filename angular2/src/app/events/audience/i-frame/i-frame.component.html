@@ -602,7 +602,7 @@
                 <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0); ">Event Name</td>
                 <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0);">Event Information</td>
                 <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0);">Contact Information</td>
-                <td align="center"style="font-size:18px; border:1px solid rgb(0, 0, 0);">Event Start And End Time</td>
+                <td align="center"style="font-size:18px; border:1px solid rgb(0, 0, 0);">Date and Time</td>
                 <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0);">Location</td>
                 <td align="center" style="font-size:18px; border:1px solid rgb(0, 0, 0);">Additional Information</td>
             </tr>
@@ -611,9 +611,9 @@
             <tr style="border:1px solid rgb(0, 0, 0);" >
                 <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{event.event_name}}</td>
                 <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{event.event_desc}}</td>
-                <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{"sponsor:"+ event.sponsoring_department}}<br> {{event.email_1}}<br> {{event.phone_number}} </td>
+                <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{"Sponsor: "+ event.sponsoring_department}}<br>{{event.first_name+" "+event.last_name}}<br> {{event.email_1}}<br> {{event.phone_number}} </td>
                <!-- <td align="center" style="font-size: 15px; border:1px solid rgb(0, 0, 0);">{{event.cancelled==='NO'? (event.event_start_date_time | date:'short') : 'event cancelled'  }}<br> {{event.cancelled==='NO'? (event.event_end_date_time | date:'short') : '' }}</td>-->
-                <td align="center" style="font-size: 15px; border:1px solid rgb(0, 0, 0);">{{event.cancelled==='NO'? (event.event_start_date_time ) : 'event cancelled'  }}<br> {{event.cancelled==='NO'? (event.event_end_date_time) : '' }}</td>
+                <td align="center" style="font-size: 15px; border:1px solid rgb(0, 0, 0);">{{event.cancelled==='NO'? (event.event_start_date_time ) : 'Event Cancelled'  }}<br> {{event.cancelled==='NO'? (event.event_end_date_time) : '' }}</td>
  
                <td align="center" style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{
                         event.building_room + event.address_line1 + ", " +
@@ -624,7 +624,8 @@
                         event.state+ ", " +
                         event.country+ ", " +
                         event.zip}}</td>
-                        <td style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{event.event_file}}</td>
+                       <!-- <td style="font-size:15px; border:1px solid rgb(0, 0, 0);">{{event.event_file}}</td>-->
+                       <td><a *ngIf = "event.event_file != null" href="http://localhost:8080/engagement-webapp/assets/files/{{event.event_file}}" target="_blank">Click for File</a></td>
             </tr>
         </tbody>
     </table>

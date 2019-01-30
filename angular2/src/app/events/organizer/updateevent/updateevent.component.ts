@@ -4,6 +4,7 @@ import {EngEvent} from '../../services/engevent.model'
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import {EngagementService} from '../../services/engagement.service';
 import {DatePipe} from '@angular/common';
+import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
 
 
 @Component({
@@ -16,8 +17,12 @@ export class UpdateEventComponent{
     public cansubmit: boolean;
     @Input() eventd:any;
     register : boolean;
+    filename : string;
+    selectedFiles: FileList;
+    currentFileUpload: File;
     events:any;
     public registerform: FormGroup;
+    progress: { percentage: number } = { percentage: 0 }
     orgoptions = [
                 'American Heritage Center and Art Museum',
                 'Athletics',
@@ -666,8 +671,8 @@ export class UpdateEventComponent{
             country : ['', [Validators.required, Validators.maxLength(3)]],
             other_city : ['', [Validators.maxLength(100)]],
             zip : ['', [Validators.required]],
-            first_name : ['', Validators.maxLength(100)],
-            last_name : ['', Validators.maxLength(100)],
+            first_name : ['', [Validators.required, Validators.maxLength(100)]],
+            last_name : ['', [Validators.required, Validators.maxLength(100)]],
             sponsoring_department : ['', [Validators.required, Validators.maxLength(100)]],
             email_1 :  ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
             email_2 :  ['', [Validators.email, Validators.maxLength(100)]],
@@ -683,30 +688,45 @@ export class UpdateEventComponent{
             cost_funding_other : new FormControl(),
             attendees_count : new FormControl(),
             event_cost : new FormControl(),
-            co_sponsors: this._fb.array(this.inItcosponsors())
-        },
-         { validator:  this.allvalidator
-              }
+            co_sponsors: this._fb.array(this.inItcosponsors()),
+            event_start_time : ['', [Validators.required]],
+            event_end_time : ['', [Validators.required]]
+        }
             );
+            this.filename = this.eventd.event_file;
+            this.eventd.event_file = "";
             this.registerform.patchValue(this.eventd);
             this.registerform.controls['event_start_date_time'].setValue(this.stdate());
             this.registerform.controls['event_end_date_time'].setValue(this.endate());
+
+            this.registerform.controls['event_start_time'].setValue(this.sttime());
+            this.registerform.controls['event_end_time'].setValue(this.entime());
 
       }
     stdate()
      {
         var datePipe = new DatePipe('en-US');
-        this.eventd.event_start_date_time=datePipe.transform(this.eventd.event_start_date_time, 'yyyy-MM-dd HH:mm');
-        return this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5);
+        return(datePipe.transform(this.eventd.event_start_date_time, 'yyyy-MM-dd'));
+        //return this.eventd.event_start_date_time.substr(0,10)+'T'+this.eventd.event_start_date_time.substr(11,5);
      }
 
 
      endate()
      {
         var datePipe = new DatePipe('en-US');
-        this.eventd.event_end_date_time=datePipe.transform(this.eventd.event_end_date_time, 'yyyy-MM-dd HH:mm');
-        return this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5);
+        return(datePipe.transform(this.eventd.event_end_date_time, 'yyyy-MM-dd'));
+        //return this.eventd.event_end_date_time.substr(0,10)+'T'+this.eventd.event_end_date_time.substr(11,5);
      }
+
+     sttime(){
+        var datePipe = new DatePipe('en-US');
+        return(datePipe.transform(this.eventd.event_start_date_time, 'HH:mm'));
+     }
+     entime(){
+        var datePipe = new DatePipe('en-US');
+        return(datePipe.transform(this.eventd.event_end_date_time, 'HH:mm'));
+     }
+
     inItSpeakers() {
         var sps1 = new Array(this._fb.group({
             first_name : ['', Validators.maxLength(100)],
@@ -802,203 +822,77 @@ export class UpdateEventComponent{
 
         }
 
-        allvalidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
-            const c = control.get('city');
-            const oc = control.get('other_city');
-            const stdate = new Date(control.get('event_start_date_time').value);
-            const endate = new Date(control.get('event_end_date_time').value);
-
-            let cv = false;
-            let dv = false;
-            if(((c.value==='' || c.value==='Other') && (oc.value === '' || oc.value === null))) 
-            {
-                cv=true;
-                
-            }
-
-            if(stdate>=endate)
-            {
-                dv = true;
-            }
-
-            if(!cv && !dv)
-            {
-                if(control.get('fee').value>999999999 || control.get('phone_number').value>99999999999 || control.get('zip').value>999999999 || control.get('anticipated_num_attendees').value>999999999 || control.get('event_cost').value>999999999 || control.get('attendees_count').value>999999999 || control.get('cost_funding1').value>999999999 || control.get('cost_funding2').value>999999999 || control.get('cost_funding_other').value>999999999)
-                    return {'cityvalid':true};
-                else
-                    return null;  
-            }
+        fileChange(event) {
+            this.selectedFiles = event.target.files;
+            this.currentFileUpload = this.selectedFiles.item(0);
+    
+            if(this.currentFileUpload.size>1048576)
+                this.registerform.controls['event_file'].setErrors({'incorrect': true});
             else
-                return {'cityvalid':true};
-        
-          };
+            {
+                this.registerform.controls['event_file'].setErrors(null);
+            }
+            }
 
           save(model:any, formvalid:any)
           {
-    
-            const c = this.registerform.get('city');
-            const oc = this.registerform.get('other_city');
-            const stdate = new Date(this.registerform.get('event_start_date_time').value);
-            const endate = new Date(this.registerform.get('event_end_date_time').value);
-    
-            let cv = false;
-            let dv = false;
-            if(((c.value==="" || c.value==="Other") && (oc.value === ""))) 
+            var stdate = model.event_start_date_time;
+            var sttime = model.event_start_time;
+            var endate = model.event_end_date_time;
+            var entime = model.event_end_time;
+            if(stdate==='' || sttime === '' || endate === '' || entime==='' )
             {
-                this.registerform.controls['city'].markAsTouched();
-                this.registerform.controls['city'].setErrors({'incorrect': true});
-    
-                this.registerform.controls['other_city'].markAsTouched();
-                this.registerform.controls['other_city'].setErrors({'incorrect': true});
-            }
-            else
-            {
-                this.registerform.controls['city'].setErrors(null);
-                this.registerform.controls['other_city'].setErrors(null);
-            }
-    
-            if(stdate>=endate)
-            {
-                this.registerform.controls['event_start_date_time'].setErrors({'greater': true});
-                this.registerform.controls['event_end_date_time'].setErrors({'lesser': true});
-    
+             this.registerform.controls['event_start_date_time'].setErrors({'incorrect': true});
+             this.registerform.controls['event_end_date_time'].setErrors({'incorrect': true});
+             this.registerform.controls['event_end_time'].setErrors({'incorrect': true});
+             this.registerform.controls['event_start_time'].setErrors({'incorrect': true});
             }
             else{
-                this.registerform.controls['event_start_date_time'].setErrors(null);
-                this.registerform.controls['event_end_date_time'].setErrors(null);
-            }
-    
-            if(this.registerform.get('fee').value>999999999)
-            {
-                this.registerform.controls['fee'].setErrors({'incorrect': true});
-            }
-    
-            if(this.registerform.get('phone_number').value>99999999999)
-            {
-                this.registerform.controls['phone_number'].setErrors({'incorrect': true});
-            }
-            if(this.registerform.get('zip').value>999999999)
-            {
-                this.registerform.controls['zip'].setErrors({'incorrect': true});
-            }
-            if(this.registerform.get('anticipated_num_attendees').value>999999999)
-            {
-                this.registerform.controls['anticipated_num_attendees'].setErrors({'incorrect': true});
-            }
-            if(this.registerform.get('event_cost').value>999999999)
-            {
-                this.registerform.controls['event_cost'].setErrors({'incorrect': true});
-            }
-            if(this.registerform.get('attendees_count').value>999999999)
-            {
-                this.registerform.controls['attendees_count'].setErrors({'incorrect': true});
-            }
-            if(this.registerform.get('cost_funding1').value>999999999)
-            {
-                this.registerform.controls['cost_funding1'].setErrors({'incorrect': true});
-            }
-            if(this.registerform.get('cost_funding2').value>999999999)
-            {
-                this.registerform.controls['cost_funding2'].setErrors({'incorrect': true});
-            }
-            if(this.registerform.get('cost_funding_other').value>999999999)
-            {
-                this.registerform.controls['cost_funding_other'].setErrors({'incorrect': true});
-            }
-    
-    
-    
-                /*
-                if(this.registerform.get('fee').value>999999999 || this.registerform.get('phone_number').value>99999999999 || control.get('zip').value>999999999 || control.get('anticipated_num_attendees').value>999999999 || control.get('event_cost').value>999999999 || control.get('attendees_count').value>999999999 || control.get('cost_funding1').value>999999999 || control.get('cost_funding2').value>999999999 || control.get('cost_funding_other').value>999999999)
-                {}
-                */
-    
-    
-    
-              /*
-            var cansubmit=false;
-            console.log(model.organization)
-            this.registerform.controls['event_name'].markAsTouched();
-            this.registerform.controls['event_name'].setErrors({'incorrect': true});
-            var regexp = new RegExp('[A-Za-z0-9._%+-]+@uwyo.edu')
-            console.log(regexp.test(model.email_1));
-    
-            var reqpattern = '[]+'
-            if(model.organization==='')
-            {
-                console.log('enter org')
-            }
-     
-            var cansubmit=false;
-            if(this.registerform.controls['email_1'].invalid)
-            {
-                this.registerform.controls['email_1'].markAsTouched();
-                this.registerform.controls['email_1'].setErrors({'incorrect': true});
-            }
-    
-            if(this.registerform.controls['fee'].invalid)
-            {
-                this.registerform.controls['fee'].markAsTouched();
-                this.registerform.controls['fee'].setErrors({'incorrect': true});
-            }
-    
-            const sp = <FormArray>this.registerform.controls['speakers'];
-    
-            console.log(sp['controls'][0].get('first_name').value)
-            for(var i=0;i<sp['controls'].length;i++)
-            {
-                const sprow = sp['controls'][i];
-                if(sprow.get('email').invalid)
+                stdate = new Date(stdate.toString()+'T'+sttime.toString());
+                endate = new Date(endate.toString()+'T'+entime.toString());
+                if(stdate>= endate)
                 {
-    
-                    //this.registerform.controls.speakers.at(0).controls.first_name.markAsTouched();
-                    //this.registerform.controls.speakers.at(0).controls.first_name.updateValueAndValidity();
-    
-                    for (let inner in this.registerform.controls) {
-                        this.registerform.get(inner).markAsTouched();
-                        this.registerform.get(inner).updateValueAndValidity();
-                    }
-    
-                    console.log(this.registerform.controls.speakers[0]);
-    
-                    console.log(this.registerform.controls.speakers.at(0));
-                    for(let speaker of   this.registerform.controls.speakers.controls)
-                    {
-                        speaker.first_name.markAsTouched();
-                        speaker.first_name.updateValueAndValidity();
-                        console.log(speaker);
-                      // this.registerform.controls.speakers.at(0).get(inner1).markAsTouched();
-                      //this.registerform.controls.speakers.at(0).controls.first_name.updateValueAndValidity();
-                        //this.registerform.controls.speakers.updateValueAndValidity();
-                        //.controls.first_name.setErrors({'incorrect': true});
-                        //this.registerform.controls.speakers.at(0).get(inner1).setErrors({'incorrect': true});
-                        //console.log(this.speakers.at(0).get(inner1));
-                       // this.speakers.at(0).get(inner1).markAsTouched();
-                        //this.speakers.at(0).get(inner1).updateValueAndValidity();
-                        //this.speakers.at(0).get(inner1).setErrors({'incorrect': true});
-                       break;
-    
-                    }
-                    //console.log(this.speakers.at(0).get('first_name'));
-                    //console.log(this.speakers.at(0).get('first_name'));
-                    //this.speakers.at(0).get('first_name').updateValueAndValidity();
-                   // controls.first_name.markAsTouched();
-                    //this.speakers.at(0).controls.first_name.setErrors({'incorrect': true});
-                    //console.log('invalid');
-                    //console.log(this.registerform.controls['speakers'][0])
-                    //this.registerform.controls['speakers'].markAsTouched();
-                    //this.registerform.controls['speakers'].setErrors({'incorrect': true});
-                   // this.registerform.controls['speakers']['controls'][i].controls['first_name'].markAsTouched();
-                    //this.registerform.controls['speakers']['controls'][i].controls['first_name'].setErrors({'incorrect': true});
-                    //console.log(this.registerform.controls['speakers']['controls'][i].get('first_name').markAsTouched());
-                    //console.log(this.registerform.controls['speakers']['controls'][i].get('first_name').setErrors({'incorrect': true}));
-                    //this.registerform.controls['speakers'].get('first_name').markAsTouched();
-                    //this.registerform.controls['speakers'].get('first_name').setErrors({'incorrect': true});
+                 this.registerform.controls['event_start_date_time'].setErrors({'incorrect': true});
+                 this.registerform.controls['event_end_date_time'].setErrors({'incorrect': true});
+                 this.registerform.controls['event_end_time'].setErrors({'incorrect': true});
+                 this.registerform.controls['event_start_time'].setErrors({'incorrect': true}); 
+                }
+                else{
+                 this.registerform.controls['event_start_date_time'].setErrors(null);
+                 this.registerform.controls['event_end_date_time'].setErrors(null);
+                 this.registerform.controls['event_end_time'].setErrors(null);
+                 this.registerform.controls['event_start_time'].setErrors(null); 
+     
                 }
             }
-    
-    
-            */
+
+            var city = model.city;
+            var othercity = model.other_city;
+            if(((city==="" || othercity==="Other") && (othercity === ""))) 
+            {
+             this.registerform.controls['city'].setErrors({'incorrect': true});
+             this.registerform.controls['other_city'].setErrors({'incorrect': true});
+            }
+            else{
+             this.registerform.controls['city'].setErrors(null);
+             this.registerform.controls['other_city'].setErrors(null);
+            }
+     
+            this.cansubmit=true;
+     
+     
+            for (let inner in this.registerform.controls) {
+             this.registerform.get(inner).markAsTouched();
+             //this.registerform.get(inner).updateValueAndValidity();
+             if(this.registerform.get(inner).invalid)
+             {
+                 this.cansubmit=false;
+             }
+             else{
+                 this.registerform.controls[inner].setErrors(null);
+             }
+             }
+
            this.cansubmit=true;
     
     
@@ -1015,8 +909,8 @@ export class UpdateEventComponent{
             if(this.cansubmit)
             {
                 var datePipe = new DatePipe('en-US');
-                model.event_start_date_time = datePipe.transform(model.event_start_date_time, 'yyyy-MM-dd h:mm a');
-                model.event_end_date_time = datePipe.transform(model.event_end_date_time, 'yyyy-MM-dd h:mm a');
+                model.event_start_date_time = datePipe.transform(stdate, 'yyyy-MM-dd h:mm a');
+                model.event_end_date_time = datePipe.transform(endate, 'yyyy-MM-dd h:mm a');
                 model.created_by = sessionStorage.getItem('org_key');
                 var j=0;
                 for(var i =0;i<model['speakers'].length ;i++)
@@ -1053,10 +947,26 @@ export class UpdateEventComponent{
                 {
                     delete model['co_sponsors'];
                 }
+
+                if(this.currentFileUpload!=null)
+                    model.event_file = this.currentFileUpload.name;
+                else{
+                    model.event_file = this.filename;
+                }
     
                 this.engservice.saveEvent(model)
                 .subscribe(
-                    eventss=>{ 
+                    eventss=>{
+                        
+                        if(this.currentFileUpload!=null)
+                        {
+                        this.engservice.pushFileToStorage(this.currentFileUpload, eventss.event_id).subscribe(eventup => {
+                            if (eventup.type === HttpEventType.UploadProgress) {
+                            this.progress.percentage = Math.round(100 * eventup.loaded / eventup.total);
+                            } else if (eventup instanceof HttpResponse) {
+                            }
+                        });
+                        }
                         this.events=eventss;
                         this.register=false;
                         this.cdRef.detectChanges();

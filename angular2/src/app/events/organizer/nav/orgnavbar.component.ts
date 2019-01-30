@@ -27,6 +27,8 @@ export class OrgNavBarComponent{
         this.register=true;
         this.loadevents=false;
         this.loadsubmit=false;
+        this.loadregister = false;
+        this.cdRef.detectChanges();
         this.loadregister = true;
         this.cdRef.detectChanges();
     }

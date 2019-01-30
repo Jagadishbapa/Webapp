@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef} from '@angular/core'
 import {EngagementService} from '../../services/engagement.service'
 import {EngEventsResolver} from '../../services/eng-events-resolver-service'
 import {ActivatedRoute} from '@angular/router'
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector : 'orgiframe',
@@ -61,7 +62,13 @@ export class OrgIfRameComponent{
             
         this.engService.getOrgEvents(this.p, this.eventscase, this.formfilter).subscribe((eventss) => {
             this.events = eventss['content'];
-            this.pages = eventss['totalElements'];        
+            this.pages = eventss['totalElements']; 
+            var datePipe = new DatePipe('en-US');
+            for(var i=0; i<this.events.length;i++)
+            {
+                this.events[i].event_start_date_time =  datePipe.transform(this.events[i].event_start_date_time, 'M/dd/yy h:mm a').toString();  
+                this.events[i].event_end_date_time =  datePipe.transform(this.events[i].event_end_date_time, 'M/dd/yy h:mm a').toString(); 
+            }     
         },
         (err)=>{console.log('org iframe default error')});
         }
@@ -98,6 +105,12 @@ export class OrgIfRameComponent{
             this.engService.getOrgEvents(this.p, this.eventscase, this.formfilter).subscribe(eventss => {
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
+                var datePipe = new DatePipe('en-US');
+                for(var i=0; i<this.events.length;i++)
+                {
+                    this.events[i].event_start_date_time =  datePipe.transform(this.events[i].event_start_date_time, 'M/dd/yy h:mm a').toString();  
+                    this.events[i].event_end_date_time =  datePipe.transform(this.events[i].event_end_date_time, 'M/dd/yy h:mm a').toString(); 
+                } 
             },
             (err)=>{console.log('org iframe filter error')});
         }
@@ -107,8 +120,15 @@ export class OrgIfRameComponent{
             this.engService.getOrgEvents(this.p, this.eventscase, this.keyword).subscribe(eventss => {
                 this.events = eventss['content'];
                 this.pages = eventss['totalElements'];
+                var datePipe = new DatePipe('en-US');
+                for(var i=0; i<this.events.length;i++)
+                {
+                    this.events[i].event_start_date_time =  datePipe.transform(this.events[i].event_start_date_time, 'M/dd/yy h:mm a').toString();  
+                    this.events[i].event_end_date_time =  datePipe.transform(this.events[i].event_end_date_time, 'M/dd/yy h:mm a').toString(); 
+                }
             },
             (err)=>{console.log('admin iframe keysearch error')});
+ 
         }
     } 
 
@@ -120,12 +140,17 @@ export class OrgIfRameComponent{
   
     }
 
-    cancelevent(event: any){
+    cancelevent(event1: any){
+        var event=event1;
         event.cancelled='YES';
+        var datePipe = new DatePipe('en-US');
+        event.event_start_date_time = datePipe.transform(event.event_start_date_time, 'yyyy-MM-dd hh:mm aa');
+        event.event_end_date_time = datePipe.transform(event.event_end_date_time, 'yyyy-MM-dd hh:mm aa');
         event.created_by=sessionStorage.getItem('org_key');
         this.engService.saveEvent(event)
         .subscribe(
             (eventss)=>{
+
                 for(var i=0;i<this.events.length;i++)
                 {
                     if(this.events[i].event_id === event.event_id)
@@ -134,14 +159,19 @@ export class OrgIfRameComponent{
                             break;
                         }
                 }
+                event1.cancelled='YES';
                 this.levent=false;
-                this.cdRef.detectChanges();
              },
             (err)=>{console.log('cancel event org error')});
     }
 
-    uncancelevent(event: any){
+    uncancelevent(event1: any){
+        var event=event1;
         event.cancelled='NO';
+        var datePipe = new DatePipe('en-US');
+
+        event.event_start_date_time = datePipe.transform(event.event_start_date_time, 'yyyy-MM-dd hh:mm aa');
+        event.event_end_date_time = datePipe.transform(event.event_end_date_time, 'yyyy-MM-dd hh:mm aa');
         event.created_by=sessionStorage.getItem('org_key');
         this.engService.saveEvent(event)
         .subscribe(
@@ -154,8 +184,10 @@ export class OrgIfRameComponent{
                             break;
                         }
                 }
+                event1.event_start_date_time = datePipe.transform(event1.event_start_date_time, 'M/dd/yy h:mm a').toString();
+                event1.event_end_date_time = datePipe.transform(event1.event_end_date_time, 'M/dd/yy h:mm a').toString();
+                event1.cancelled='NO';
                 this.levent=false;
-                this.cdRef.detectChanges();
              },
             (err)=>{console.log('uncancel event org error')});
     }

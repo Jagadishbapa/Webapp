@@ -166,7 +166,7 @@ public class EventService {
 		
 	}
 	
-	private final Path rootLocation = Paths.get("C:\\Users\\jbapanap\\ng-fundamentals");
+	private final Path rootLocation = Paths.get("D:\\Webapp25122018\\Webapp\\engagement-webapp\\src\\main\\webapp\\assets\\files");
 	 
 	public void store(MultipartFile file) {
 		try {
